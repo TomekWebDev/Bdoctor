@@ -17,8 +17,8 @@ class SpecializationsSeeder extends Seeder
         foreach ($specialitazions as $elem) {
 
             $newSpecialization = new Spec();
-            $newSpecialization-> name = $elem['name'];
-            $newSpecialization-> save();
+            $newSpecialization->name = $elem['name'];
+            $newSpecialization->save();
         }
     }
 }
