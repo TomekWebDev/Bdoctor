@@ -12,7 +12,7 @@ class SpecializationsSeeder extends Seeder
      */
     public function run()
     {
-        $specialitazions = config('seeder.specialitazions');
+        $specialitazions = config('seeder.specializations');
 
         foreach ($specialitazions as $elem) {
 
