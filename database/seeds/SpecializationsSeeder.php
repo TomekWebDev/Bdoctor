@@ -12,13 +12,13 @@ class SpecializationsSeeder extends Seeder
      */
     public function run()
     {
-        $specialitazions = config('seeder.specialitazions');
+        $specialitazions = config('seeder.specializations');
 
         foreach ($specialitazions as $elem) {
 
             $newSpecialization = new Spec();
-            $newSpecialization-> name = $elem['name'];
-            $newSpecialization-> save();
+            $newSpecialization->name = $elem['name'];
+            $newSpecialization->save();
         }
     }
 }
