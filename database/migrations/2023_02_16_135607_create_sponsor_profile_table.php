@@ -20,9 +20,9 @@ class CreateSponsorProfileTable extends Migration
             $table->unsignedBigInteger('profile_id');
             $table->foreign('profile_id')->references('id')->on('profiles');
 
-            $table->timestamps();
+            $table->dateTime('expiration_date')->nullable();
 
-            
+
         });
     }
 
