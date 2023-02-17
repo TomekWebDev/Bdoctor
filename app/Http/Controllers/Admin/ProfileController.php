@@ -108,7 +108,9 @@ class ProfileController extends Controller
 
         $profile_to_edit = Profile::findOrFail($id);
 
-        return view('admin.profile.edit', compact('profile_to_edit'));
+        $specs = Spec::All();
+
+        return view('admin.profile.edit', compact('profile_to_edit', 'specs'));
     }
 
     /**
