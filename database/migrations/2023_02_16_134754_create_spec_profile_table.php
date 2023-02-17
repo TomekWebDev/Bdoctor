@@ -13,13 +13,12 @@ class CreateSpecProfileTable extends Migration
      */
     public function up()
     {
-        Schema::create('spec_profile', function (Blueprint $table) {
+        Schema::create('profile_spec', function (Blueprint $table) {
             $table->unsignedBigInteger('spec_id');
             $table->foreign('spec_id')->references('id')->on('specs');
 
             $table->unsignedBigInteger('profile_id');
             $table->foreign('profile_id')->references('id')->on('profiles');
-
         });
     }
 
@@ -30,6 +29,6 @@ class CreateSpecProfileTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('spec_profile');
+        Schema::dropIfExists('profile_spec');
     }
 }

@@ -54,6 +54,8 @@ class ProfileController extends Controller
         $new_profile = new Profile();
         $new_profile->user_id = Auth::user()->id;
 
+        $new_profile->fill($data);
+
         $new_profile->save();
 
         if (array_key_exists('specs', $data)) {

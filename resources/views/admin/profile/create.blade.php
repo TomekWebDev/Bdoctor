@@ -19,8 +19,11 @@
         <div class="mb-3">
             <label class="form-label">Address</label>
             <input name="address" type="string" class="form-control">
+        </div>
 
-
+        <div class="mb-3">
+            <label class="form-label">Phone</label>
+            <input name="phone" type="string" class="form-control">
         </div>
 
         <div class="mb-3">
@@ -32,19 +35,16 @@
         <div class="mb-3">
             <label class="form-label">Profile image</label>
             <input name="image" type="file" class="form-control">
-
         </div>
 
         <div class="mb-3">
             <label class="form-label">Description</label>
             <textarea name="description" class="form-control"></textarea>
-
         </div>
 
         <div class="mb-3">
             <label class="form-label">Services</label>
             <textarea name="services" class="form-control"></textarea>
-
         </div>
 
         <div class="mb-3">
