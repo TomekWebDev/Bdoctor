@@ -7,6 +7,8 @@
 
     <a href="">Link per andare alla Blade di acquisto degli sponsor</a>
 
+    {{-- {{dd($profile_to_edit)}} --}}
+
     <form enctype="multipart/form-data" method="POST" action="{{ route('admin.profile.update', $profile_to_edit->id) }}" class="mx-5 my-3">
 
         @csrf

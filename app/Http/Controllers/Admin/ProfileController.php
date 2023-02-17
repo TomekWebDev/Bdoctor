@@ -54,7 +54,7 @@ class ProfileController extends Controller
             [
                 'city' => 'required|max:50',
                 'address' => 'required|max:100'
-            ],
+            ]
 
         );
 
@@ -120,9 +120,53 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Profile $profile)
     {
-        //
+        
+        $request->validate(
+            [
+                'city' => 'required|max:50',
+                'address' => 'required|max:100'
+            ]
+        );
+
+        $data = $request->all();
+
+        if (!isset($data['specs'])) {
+            $data['specs'] = "Nessuna specializzazione selezionata!";
+        }
+
+        if (isset($data['image'])) {
+            //condizione per rimuovere l'immagine vecchia se presente
+            if ($profile->image) {
+                Storage::delete($profile->image);
+            }
+
+            $image_url = Storage::put('profile_images', $data['image']);
+            $data['image'] = $image_url;
+
+        }
+
+        if (isset($data['resume'])) {
+            //condizione per rimuovere l'immagine vecchia se presente
+            if ($profile->resume) {
+                Storage::delete($profile->resume);
+            }
+
+            $resume_url = Storage::put('resumes', $data['resume']);
+            $data['resume'] = $resume_url;
+
+        }
+
+        $profile->update($data);
+        $profile->save();
+
+        if (isset($data['specs'])) {
+            $profile->specs()->sync($data['specs']);
+        }
+
+
+        return redirect()->route('admin.profile.show', ['profile' => $profile->id]);
     }
 
     /**
