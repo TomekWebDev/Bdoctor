@@ -14,9 +14,13 @@
 
     @endif --}}
 
+    {{-- da togliere --}}
     <a href="{{ route('admin.profile.create') }}">vai a create</a>
+
 
     <a href="{{ route('admin.profile.edit', $profile->id) }}">Vai a edit</a>
 
     <a href="{{ route('admin.profile.show', $profile->id) }}">Vai alla show</a>
+
+    <a href="">Vai ad acquisto sponsor</a>
 @endsection

@@ -4,4 +4,6 @@
 
 @section('content')
     <div>questa è la edit del medico</div>
+
+    <a href="">Link per andare alla Blade di acquisto degli sponsor</a>
 @endsection
