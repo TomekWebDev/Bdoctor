@@ -14,7 +14,8 @@ class HomeController extends Controller
     {
 
         $profile = Profile::where('user_id', Auth::user()->id)->firstOrFail();
+        $user = Auth::user();
 
-        return view('admin.dashboard', compact('profile'));
+        return view('admin.dashboard', compact('profile', 'user'));
     }
 }

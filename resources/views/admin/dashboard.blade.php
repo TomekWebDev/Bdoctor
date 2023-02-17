@@ -4,7 +4,7 @@
 
 @section('content')
     <div>
-        CIAOOOOOOOOOOOO Dashboard!
+        <h4 class="mb-5">CIAOOOOOOOOOOOO Dashboard dello user: {{ $user->name }} con id: {{ $user->id }}</h4>
     </div>
     {{-- @if (session('alreadyCreated'))
         <div>{{ session('alreadyCreated') }}</div>
