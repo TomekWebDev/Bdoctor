@@ -91,7 +91,10 @@ class ProfileController extends Controller
      */
     public function show($id)
     {
-        //
+        $this_profile = Profile::findOrFail($id);
+        $this_user = Auth::user();
+
+        return view('admin.profile.show', compact('this_profile', 'this_user'));
     }
 
     /**
@@ -102,7 +105,10 @@ class ProfileController extends Controller
      */
     public function edit($id)
     {
-        //
+
+        $profile_to_edit = Profile::findOrFail($id);
+
+        return view('admin.profile.edit', compact('profile_to_edit'));
     }
 
     /**
