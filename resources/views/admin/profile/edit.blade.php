@@ -17,18 +17,18 @@
 
         <div class="mb-3">
             <label class="form-label">City</label>
-            <input name="city" type="string" class="form-control" value="city">
+            <input name="city" type="string" class="form-control" value="{{$profile_to_edit->city}}">
 
         </div>
 
         <div class="mb-3">
             <label class="form-label">Address</label>
-            <input name="address" type="string" class="form-control" value="address">
+            <input name="address" type="string" class="form-control" value="{{$profile_to_edit->address}}">
         </div>
 
         <div class="mb-3">
             <label class="form-label">Phone</label>
-            <input name="phone" type="string" class="form-control" value="phone">
+            <input name="phone" type="string" class="form-control" value="{{$profile_to_edit->phone}}">
         </div>
 
         <div class="mb-3">
@@ -64,6 +64,6 @@
 
         </div>
 
-        <button type="submit" class="btn btn-primary">Create</button>
+        <button type="submit" class="btn btn-primary">Modifica</button>
     </form>
 @endsection
