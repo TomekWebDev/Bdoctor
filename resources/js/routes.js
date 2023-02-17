@@ -14,16 +14,7 @@ const router = new VueRouter({
     mode: 'history',
     routes: [
         // aggiungo tutte le rotte sotto forma di oggetti
-        {
-            // path: '/',
-            // name: 'home',
-            // component: HomePageComp
-        },
-        {
-            // path: '/about-us',
-            // name: 'about-us',
-            // component: AboutUsComp
-        },
+
 
     ]
 });
