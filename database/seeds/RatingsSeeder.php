@@ -12,7 +12,8 @@ class RatingsSeeder extends Seeder
      */
     public function run()
     {
-        $ratings= [
+        $ratings = [
+            0,
             1,
             2,
             3,
@@ -22,9 +23,9 @@ class RatingsSeeder extends Seeder
 
         foreach ($ratings as $elem) {
 
-            $newratings= new Rating();
-            $newratings-> vote = $elem;
-            $newratings-> save();
+            $newratings = new Rating();
+            $newratings->vote = $elem;
+            $newratings->save();
         }
     }
 }
