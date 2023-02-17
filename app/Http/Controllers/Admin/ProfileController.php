@@ -7,6 +7,7 @@ use App\Models\Profile;
 use App\Models\Spec;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -30,7 +31,13 @@ class ProfileController extends Controller
         $specs = Spec::All();
         $userId = Auth::user()->id;
 
-        return view('admin.profile.create', compact('specs', 'userId'));
+        return view('admin.profile.create', compact('userId', 'specs'));
+
+        // if (!Auth::user()->id) {
+        //     return view('Admin.profile.create', compact('specs', 'userId'));
+        // } else {
+        //     return redirect()->route('admin.home', compact('userId'))->with('alreadyCreated', 'Hai già creato il tuo profilo!');
+        // }
     }
 
     /**
@@ -53,6 +60,17 @@ class ProfileController extends Controller
 
         $new_profile = new Profile();
         $new_profile->user_id = Auth::user()->id;
+
+        if (array_key_exists('image', $data)) { // qui check se esiste input (che si chiama image)
+            $image_url = Storage::put('profile_images', $data['image']); //salvo url in variabile e dichiaro di eseguire put nella cartella che ho scelto in public/storage
+            $data['image'] = $image_url; // image è il nome della colonna, gli assegno l'url salvato prima
+        }
+
+        // stessa cosa delle image per il resume
+        if (array_key_exists('resume', $data)) {
+            $resume_url = Storage::put('resumes', $data['resume']);
+            $data['resume'] = $resume_url;
+        }
 
         $new_profile->fill($data);
 
