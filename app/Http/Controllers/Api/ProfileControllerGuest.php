@@ -15,7 +15,7 @@ class ProfileControllerGuest extends Controller
      */
     public function index()
     {
-        $profiles = Profile::with('specs', 'user')->get();
+        $profiles = Profile::with('specs', 'user')->paginate(2);
         return response()->json($profiles);
     }
 

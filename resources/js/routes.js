@@ -14,7 +14,7 @@ const router = new VueRouter({
     routes: [
         // aggiungo tutte le rotte sotto forma di oggetti
         {
-            path: '/search',
+            path: '/profiles',
             name: 'search',
             component: SearchPage
         },
