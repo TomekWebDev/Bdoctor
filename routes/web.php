@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Admin\MessageController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -30,6 +29,7 @@ Route::middleware('auth')
         Route::get('/', 'HomeController@index')->name('index');
         Route::resource('/profile', ProfileController::class);
         Route::resource('/messages', MessageController::class);
+        Route::resource('/reviews', ReviewController::class);
     });
 
 Route::get('{any?}', function () {
