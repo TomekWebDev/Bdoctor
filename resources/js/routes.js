@@ -4,7 +4,7 @@ import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 
 // import uncomponenteComp from ...
-import SearchPage from './pages/SearchPage.vue';
+import ShowPage from './pages/SearchPage.vue';
 
 
 
@@ -16,9 +16,9 @@ const router = new VueRouter({
     routes: [
         // aggiungo tutte le rotte sotto forma di oggetti
         {
-            path: '/',
+            path: '/search',
             name: 'search',
-            component: SearchPage
+            component: ShowPage
         },
 
     ]
