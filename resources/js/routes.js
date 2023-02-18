@@ -4,9 +4,7 @@ import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 
 // import uncomponenteComp from ...
-import ShowPage from './pages/SearchPage.vue';
-
-
+import SearchPage from './pages/SearchPage.vue';
 
 
 const router = new VueRouter({
@@ -18,7 +16,7 @@ const router = new VueRouter({
         {
             path: '/search',
             name: 'search',
-            component: ShowPage
+            component: SearchPage
         },
 
     ]
