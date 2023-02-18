@@ -22,5 +22,7 @@
 
     <a href="{{ route('admin.profile.show', $profile->id) }}">Vai alla show</a>
 
+    <a href="{{ route('admin.messages.index', $profile->id) }}">Vai ai messaggi</a>
+
     <a href="">Vai ad acquisto sponsor</a>
 @endsection

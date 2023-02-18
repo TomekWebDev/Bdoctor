@@ -21,6 +21,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::namespace('Api')
     ->prefix('/profiles')
     ->group(function () {
-        Route::get('/', 'PostController@index');
-        Route::get('/{id}', 'PostController@show');
+        Route::get('/', 'ProfileControllerGuest@index');
+        Route::get('/{id}', 'ProfileControllerGuest@show');
     });
