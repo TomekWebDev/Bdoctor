@@ -26,6 +26,12 @@
 
     <a href="{{ route('admin.reviews.index', $profile->id) }}">Vai alle reviews</a>
 
+    <a href="{{ route('admin.ratings.index', $profile->id) }}">Vai ai ratings</a>
+
+    <a href="{{ route('admin.sponsors.index', $profile->id) }}">Scegli una sponsorizzazione</a>
+
+    <a href="{{ route('admin.statistics.index', $profile->id) }}">Vai alle tue statistiche</a>
+
 
     <a href="">Vai ad acquisto sponsor</a>
 @endsection

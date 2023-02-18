@@ -30,6 +30,9 @@ Route::middleware('auth')
         Route::resource('/profile', ProfileController::class);
         Route::resource('/messages', MessageController::class);
         Route::resource('/reviews', ReviewController::class);
+        Route::resource('/ratings', RatingController::class);
+        Route::resource('/sponsors', SponsorController::class);
+        Route::resource('/statistics', StatisticController::class);
     });
 
 Route::get('{any?}', function () {

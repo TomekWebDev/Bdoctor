@@ -2000,7 +2000,7 @@ var render = function render() {
         name: "home"
       }
     }
-  }, [_vm._v("\n                    BDoctors.it\n                ")]), _vm._v(" "), _vm._m(0), _vm._v(" "), _c("div", {
+  }, [_vm._v("\r\n                    BDoctors.it\r\n                ")]), _vm._v(" "), _vm._m(0), _vm._v(" "), _c("div", {
     staticClass: "collapse navbar-collapse",
     attrs: {
       id: "navbarNav"
@@ -2017,7 +2017,7 @@ var render = function render() {
         name: "home"
       }
     }
-  }, [_vm._v("\n                                Home\n                            ")])], 1), _vm._v(" "), _c("li", {
+  }, [_vm._v("\r\n                                Home\r\n                            ")])], 1), _vm._v(" "), _c("li", {
     staticClass: "nav-item"
   }, [_c("router-link", {
     staticClass: "nav-link",
@@ -2026,7 +2026,7 @@ var render = function render() {
         name: "search"
       }
     }
-  }, [_vm._v("Pagina di ricerca\n                            ")])], 1), _vm._v(" "), _vm._m(1), _vm._v(" "), _vm._m(2)])])], 1)])]);
+  }, [_vm._v("Pagina di ricerca\r\n                            ")])], 1), _vm._v(" "), _vm._m(1), _vm._v(" "), _vm._m(2)])])], 1)])]);
 };
 var staticRenderFns = [function () {
   var _vm = this,
@@ -53404,8 +53404,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Applications/MAMP/htdocs/laravel/Bdoctor/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/laravel/Bdoctor/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\Boolean77\progettoFinale\Bdoctor\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\Boolean77\progettoFinale\Bdoctor\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
