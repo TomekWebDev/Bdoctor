@@ -25,6 +25,7 @@ const router = new VueRouter({
             component: ShowPage
         },
 
+
     ]
 });
 

@@ -1,14 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Message;
-use App\Models\Profile;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class MessageController extends Controller
+class MessageControllerGuest extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +15,7 @@ class MessageController extends Controller
      */
     public function index()
     {
-        $messages = Message::where('profile_id', Auth::user()->id)->get();
-        return view('admin.messages.index', compact('messages'));
+        //
     }
 
     /**
@@ -39,7 +36,15 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+
+        $new_message = new Message();
+        $new_message->name = $request->name;
+        $new_message->surname = $request->surname;
+        $new_message->email = $request->email;
+        $new_message->message = $request->message;
+        $new_message->profile_id = $request->profile_id;
+        $new_message->save();
     }
 
     /**

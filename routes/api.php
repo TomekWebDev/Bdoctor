@@ -24,3 +24,10 @@ Route::namespace('Api')
         Route::get('/', 'ProfileControllerGuest@index');
         Route::get('/{id}', 'ProfileControllerGuest@show');
     });
+
+Route::namespace('Api')
+    ->prefix('/message')
+    ->group(function () {
+        Route::post("/", 'MessageControllerGuest@store'); // forma diversa con la classe e parametro tra apici che indica la funzione del controller
+
+    });

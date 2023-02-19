@@ -4,9 +4,8 @@
     <div class="container">
         <div class="card">
             <div class="card-body">
-                Messaggio
+                {{ $messages }}
             </div>
         </div>
     </div>
-
 @endsection
