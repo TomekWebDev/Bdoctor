@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Message;
+use App\Models\Review;
 use Illuminate\Http\Request;
 
-class MessageControllerGuest extends Controller
+class ReviewControllerGuest extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -38,9 +38,9 @@ class MessageControllerGuest extends Controller
     {
         $data = $request->all();
 
-        $new_message = new Message();
-        $new_message->fill($data);
-        $new_message->save();
+        $new_review = new Review();
+        $new_review->fill($data);
+        $new_review->save();
     }
 
     /**

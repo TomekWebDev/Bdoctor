@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Message;
+use App\Models\Rating;
+use App\Models\Sponsor;
 use Illuminate\Http\Request;
 
-class MessageControllerGuest extends Controller
+class RatingControllerGuest extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +16,9 @@ class MessageControllerGuest extends Controller
      */
     public function index()
     {
-        //
+        $ratings = Rating::all();
+
+        return response()->json($ratings);
     }
 
     /**
@@ -36,11 +39,6 @@ class MessageControllerGuest extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
-
-        $new_message = new Message();
-        $new_message->fill($data);
-        $new_message->save();
     }
 
     /**

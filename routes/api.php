@@ -31,3 +31,17 @@ Route::namespace('Api')
         Route::post("/", 'MessageControllerGuest@store'); // forma diversa con la classe e parametro tra apici che indica la funzione del controller
 
     });
+
+Route::namespace('Api')
+    ->prefix('/review')
+    ->group(function () {
+        Route::post("/", 'ReviewControllerGuest@store'); // forma diversa con la classe e parametro tra apici che indica la funzione del controller
+
+    });
+
+Route::namespace('Api')
+    ->prefix('/rating')
+    ->group(function () {
+        Route::get("/", 'RatingControllerGuest@index'); // forma diversa con la classe e parametro tra apici che indica la funzione del controller
+        Route::post("/", 'RatingControllerGuest@store');
+    });
