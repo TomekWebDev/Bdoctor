@@ -1994,7 +1994,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       ratings: [],
-      voteId: null
+      voteId: ""
     };
   },
   mounted: function mounted() {
@@ -2014,7 +2014,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
       this.isLoading = true;
       axios.post("/api/rating", {
-        rating_id: parseInt(this.voteId),
+        rating_id: this.voteId,
         profile_id: this.$route.params.id
       }).then(function (res) {
         console.log(res.data);
@@ -54335,8 +54335,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/Mangiagalli/Desktop/Progetto finale/Bdoctor/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/Mangiagalli/Desktop/Progetto finale/Bdoctor/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Applications/MAMP/htdocs/laravel/Bdoctor/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/laravel/Bdoctor/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

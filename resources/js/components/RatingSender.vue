@@ -21,7 +21,7 @@ export default {
   data() {
     return {
       ratings: [],
-      voteId: null,
+      voteId: "",
     };
   },
 
@@ -47,7 +47,7 @@ export default {
 
       axios
         .post("/api/rating", {
-          rating_id: parseInt(this.voteId),
+          rating_id: this.voteId,
           profile_id: this.$route.params.id,
         })
         .then((res) => {

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Profile;
 use App\Models\Rating;
 use App\Models\Sponsor;
 use Illuminate\Http\Request;
@@ -39,6 +40,16 @@ class RatingControllerGuest extends Controller
      */
     public function store(Request $request)
     {
+        $data = $request->all();
+
+        $new_profile = new Profile; //associo model profile
+        $new_rating = new Rating; //associo model rating
+
+        $new_profile->fill($data);
+
+        $new_profile->ratings()->sync($data['profile_id']); // al model profile invoco la funzione ratings per tabella pivot e sync il dato arrivato da vue
+        $new_rating->profiles()->sync($data['rating_id']);// al model rating invoco la funzione profiles per tabella pivot e sync il dato arrivato da vue
+
     }
 
     /**
