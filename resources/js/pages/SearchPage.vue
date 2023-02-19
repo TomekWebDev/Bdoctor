@@ -7,7 +7,7 @@
       <li v-for="spec in profile.specs" :key="spec.id">
         Nome della spec: {{ spec.name }}
       </li>
-      <li>Nome dello user: {{ profile.user.name }}</li>
+      <li> <router-link :to="`/profile/${profile.id}`"> {{ profile.user.name }} </router-link> </li>
     </ul>
 
     <PaginationComp @on-page-change="getProfiles" :pagination="pagination" />

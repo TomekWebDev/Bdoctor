@@ -5,6 +5,7 @@ Vue.use(VueRouter);
 
 // import uncomponenteComp from ...
 import SearchPage from './pages/SearchPage.vue';
+import ShowPage from './pages/ShowPage.vue';
 
 
 const router = new VueRouter({
@@ -17,6 +18,11 @@ const router = new VueRouter({
             path: '/profiles',
             name: 'search',
             component: SearchPage
+        },
+        {
+            path: '/profile/:id',
+            name: 'singleProfile',
+            component: ShowPage
         },
 
     ]
