@@ -14,9 +14,9 @@
 
                 {{-- <embed src="{{ asset("Storage/$this_profile->resume") }}" class="img-fluid w-25" type='application/pdf'/> --}}
 
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal" id="myInput">
-                    Bottone CV
-                </button>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        Launch demo modal
+                      </button>
 
             </div>
 
@@ -26,24 +26,23 @@
         <a href="{{ route('admin.profile.edit', $this_profile->id) }}">Vai a edit</a>
     </div>
 
-    <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    {{-- <embed src="{{ asset("Storage/$this_profile->resume") }}" class="img-fluid w-25" type='application/pdf'/> --}}
-                        Ciao
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
+    <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+            <div class="modal-body">
+              <embed src="{{ asset("Storage/$this_profile->resume") }}" class="img-fluid w-100 h-100" type='application/pdf'/>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
         </div>
-    </div>
+      </div>
 @endsection
 
 {{-- @push('script')
@@ -57,12 +56,3 @@
     </script>
 @endpush --}}
 
-@push('scripts')
-    <script>
-        $(document).ready(function() {
-            $('#myInput').click(function() {
-                $('#myModal').modal('show');
-            });
-        });
-    </script>
-@endpush
