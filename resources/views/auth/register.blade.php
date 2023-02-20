@@ -112,6 +112,7 @@ $specs = Spec::all();
                         <div class="form-group row ">
                             <div class="col-md-6 offset-md-4">
                                 <select name="spec_id" id="" required>
+                                    <option value="" disabled selected>Seleziona la tua specializzazione</option>
                                     @foreach ($specs as $spec)
                                         <option value="{{$spec->id}}">
                                             {{$spec->name}}
