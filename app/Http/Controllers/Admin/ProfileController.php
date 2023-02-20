@@ -94,6 +94,10 @@ class ProfileController extends Controller
         $this_profile = Profile::findOrFail($id);
         $this_user = Auth::user();
 
+        if ($this_profile->user_id !== auth()->user()->id) {
+            abort(403, 'Non è il tuo profilo.');
+        }
+
         return view('admin.profile.show', compact('this_profile', 'this_user'));
     }
 
@@ -107,6 +111,10 @@ class ProfileController extends Controller
     {
 
         $profile_to_edit = Profile::findOrFail($id);
+
+        if ($profile_to_edit->user_id !== auth()->user()->id) {
+            abort(403, 'Non puoi modificare il profilo altrui.');
+        }
 
         $specs = Spec::All();
 
@@ -122,7 +130,7 @@ class ProfileController extends Controller
      */
     public function update(Request $request, Profile $profile)
     {
-        
+
         $request->validate(
             [
                 'city' => 'required|max:50',
