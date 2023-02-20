@@ -2528,7 +2528,10 @@ var render = function render() {
     }
   }, _vm._l(_vm.ratings, function (rating) {
     return _c("option", {
-      key: rating.id
+      key: rating,
+      domProps: {
+        value: rating.id
+      }
     }, [_vm._v("\n        " + _vm._s(rating.vote) + "\n      ")]);
   }), 0), _vm._v(" "), _c("button", {
     attrs: {
