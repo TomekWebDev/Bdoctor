@@ -34,6 +34,15 @@
                     <li>
                         <a class="dropdown-item" href="{{route('admin.statistics.index', $profile->id)}}">Statistiche</a>
                     </li>
+                    <div class="dropdown-divider">
+                    </div>
+                    <li>
+                        <a href="#" class="dropdown-item text-danger" onclick="deleteProfile()">Elimina profilo</a>
+                    </li>
+                    <form class="d-none" id="activeDelete" action="{{ route('admin.profile.destroy', $profile->id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                    </form>
                     </ul>
                   </div>
             </div>
@@ -66,5 +75,18 @@
     
 
 @endsection
+
+@push('script')
+ <script>
+    function deleteProfile(){
+        let alert = confirm( 'sei sicuro di voler cancellare il profilo?');
+        if(alert){
+            document.querySelector('form#activeDelete').submit();
+        }
+    }
+ </script>
+ 
+    
+@endpush
 
 

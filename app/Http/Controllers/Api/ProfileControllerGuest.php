@@ -85,6 +85,6 @@ class ProfileControllerGuest extends Controller
      */
     public function destroy($id)
     {
-        //
+    //
     }
 }

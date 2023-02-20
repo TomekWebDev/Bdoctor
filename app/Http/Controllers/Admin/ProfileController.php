@@ -178,6 +178,13 @@ class ProfileController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $profiloUtente = Profile::findOrFail($id);
+        $profiloUser = Auth::user();
+        $profiloUtente->specs()->sync([]);
+        $profiloUtente->ratings()->sync([]);
+        $profiloUtente->delete();
+        $profiloUser -> delete();
+
+        return view('guest.home');
     }
 }
