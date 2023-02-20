@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Profile;
+use App\Models\ProfileSpec;
 use App\Providers\RouteServiceProvider;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+
 
 class RegisterController extends Controller
 {
@@ -65,11 +68,26 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user =  User::create([
             'name' => $data['name'],
             'surname' => $data['surname'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+
+        $profile =  Profile::create([
+            'user_id' => $user->id,
+            'city' => $data['city'],
+            'address' => $data['address'],
+        ]);
+
+        $pivot = ProfileSpec::create([
+            'spec_id' => $data['spec'],
+            'profile_id' => $user->id,
+        ]);
+
+        $user->profile()->save($profile);
+        // $profile->save();
+
     }
 }

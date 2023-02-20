@@ -1,3 +1,9 @@
+<?php
+use App\Models\Spec;
+
+$specs = Spec::all();
+?>
+
 @extends('layouts.app')
 
 @section('content')
@@ -72,6 +78,46 @@
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                            </div>
+                        </div>
+{{-- form city --}}
+                        <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('City') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="city" type="text" class="form-control @error('city') is-invalid @enderror" name="city" value="{{ old('city') }}" required autocomplete="city" autofocus>
+
+                                @error('city')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+{{-- form address --}}
+                        <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Address') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="address" type="text" class="form-control @error('address') is-invalid @enderror" name="address" value="{{ old('address') }}" required autocomplete="address" autofocus>
+
+                                @error('address')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row ">
+                            <div class="col-md-6 offset-md-4">
+                                <select value="spec" name="" id="">
+                                    @foreach ($specs as $spec)
+                                        <option value="{{$spec->id}}">
+                                            {{$spec->name}}
+                                        </option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
 
