@@ -111,7 +111,7 @@ $specs = Spec::all();
 
                         <div class="form-group row ">
                             <div class="col-md-6 offset-md-4">
-                                <select value="spec" name="" id="">
+                                <select v-model="spec" name="spec_id" id="">
                                     @foreach ($specs as $spec)
                                         <option value="{{$spec->id}}">
                                             {{$spec->name}}

@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\Profile;
-use App\Models\ProfileSpec;
 use App\Providers\RouteServiceProvider;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -81,12 +80,12 @@ class RegisterController extends Controller
             'address' => $data['address'],
         ]);
 
-        $pivot = ProfileSpec::create([
-            'spec_id' => $data['spec'],
-            'profile_id' => $user->id,
-        ]);
+        if(isset($data['spec_id'])){
+            $profile->specs()->sync($data['spec_id']);
+        };
 
         $user->profile()->save($profile);
+        return $user;
         // $profile->save();
 
     }
