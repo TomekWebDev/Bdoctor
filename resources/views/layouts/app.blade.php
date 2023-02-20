@@ -81,6 +81,9 @@
             @yield('content')
         </main>
     </div>
+
+    {{-- Per scripts --}}
+    @stack('script')
 </body>
 
 </html>

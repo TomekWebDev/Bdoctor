@@ -21,7 +21,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/admin/profile/create';
+    public const HOME = '/admin';
 
     /**
      * /////// COMMENTO NOSTRO!!!! The path to the "dashboard of an already registered Admin (with a profile)"

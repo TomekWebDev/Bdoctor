@@ -126,7 +126,8 @@ class ProfileController extends Controller
         $request->validate(
             [
                 'city' => 'required|max:50',
-                'address' => 'required|max:100'
+                'address' => 'required|max:100',
+                'specs' => 'required|min:1',
             ]
         );
 
