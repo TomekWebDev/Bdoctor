@@ -1,8 +1,8 @@
 <template>
   <div>
     <form v-on:submit="sendReview">
-      <input v-model="name" type="text" placeholder="name" />
-      <textarea v-model="review" name="review"></textarea>
+      <input required v-model="name" type="text" placeholder="name" />
+      <textarea required v-model="review" name="review"></textarea>
       <button type="submit">Send Review</button>
     </form>
   </div>

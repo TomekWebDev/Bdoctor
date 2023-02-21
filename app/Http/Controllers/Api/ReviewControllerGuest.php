@@ -36,6 +36,15 @@ class ReviewControllerGuest extends Controller
      */
     public function store(Request $request)
     {
+
+        $request->validate(
+            [
+                'name' => 'required|max:50',
+                'review' => 'required|max:255',
+                'profile_id' => 'required'
+            ]
+        );
+
         $data = $request->all();
 
         $new_review = new Review();
