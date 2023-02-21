@@ -21,7 +21,7 @@ const router = new VueRouter({
             component: HomePage
         },
         {
-            path: '/profiles',
+            path: '/search',
             name: 'search',
             component: SearchPage
         },
@@ -30,8 +30,7 @@ const router = new VueRouter({
             name: 'singleProfile',
             component: ShowPage
         },
-
-
+        
     ]
 });
 

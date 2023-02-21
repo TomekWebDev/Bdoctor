@@ -49,9 +49,33 @@ class ProfileControllerGuest extends Controller
      */
     public function store(Request $request)
     {
-        $pippo = $request->all();
-        // Store the data in the session
-        session(['pippo' => $pippo]);
+
+//Questo codice esegue una query per recuperare tutti i profili che hanno una determinata specializzazione. In particolare, estrae il parametro spec dalla richiesta in ingresso ($request->input('spec')) e quindi utilizza questo parametro per filtrare i profili attraverso il metodo whereHas() di Laravel.
+
+// Il metodo whereHas() viene utilizzato per aggiungere una clausola "has" alla query, in modo da filtrare i risultati in base all'esistenza di relazioni con altre tabelle. In questo caso, la clausola "has" viene applicata alla relazione specs del modello Profile, e viene usata per cercare tutti i profili che hanno almeno una specializzazione con un ID corrispondente al valore di $specId.
+
+// Il metodo with() invece viene utilizzato per caricare in anticipo le relazioni specs e user dei profili recuperati, in modo da evitare il problema dell'N+1, dove per ogni profilo recuperato verrebbe eseguita una query separata per recuperare le sue relazioni.
+
+// In sintesi, questo codice recupera tutti i profili che hanno una determinata specializzazione, e per ciascun profilo recuperato carica in anticipo le sue relazioni specs e user
+
+        $specId = $request->input('spec');
+
+        $profiles = Profile::with('specs', 'user')
+                    ->whereHas('specs', function ($query) use ($specId) {
+                        $query->where('specs.id', $specId);
+                    })
+                    ->get();
+
+        $specs = Spec::all();
+        $pippo = session('pippo');
+    
+        $data = [
+            'profiles' => $profiles,
+            'specs' => $specs,
+            'pippo' => $pippo
+        ];
+    
+        return response()->json($data);
         return redirect()->route('/profiles');
     }
 

@@ -7,7 +7,8 @@
         {{ spec.name }}
       </option>
     </select>
-    <button v-on:click="searchProfilesSpecs">Search</button>
+    <!-- <button v-on:click="searchProfilesSpecs">Search</button> -->
+    <router-link :to="{ name: 'search', params: { spec: selectedSpecId } }">Search</router-link>
 
     <ul v-for="profile in profiles" :key="profile.id">
       <li>Profile id: {{ profile.id }}</li>
@@ -65,6 +66,9 @@ export default {
         })
         .then((res) => {
           console.log(res.data);
+          // ripopolo l'arrauy dopo la chiamata POST
+          this.profiles = res.data.profiles;
+          this.specs = res.data.specs;
         })
         .catch((err) => {
           console.log(err);
