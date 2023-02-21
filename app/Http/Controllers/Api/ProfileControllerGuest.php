@@ -18,7 +18,14 @@ class ProfileControllerGuest extends Controller
     {
         // $specs = Spec::all()->get();
         $profiles = Profile::with('specs', 'user')->get();
-        return response()->json($profiles);
+        $specs = Spec::all();
+
+        $data = [
+            'profiles' => $profiles,
+            'specs' => $specs
+        ];
+
+        return response()->json($data);
     }
 
     /**
@@ -87,6 +94,6 @@ class ProfileControllerGuest extends Controller
      */
     public function destroy($id)
     {
-    //
+        //
     }
 }

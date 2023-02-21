@@ -2071,6 +2071,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       profiles: [],
+      specs: [],
       isLoading: false,
       pagination: {}
     };
@@ -2084,7 +2085,8 @@ __webpack_require__.r(__webpack_exports__);
       this.isLoading = true;
       axios.get("http://localhost:8000/api/profiles").then(function (res) {
         console.log(res.data);
-        _this.profiles = res.data;
+        _this.profiles = res.data.profiles;
+        _this.specs = res.data.specs;
       })["catch"](function (err) {
         console.log(err);
       }).then(function () {
@@ -2124,7 +2126,7 @@ __webpack_require__.r(__webpack_exports__);
       this.isLoading = true;
       axios.get("http://localhost:8000/api/profiles").then(function (res) {
         console.log(res.data);
-        _this.profiles = res.data;
+        _this.profiles = res.data.profiles;
       })["catch"](function (err) {
         console.log(err);
       }).then(function () {
@@ -2554,7 +2556,19 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", [_c("h1", [_vm._v("Questa è HomePage")]), _vm._v(" "), _vm._l(_vm.profiles, function (profile) {
+  return _c("div", [_c("h1", [_vm._v("Questa è HomePage")]), _vm._v(" "), _c("select", {
+    attrs: {
+      name: "",
+      id: ""
+    }
+  }, _vm._l(_vm.specs, function (spec) {
+    return _c("option", {
+      key: spec.id,
+      attrs: {
+        value: ""
+      }
+    }, [_vm._v("\n      " + _vm._s(spec.name) + "\n    ")]);
+  }), 0), _vm._v(" "), _vm._l(_vm.profiles, function (profile) {
     return _c("ul", {
       key: profile.id
     }, [_c("li", [_vm._v("Profile id: " + _vm._s(profile.id))]), _vm._v(" "), _vm._l(profile.specs, function (spec) {
@@ -2599,7 +2613,7 @@ var render = function render() {
       attrs: {
         to: "/profile/".concat(profile.id)
       }
-    }, [_vm._v(" " + _vm._s(profile.user.name) + " ")])], 1)], 2);
+    }, [_vm._v("\n        " + _vm._s(profile.user.name) + "\n      ")])], 1)], 2);
   })], 2);
 };
 var staticRenderFns = [];
@@ -54206,8 +54220,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Applications/MAMP/htdocs/laravel/Bdoctor/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/laravel/Bdoctor/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/Mangiagalli/Desktop/Progetto finale/Bdoctor/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/Mangiagalli/Desktop/Progetto finale/Bdoctor/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

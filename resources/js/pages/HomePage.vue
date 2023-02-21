@@ -2,6 +2,12 @@
   <div>
     <h1>Questa è HomePage</h1>
 
+    <select name="" id="">
+      <option v-for="spec in specs" :key="spec.id" value="">
+        {{ spec.name }}
+      </option>
+    </select>
+
     <ul v-for="profile in profiles" :key="profile.id">
       <li>Profile id: {{ profile.id }}</li>
       <li v-for="spec in profile.specs" :key="spec.id">
@@ -17,14 +23,13 @@
 </template>
 
   <script>
-
 export default {
   name: "SearchPage",
-  components: {
-  },
+  components: {},
   data() {
     return {
       profiles: [],
+      specs: [],
       isLoading: false,
       pagination: {},
     };
@@ -41,7 +46,8 @@ export default {
         .get("http://localhost:8000/api/profiles")
         .then((res) => {
           console.log(res.data);
-          this.profiles = res.data;
+          this.profiles = res.data.profiles;
+          this.specs = res.data.specs;
         })
         .catch((err) => {
           console.log(err);
