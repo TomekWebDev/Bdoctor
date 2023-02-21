@@ -58,6 +58,7 @@ class RegisterController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'city' => ['required', 'string', 'max:255'],
             'address' => ['required', 'string', 'max:255'],
+            'spec' => ['required'],
         ]);
     }
 
@@ -82,7 +83,7 @@ class RegisterController extends Controller
             'address' => $data['address'],
         ]);
 
-        if(isset($data['spec_id'])){
+        if (isset($data['spec_id'])) {
             $profile->specs()->sync($data['spec_id']);
         };
 

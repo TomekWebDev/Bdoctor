@@ -42,12 +42,20 @@ class RatingControllerGuest extends Controller
      */
     public function store(Request $request)
     {
+
         $data = $request->all();
+
+        $request->validate(
+            [
+                'rating_id' => 'required',
+                'profile_id' => 'required',
+            ]
+        );
+
         $pivot = new ProfileRating;
-        
+
         $pivot->fill($data);
         $pivot->save();
-
     }
 
     /**
