@@ -10,7 +10,6 @@
       <li> <router-link :to="`/profile/${profile.id}`"> {{ profile.user.name }} </router-link> </li>
     </ul>
 
-    <PaginationComp @on-page-change="getProfiles" :pagination="pagination" />
   </div>
 </template>
 
@@ -18,13 +17,11 @@
 
   <script>
 import SearchBar from "../components/SearchBar.vue";
-import PaginationComp from "../components/PaginationComp.vue";
 
 export default {
   name: "SearchPage",
   components: {
     SearchBar,
-    PaginationComp,
   },
   data() {
     return {
@@ -39,19 +36,14 @@ export default {
   },
 
   methods: {
-    getProfiles(page) {
+    getProfiles() {
       this.isLoading = true;
       axios
-        .get("http://localhost:8000/api/profiles?page=" + page)
+        .get("http://localhost:8000/api/profiles")
         .then((res) => {
           console.log(res.data);
-          // this.posts = res.data.data;
-          const { data, current_page, last_page } = res.data;
-          this.profiles = data;
-          this.pagination = {
-            lastPage: last_page,
-            currentPage: current_page,
-          };
+          this.profiles = res.data;
+          
         })
         .catch((err) => {
           console.log(err);
