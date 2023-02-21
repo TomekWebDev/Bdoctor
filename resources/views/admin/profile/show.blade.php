@@ -1,29 +1,38 @@
 @extends('layouts.app')
 
 @section('content')
+
     <div class="container">
-        <div>questa è la show del dottore</div>
+        
+        <div class="row">
 
-        <div class="card">
-            <div class="card-body">
-                <div>{{ $this_user->name }}</div>
-                <div>{{ $this_user->surname }}</div>
-                <div>{{ $this_profile->city }}</div>
-                <div>{{ $this_profile->address }}</div>
-                <img src="{{ asset("Storage/$this_profile->image") }}" class="img-fluid w-25">
-
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    Mostra CV
-                </button>
-
+            <div class="col-sm-4">
+                <div class="card mt-3">
+                    <div class="card-body">
+                        <img src="{{ asset("Storage/$this_profile->image") }}" class="img-fluid">
+                        <hr>
+                        <button type="button" class="btn btn-outline-primary btn-sm btn-block" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            Mostra CV
+                        </button>
+                    </div>
+                </div>
             </div>
 
+            <div class="col-sm-8">
+                <div class="card mt-3">
+                    <div class="card-body">
+                        <div>{{ $this_user->name }}</div>
+                        <div>{{ $this_user->surname }}</div>
+                        <div>{{ $this_profile->city }}</div>
+                        <div>{{ $this_profile->address }}</div>
+                    </div>
+                </div>
+            </div>
         </div>
-
-
-        <a href="{{ route('admin.profile.edit', $this_profile->id) }}">Vai a edit</a>
+        
     </div>
 
+{{-- Modal Curriculum Vitae --}}
     <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-fullscreen">
             <div class="modal-content">
