@@ -23,6 +23,7 @@ Route::namespace('Api')
     ->group(function () {
         Route::get('/', 'ProfileControllerGuest@index');
         Route::get('/{id}', 'ProfileControllerGuest@show');
+        Route::post('/', 'ProfileControllerGuest@store');
     });
 
 Route::namespace('Api')

@@ -12,7 +12,11 @@
           {{ profile.user.name }}
         </router-link>
       </li>
+      {{
+        pippo
+      }}
     </ul>
+    {{}}
   </div>
 </template>
 
@@ -23,6 +27,7 @@ export default {
   data() {
     return {
       profiles: [],
+      pippo: "",
       isLoading: false,
       pagination: {},
     };
@@ -40,6 +45,7 @@ export default {
         .then((res) => {
           console.log(res.data);
           this.profiles = res.data.profiles;
+          this.pippo = res.data.pippo;
         })
         .catch((err) => {
           console.log(err);

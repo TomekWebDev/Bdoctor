@@ -20,9 +20,12 @@ class ProfileControllerGuest extends Controller
         $profiles = Profile::with('specs', 'user')->get();
         $specs = Spec::all();
 
+        $pippo = session('pippo');
+
         $data = [
             'profiles' => $profiles,
-            'specs' => $specs
+            'specs' => $specs,
+            'pippo' => $pippo
         ];
 
         return response()->json($data);
@@ -46,7 +49,10 @@ class ProfileControllerGuest extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $pippo = $request->all();
+        // Store the data in the session
+        session(['pippo' => $pippo]);
+        return redirect()->route('/profiles');
     }
 
     /**

@@ -2071,6 +2071,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       profiles: [],
+      selectedSpecId: "",
       specs: [],
       isLoading: false,
       pagination: {}
@@ -2091,6 +2092,18 @@ __webpack_require__.r(__webpack_exports__);
         console.log(err);
       }).then(function () {
         _this.isLoading = false;
+      });
+    },
+    searchProfilesSpecs: function searchProfilesSpecs() {
+      var _this2 = this;
+      axios.post("http://localhost:8000/api/profiles", {
+        spec: this.selectedSpecId
+      }).then(function (res) {
+        console.log(res.data);
+      })["catch"](function (err) {
+        console.log(err);
+      }).then(function () {
+        _this2.isLoading = false;
       });
     }
   }
@@ -2113,6 +2126,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       profiles: [],
+      pippo: "",
       isLoading: false,
       pagination: {}
     };
@@ -2127,6 +2141,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.get("http://localhost:8000/api/profiles").then(function (res) {
         console.log(res.data);
         _this.profiles = res.data.profiles;
+        _this.pippo = res.data.pippo;
       })["catch"](function (err) {
         console.log(err);
       }).then(function () {
@@ -2557,18 +2572,39 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", [_c("h1", [_vm._v("Questa è HomePage")]), _vm._v(" "), _c("select", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.selectedSpecId,
+      expression: "selectedSpecId"
+    }],
     attrs: {
       name: "",
       id: ""
+    },
+    on: {
+      change: function change($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
+          return o.selected;
+        }).map(function (o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val;
+        });
+        _vm.selectedSpecId = $event.target.multiple ? $$selectedVal : $$selectedVal[0];
+      }
     }
   }, _vm._l(_vm.specs, function (spec) {
     return _c("option", {
       key: spec.id,
-      attrs: {
-        value: ""
+      domProps: {
+        value: spec.id
       }
     }, [_vm._v("\n      " + _vm._s(spec.name) + "\n    ")]);
-  }), 0), _vm._v(" "), _vm._l(_vm.profiles, function (profile) {
+  }), 0), _vm._v(" "), _c("button", {
+    on: {
+      click: _vm.searchProfilesSpecs
+    }
+  }, [_vm._v("Search")]), _vm._v(" "), _vm._l(_vm.profiles, function (profile) {
     return _c("ul", {
       key: profile.id
     }, [_c("li", [_vm._v("Profile id: " + _vm._s(profile.id))]), _vm._v(" "), _vm._l(profile.specs, function (spec) {
@@ -2613,8 +2649,8 @@ var render = function render() {
       attrs: {
         to: "/profile/".concat(profile.id)
       }
-    }, [_vm._v("\n        " + _vm._s(profile.user.name) + "\n      ")])], 1)], 2);
-  })], 2);
+    }, [_vm._v("\n        " + _vm._s(profile.user.name) + "\n      ")])], 1), _vm._v("\n    " + _vm._s(_vm.pippo) + "\n  ")], 2);
+  }), _vm._v("\n  {{}}\n")], 2);
 };
 var staticRenderFns = [];
 render._withStripped = true;

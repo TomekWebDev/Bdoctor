@@ -2,11 +2,12 @@
   <div>
     <h1>Questa è HomePage</h1>
 
-    <select name="" id="">
-      <option v-for="spec in specs" :key="spec.id" value="">
+    <select v-model="selectedSpecId" name="" id="">
+      <option v-for="spec in specs" :key="spec.id" :value="spec.id">
         {{ spec.name }}
       </option>
     </select>
+    <button v-on:click="searchProfilesSpecs">Search</button>
 
     <ul v-for="profile in profiles" :key="profile.id">
       <li>Profile id: {{ profile.id }}</li>
@@ -29,6 +30,7 @@ export default {
   data() {
     return {
       profiles: [],
+      selectedSpecId: "",
       specs: [],
       isLoading: false,
       pagination: {},
@@ -48,6 +50,21 @@ export default {
           console.log(res.data);
           this.profiles = res.data.profiles;
           this.specs = res.data.specs;
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+        .then(() => {
+          this.isLoading = false;
+        });
+    },
+    searchProfilesSpecs() {
+      axios
+        .post("http://localhost:8000/api/profiles", {
+          spec: this.selectedSpecId,
+        })
+        .then((res) => {
+          console.log(res.data);
         })
         .catch((err) => {
           console.log(err);
