@@ -193,6 +193,6 @@ class ProfileController extends Controller
         $profiloUtente->delete();
         $profiloUser -> delete();
 
-        return view('guest.home');
+        return redirect()->route('guest.home');
     }
 }
