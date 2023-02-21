@@ -38,6 +38,16 @@ class MessageControllerGuest extends Controller
     {
         $data = $request->all();
 
+        $request->validate(
+            [
+                'name' => 'required|max:100',
+                'surname' => 'required|max:100',
+                'email' => 'required|max:50',
+                'message' => 'required|max:400',
+                'profile_id' => 'required'
+            ]
+        );
+
         $new_message = new Message();
         $new_message->fill($data);
         $new_message->save();
