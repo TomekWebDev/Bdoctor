@@ -9,7 +9,12 @@
             <div class="col-sm-4">
                 <div class="card mt-3">
                     <div class="card-body">
-                        <img src="{{ asset("Storage/$this_profile->image") }}" class="img-fluid">
+                        @if ($this_profile->image)
+                            <img src="{{ asset("Storage/$this_profile->image") }}" class="img-fluid">
+                        @else
+                            <img src="/img/user.png" class="img-fluid">
+                        @endif
+                        
                         <hr>
                         <button type="button" class="btn btn-outline-primary btn-sm btn-block" data-bs-toggle="modal" data-bs-target="#exampleModal">
                             Mostra CV
@@ -29,7 +34,7 @@
                 </div>
             </div>
         </div>
-        
+
     </div>
 
 {{-- Modal Curriculum Vitae --}}
