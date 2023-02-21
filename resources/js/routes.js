@@ -4,6 +4,7 @@ import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 
 // import uncomponenteComp from ...
+import HomePage from './pages/HomePage.vue';
 import SearchPage from './pages/SearchPage.vue';
 import ShowPage from './pages/ShowPage.vue';
 
@@ -14,6 +15,11 @@ const router = new VueRouter({
     mode: 'history',
     routes: [
         // aggiungo tutte le rotte sotto forma di oggetti
+        {
+            path: '/homepage',
+            name: 'homepage',
+            component: HomePage
+        },
         {
             path: '/profiles',
             name: 'search',

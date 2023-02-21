@@ -1,6 +1,6 @@
 <template>
   <div>
-    <SearchBar />
+    <h1>Questa è HomePage</h1>
 
     <ul v-for="profile in profiles" :key="profile.id">
       <li>Profile id: {{ profile.id }}</li>
@@ -16,15 +16,11 @@
   </div>
 </template>
 
-
-
   <script>
-import SearchBar from "../components/SearchBar.vue";
 
 export default {
   name: "SearchPage",
   components: {
-    SearchBar,
   },
   data() {
     return {

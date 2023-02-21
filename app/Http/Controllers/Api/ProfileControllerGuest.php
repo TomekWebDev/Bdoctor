@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Profile;
+use App\Models\Spec;
 use Illuminate\Http\Request;
 
 class ProfileControllerGuest extends Controller
@@ -15,6 +16,7 @@ class ProfileControllerGuest extends Controller
      */
     public function index()
     {
+        // $specs = Spec::all()->get();
         $profiles = Profile::with('specs', 'user')->get();
         return response()->json($profiles);
     }
