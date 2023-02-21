@@ -1909,7 +1909,7 @@ module.exports = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'HeaderComp'
+  name: "HeaderComp"
 });
 
 /***/ }),
@@ -2070,7 +2070,6 @@ __webpack_require__.r(__webpack_exports__);
   components: {},
   data: function data() {
     return {
-      profiles: [],
       selectedSpecId: "",
       specs: [],
       isLoading: false,
@@ -2078,32 +2077,19 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   mounted: function mounted() {
-    this.getProfiles();
+    this.getSpecs();
   },
   methods: {
-    getProfiles: function getProfiles() {
+    getSpecs: function getSpecs() {
       var _this = this;
       this.isLoading = true;
       axios.get("http://localhost:8000/api/profiles").then(function (res) {
-        console.log(res.data);
-        _this.profiles = res.data.profiles;
-        _this.specs = res.data.specs;
+        //   console.log(res.data);
+        _this.specs = res.data;
       })["catch"](function (err) {
         console.log(err);
       }).then(function () {
         _this.isLoading = false;
-      });
-    },
-    searchProfilesSpecs: function searchProfilesSpecs() {
-      var _this2 = this;
-      axios.post("http://localhost:8000/api/profiles", {
-        spec: this.selectedSpecId
-      }).then(function (res) {
-        console.log(res.data);
-      })["catch"](function (err) {
-        console.log(err);
-      }).then(function () {
-        _this2.isLoading = false;
       });
     }
   }
@@ -2126,22 +2112,24 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       profiles: [],
-      pippo: "",
+      //   specs: [],
       isLoading: false,
-      pagination: {}
+      pagination: {},
+      selectedSpecId: this.$route.params.spec
     };
   },
   mounted: function mounted() {
-    this.getProfiles();
+    this.searchProfilesSpecs();
   },
   methods: {
-    getProfiles: function getProfiles() {
+    searchProfilesSpecs: function searchProfilesSpecs() {
       var _this = this;
-      this.isLoading = true;
-      axios.get("http://localhost:8000/api/profiles").then(function (res) {
-        console.log(res.data);
+      axios.post("http://localhost:8000/api/profiles", {
+        spec: this.selectedSpecId
+      }).then(function (res) {
+        //   console.log(res.data);
         _this.profiles = res.data.profiles;
-        _this.pippo = res.data.pippo;
+        _this.specs = res.data.specs;
       })["catch"](function (err) {
         console.log(err);
       }).then(function () {
@@ -2243,10 +2231,10 @@ var render = function render() {
     staticClass: "navbar-brand",
     attrs: {
       to: {
-        name: "home"
+        name: "homepage"
       }
     }
-  }, [_vm._v("\n                    BDoctors.it\n                ")]), _vm._v(" "), _vm._m(0), _vm._v(" "), _c("div", {
+  }, [_vm._v("\n        BDoctors.it\n      ")]), _vm._v(" "), _vm._m(0), _vm._v(" "), _c("div", {
     staticClass: "collapse navbar-collapse",
     attrs: {
       id: "navbarNav"
@@ -2263,7 +2251,7 @@ var render = function render() {
         name: "homepage"
       }
     }
-  }, [_vm._v("\n                                Home\n                            ")])], 1), _vm._v(" "), _c("li", {
+  }, [_vm._v("\n              Home\n            ")])], 1), _vm._v(" "), _c("li", {
     staticClass: "nav-item"
   }, [_c("router-link", {
     staticClass: "nav-link",
@@ -2272,7 +2260,7 @@ var render = function render() {
         name: "search"
       }
     }
-  }, [_vm._v("Pagina di ricerca\n                            ")])], 1), _vm._v(" "), _vm._m(1), _vm._v(" "), _vm._m(2)])])], 1)])]);
+  }, [_vm._v("Pagina di ricerca\n            ")])], 1), _vm._v(" "), _vm._m(1), _vm._v(" "), _vm._m(2)])])], 1)])]);
 };
 var staticRenderFns = [function () {
   var _vm = this,
@@ -2600,23 +2588,17 @@ var render = function render() {
         value: spec.id
       }
     }, [_vm._v("\n      " + _vm._s(spec.name) + "\n    ")]);
-  }), 0), _vm._v(" "), _c("button", {
-    on: {
-      click: _vm.searchProfilesSpecs
-    }
-  }, [_vm._v("Search")]), _vm._v(" "), _vm._l(_vm.profiles, function (profile) {
-    return _c("ul", {
-      key: profile.id
-    }, [_c("li", [_vm._v("Profile id: " + _vm._s(profile.id))]), _vm._v(" "), _vm._l(profile.specs, function (spec) {
-      return _c("li", {
-        key: spec.id
-      }, [_vm._v("\n      Nome della spec: " + _vm._s(spec.name) + "\n    ")]);
-    }), _vm._v(" "), _c("li", [_c("router-link", {
-      attrs: {
-        to: "/profile/".concat(profile.id)
+  }), 0), _vm._v(" "), _c("router-link", {
+    staticClass: "btn btn-primary",
+    attrs: {
+      to: {
+        name: "search",
+        params: {
+          spec: _vm.selectedSpecId
+        }
       }
-    }, [_vm._v("\n        " + _vm._s(profile.user.name) + "\n      ")])], 1)], 2);
-  })], 2);
+    }
+  }, [_vm._v("Search")])], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -2649,8 +2631,8 @@ var render = function render() {
       attrs: {
         to: "/profile/".concat(profile.id)
       }
-    }, [_vm._v("\n        " + _vm._s(profile.user.name) + "\n      ")])], 1), _vm._v("\n    " + _vm._s(_vm.pippo) + "\n  ")], 2);
-  }), _vm._v("\n  {{}}\n")], 2);
+    }, [_vm._v("\n        " + _vm._s(profile.user.name) + "\n      ")])], 1)], 2);
+  })], 2);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -54156,7 +54138,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     name: 'homepage',
     component: _pages_HomePage_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   }, {
-    path: '/profiles',
+    path: '/search',
     name: 'search',
     component: _pages_SearchPage_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
   }, {

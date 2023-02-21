@@ -12,11 +12,7 @@
           {{ profile.user.name }}
         </router-link>
       </li>
-      {{
-        pippo
-      }}
     </ul>
-    {{}}
   </div>
 </template>
 
@@ -27,8 +23,7 @@ export default {
   data() {
     return {
       profiles: [],
-      specs: [],
-      pippo: "",
+      //   specs: [],
       isLoading: false,
       pagination: {},
       selectedSpecId: this.$route.params.spec,
@@ -36,46 +31,28 @@ export default {
   },
 
   mounted() {
-    // this.getProfiles();
     this.searchProfilesSpecs();
   },
 
   methods: {
-  //   getProfiles() {
-  //     this.isLoading = true;
-  //     axios
-  //       .get("http://localhost:8000/api/profiles")
-  //       .then((res) => {
-  //         console.log(res.data);
-  //         this.profiles = res.data.profiles;
-  //         this.pippo = res.data.pippo;
-  //       })
-  //       .catch((err) => {
-  //         console.log(err);
-  //       })
-  //       .then(() => {
-  //         this.isLoading = false;
-  //       });
-  //   },
-  // },
-  searchProfilesSpecs() {
+    searchProfilesSpecs() {
       axios
-          .post('http://localhost:8000/api/profiles', {
-              spec: this.selectedSpecId,
-          })
-          .then((res) => {
-              console.log(res.data);
-              this.profiles = res.data.profiles;
-              this.specs = res.data.specs;
-          })
-          .catch((err) => {
-              console.log(err);
-          })
-          .then(() => {
-              this.isLoading = false;
-            });
-        },
-      }
+        .post("http://localhost:8000/api/profiles", {
+          spec: this.selectedSpecId,
+        })
+        .then((res) => {
+          //   console.log(res.data);
+          this.profiles = res.data.profiles;
+          this.specs = res.data.specs;
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+        .then(() => {
+          this.isLoading = false;
+        });
+    },
+  },
 };
 </script>
 

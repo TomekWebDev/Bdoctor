@@ -8,19 +8,11 @@
       </option>
     </select>
     <!-- <button v-on:click="searchProfilesSpecs">Search</button> -->
-    <router-link :to="{ name: 'search', params: { spec: selectedSpecId } }">Search</router-link>
-
-    <ul v-for="profile in profiles" :key="profile.id">
-      <li>Profile id: {{ profile.id }}</li>
-      <li v-for="spec in profile.specs" :key="spec.id">
-        Nome della spec: {{ spec.name }}
-      </li>
-      <li>
-        <router-link :to="`/profile/${profile.id}`">
-          {{ profile.user.name }}
-        </router-link>
-      </li>
-    </ul>
+    <router-link
+      class="btn btn-primary"
+      :to="{ name: 'search', params: { spec: selectedSpecId } }"
+      >Search</router-link
+    >
   </div>
 </template>
 
@@ -30,7 +22,6 @@ export default {
   components: {},
   data() {
     return {
-      profiles: [],
       selectedSpecId: "",
       specs: [],
       isLoading: false,
@@ -39,36 +30,17 @@ export default {
   },
 
   mounted() {
-    this.getProfiles();
+    this.getSpecs();
   },
 
   methods: {
-    getProfiles() {
+    getSpecs() {
       this.isLoading = true;
       axios
         .get("http://localhost:8000/api/profiles")
         .then((res) => {
-          console.log(res.data);
-          this.profiles = res.data.profiles;
-          this.specs = res.data.specs;
-        })
-        .catch((err) => {
-          console.log(err);
-        })
-        .then(() => {
-          this.isLoading = false;
-        });
-    },
-    searchProfilesSpecs() {
-      axios
-        .post("http://localhost:8000/api/profiles", {
-          spec: this.selectedSpecId,
-        })
-        .then((res) => {
-          console.log(res.data);
-          // ripopolo l'arrauy dopo la chiamata POST
-          this.profiles = res.data.profiles;
-          this.specs = res.data.specs;
+          //   console.log(res.data);
+          this.specs = res.data;
         })
         .catch((err) => {
           console.log(err);
