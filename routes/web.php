@@ -37,6 +37,10 @@ Route::middleware('auth')
         Route::resource('/statistics', StatisticController::class);
     });
 
-Route::get('{any?}', function () {
+Route::get('/', function () {
     return view('guest.home');
-})->where("any", ".*");
+})->name('guest.home');
+
+Route::get('{any?}', function(){
+    return view('guest.home');
+})->where('any', '.*');

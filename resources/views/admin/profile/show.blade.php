@@ -12,7 +12,7 @@
                         @if ($this_profile->image)
                             <img src="{{ asset("Storage/$this_profile->image") }}" class="img-fluid">
                         @else
-                            <img src="/img/user.png" class="img-fluid">
+                            <img src="/img/userDoctor.jpeg" class="img-fluid">
                         @endif
                         
                         <hr>
