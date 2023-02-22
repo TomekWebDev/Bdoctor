@@ -90,7 +90,11 @@
             <h5>{{ profile.reviews.length }} recensioni</h5>
             <h5>Voto medio {{ getVoteAverage(profile.ratings) }}</h5>
             <h5>{{ profile.address }},{{ profile.city }}</h5>
-            <router-link :to="`/profile/${profile.id}`">
+            <h5>Tu chiamami sul trap phone: {{ profile.phone }}</h5>
+            <router-link
+              class="btn btn-outline-primary"
+              :to="`/profile/${profile.id}`"
+            >
               Vedi medico
             </router-link>
           </div>
@@ -146,15 +150,6 @@
             v-on:click="searchProfilesSpecs"
           >
             cambia specializzazione (nuova chiamata axios)
-          </button>
-        </div>
-        <div class="dropdown mt-3">
-          <button
-            class="btn btn-secondary dropdown-toggle"
-            type="button"
-            data-bs-toggle="dropdown"
-          >
-            Dropdown button
           </button>
         </div>
       </div>

@@ -1,6 +1,11 @@
 <template>
   <div>
-    <h1>{{ profile.user.name }}</h1>
+    <h1></h1>
+    <h5>Dr. {{ profile.user.name }} {{ profile.user.surname }}</h5>
+    <h5>{{ profile.address }}, {{ profile.city }}</h5>
+    <h5>{{ profile.phone }}</h5>
+    <h5>{{ profile.description }}</h5>
+    <h5>{{ profile.services }}</h5>
     <h2>manda messaggio</h2>
     <MessageSender />
     <h2>manda review</h2>

@@ -2803,7 +2803,8 @@ var render = function render() {
       attrs: {
         to: "/profile/".concat(profile.id)
       }
-    }, [_vm._v("\n              Dr. " + _vm._s(profile.user.name) + " " + _vm._s(profile.user.surname) + "\n            ")])], 1), _vm._v(" "), _c("h5", [_vm._v(_vm._s(profile.reviews.length) + " recensioni")]), _vm._v(" "), _c("h5", [_vm._v("Voto medio " + _vm._s(_vm.getVoteAverage(profile.ratings)))]), _vm._v(" "), _c("h5", [_vm._v(_vm._s(profile.address) + "," + _vm._s(profile.city))]), _vm._v(" "), _c("router-link", {
+    }, [_vm._v("\n              Dr. " + _vm._s(profile.user.name) + " " + _vm._s(profile.user.surname) + "\n            ")])], 1), _vm._v(" "), _c("h5", [_vm._v(_vm._s(profile.reviews.length) + " recensioni")]), _vm._v(" "), _c("h5", [_vm._v("Voto medio " + _vm._s(_vm.getVoteAverage(profile.ratings)))]), _vm._v(" "), _c("h5", [_vm._v(_vm._s(profile.address) + "," + _vm._s(profile.city))]), _vm._v(" "), _c("h5", [_vm._v("Tu chiamami sul trap phone: " + _vm._s(profile.phone))]), _vm._v(" "), _c("router-link", {
+      staticClass: "btn btn-outline-primary",
       attrs: {
         to: "/profile/".concat(profile.id)
       }
@@ -2855,7 +2856,7 @@ var render = function render() {
     on: {
       click: _vm.searchProfilesSpecs
     }
-  }, [_vm._v("\n          cambia specializzazione (nuova chiamata axios)\n        ")])]), _vm._v(" "), _vm._m(2)])])], 2);
+  }, [_vm._v("\n          cambia specializzazione (nuova chiamata axios)\n        ")])])])])], 2);
 };
 var staticRenderFns = [function () {
   var _vm = this,
@@ -2889,18 +2890,6 @@ var staticRenderFns = [function () {
       "aria-label": "Close"
     }
   })]);
-}, function () {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c("div", {
-    staticClass: "dropdown mt-3"
-  }, [_c("button", {
-    staticClass: "btn btn-secondary dropdown-toggle",
-    attrs: {
-      type: "button",
-      "data-bs-toggle": "dropdown"
-    }
-  }, [_vm._v("\n          Dropdown button\n        ")])]);
 }];
 render._withStripped = true;
 
@@ -2921,7 +2910,7 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", [_c("h1", [_vm._v(_vm._s(_vm.profile.user.name))]), _vm._v(" "), _c("h2", [_vm._v("manda messaggio")]), _vm._v(" "), _c("MessageSender"), _vm._v(" "), _c("h2", [_vm._v("manda review")]), _vm._v(" "), _c("ReviewSender"), _vm._v(" "), _c("h2", [_vm._v("manda rating")]), _vm._v(" "), _c("RatingSender")], 1);
+  return _c("div", [_c("h1"), _vm._v(" "), _c("h5", [_vm._v("Dr. " + _vm._s(_vm.profile.user.name) + " " + _vm._s(_vm.profile.user.surname))]), _vm._v(" "), _c("h5", [_vm._v(_vm._s(_vm.profile.address) + ", " + _vm._s(_vm.profile.city))]), _vm._v(" "), _c("h5", [_vm._v(_vm._s(_vm.profile.phone))]), _vm._v(" "), _c("h5", [_vm._v(_vm._s(_vm.profile.description))]), _vm._v(" "), _c("h5", [_vm._v(_vm._s(_vm.profile.services))]), _vm._v(" "), _c("h2", [_vm._v("manda messaggio")]), _vm._v(" "), _c("MessageSender"), _vm._v(" "), _c("h2", [_vm._v("manda review")]), _vm._v(" "), _c("ReviewSender"), _vm._v(" "), _c("h2", [_vm._v("manda rating")]), _vm._v(" "), _c("RatingSender")], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;
