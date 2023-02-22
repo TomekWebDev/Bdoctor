@@ -2771,18 +2771,26 @@ var render = function render() {
       staticClass: "card-body"
     }, [_c("div", {
       staticClass: "row"
-    }, [!profile.image ? _c("img", {
+    }, [_c("div", {
+      staticClass: "col-6 d-flex"
+    }, [!profile.image ? _c("div", {
+      staticClass: "col-5"
+    }, [_c("img", {
       staticClass: "img-fluid",
       attrs: {
         src: __webpack_require__(/*! ../../../public/img/userDoctor.jpeg */ "./public/img/userDoctor.jpeg"),
         alt: ""
       }
-    }) : _c("img", {
-      staticClass: "img-fluid",
+    })]) : _c("div", {
+      staticClass: "col-5"
+    }, [_c("img", {
+      staticClass: "img-fluid rounded-circle",
       attrs: {
         src: "storage/".concat(profile.image),
         alt: ""
       }
+    })])]), _vm._v(" "), _c("div", {
+      staticClass: "col-6"
     })])])]);
   }), _vm._v(" "), _c("div", {
     staticClass: "offcanvas offcanvas-top",

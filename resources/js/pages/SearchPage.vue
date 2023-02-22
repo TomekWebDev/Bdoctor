@@ -40,9 +40,19 @@
     <div v-else v-for="profile in profiles" :key="profile.id" class="card mt-3">
       <div class="card-body">
         <div class="row">
+
+          <div class="col-6 d-flex">
+
+            <div v-if="!profile.image" class="col-5">
+              <img class="img-fluid" src="../../../public/img/userDoctor.jpeg" alt="">
+            </div>
+            <div v-else class="col-5">
+              <img class="img-fluid rounded-circle" :src="`storage/${profile.image}`" alt="">
+            </div>
+            
+        </div>
+          <div class="col-6"></div>
           
-          <img class="img-fluid" v-if="!profile.image" src="../../../public/img/userDoctor.jpeg" alt="">
-          <img class="img-fluid" v-else :src="`storage/${profile.image}`" alt="">
 
         </div>
       </div>
