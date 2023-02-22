@@ -1,28 +1,54 @@
 <template>
-
   <div class="container">
-
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
       <div class="container-fluid">
-
-        <div class="collapse navbar-collapse d-flex justify-content-center" id="navbarNav">
-          <ul class="navbar-nav ">
+        <div
+          class="collapse navbar-collapse d-flex justify-content-center"
+          id="navbarNav"
+        >
+          <ul class="navbar-nav">
             <li class="nav-item mx-1">
-              <button class="btn btn-outline-primary" v-on:click="reviewsFilterTopDown">Filtra per recensioni + -</button>
+              <button
+                class="btn btn-outline-primary"
+                v-on:click="reviewsFilterTopDown"
+              >
+                Filtra per recensioni + -
+              </button>
             </li>
             <li class="nav-item mx-1">
-              <button class="btn btn-outline-primary" v-on:click="reviewsFilterDownTop">Filtra per recensioni + -</button>
+              <button
+                class="btn btn-outline-primary"
+                v-on:click="reviewsFilterDownTop"
+              >
+                Filtra per recensioni - +
+              </button>
             </li>
             <li class="nav-item mx-1">
-              <button class="btn btn-outline-primary" v-on:click="ratingFilterTopDown">Filtra per recensioni + -</button>
+              <button
+                class="btn btn-outline-primary"
+                v-on:click="ratingFilterTopDown"
+              >
+                Filtra per rating + -
+              </button>
             </li>
             <li class="nav-item mx-1">
-              <button class="btn btn-outline-primary" v-on:click="ratingFilterDownTop">Filtra per recensioni + -</button>
+              <button
+                class="btn btn-outline-primary"
+                v-on:click="ratingFilterDownTop"
+              >
+                Filtra per rating - +
+              </button>
             </li>
             <li class="nav-item mx-1">
-              <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+              <button
+                class="btn btn-primary"
+                type="button"
+                data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasExample"
+                aria-controls="offcanvasExample"
+              >
                 Nuova ricerca
-              </button>            
+              </button>
             </li>
           </ul>
         </div>
@@ -31,37 +57,48 @@
 
     <!-- Se non ci sono specialisti -->
     <div class="card mt-3" v-if="profiles.length <= 0">
-      <div class="card-body" >
-          Non ci sono specialisti
-      </div>
+      <div class="card-body">Non ci sono specialisti</div>
     </div>
 
     <!-- Se ci sono specialisti -->
+
     <div v-else v-for="profile in profiles" :key="profile.id" class="card mt-3">
       <div class="card-body">
         <div class="row">
-
           <div class="col-6 d-flex">
-
             <div v-if="!profile.image" class="col-5">
-              <img class="img-fluid" src="../../../public/img/userDoctor.jpeg" alt="">
+              <img
+                class="img-fluid"
+                src="../../../public/img/userDoctor.jpeg"
+                alt=""
+              />
             </div>
             <div v-else class="col-5">
-              <img class="img-fluid rounded-circle" :src="`storage/${profile.image}`" alt="">
+              <img
+                class="img-fluid rounded-circle"
+                :src="`storage/${profile.image}`"
+                alt=""
+              />
             </div>
-            
-        </div>
-          <div class="col-6"></div>
-          
-
+          </div>
+          <div class="col-6">
+            <h5>
+              <router-link :to="`/profile/${profile.id}`">
+                Dr. {{ profile.user.name }} {{ profile.user.surname }}
+              </router-link>
+            </h5>
+            <h5>{{ profile.reviews.length }} recensioni</h5>
+            <h5>Voto medio {{ getVoteAverage(profile.ratings) }}</h5>
+            <h5>{{ profile.address }},{{ profile.city }}</h5>
+            <router-link :to="`/profile/${profile.id}`">
+              Vedi medico
+            </router-link>
+          </div>
         </div>
       </div>
     </div>
 
-    
-  
-
-    <ul v-else v-for="profile in profiles" :key="profile.id">
+    <!-- <ul v-else v-for="profile in profiles" :key="profile.id">
       <li>Profile id: {{ profile.id }}</li>
       <li v-for="spec in profile.specs" :key="spec.id">
         Nome della spec: {{ spec.name }}
@@ -72,28 +109,51 @@
           {{ profile.user.name }}
         </router-link>
       </li>
-    </ul>
+    </ul> -->
 
     <!-- Offcanvas -->
-    <div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+    <div
+      class="offcanvas offcanvas-top"
+      tabindex="-1"
+      id="offcanvasExample"
+      aria-labelledby="offcanvasExampleLabel"
+    >
       <div class="offcanvas-header">
         <h5 class="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="offcanvas"
+          aria-label="Close"
+        ></button>
       </div>
       <div class="offcanvas-body">
         <div>
           <select v-model="selectedSpecId" name="" id="">
-            <option v-for="spec in specializations" :key="spec.id" :value="spec.id">
+            <option
+              v-for="spec in specializations"
+              :key="spec.id"
+              :value="spec.id"
+            >
               {{ spec.name }}
             </option>
           </select>
-      
-          <button class="btn btn-primary" data-bs-dismiss="offcanvas" aria-label="Close" v-on:click="searchProfilesSpecs">
+
+          <button
+            class="btn btn-primary"
+            data-bs-dismiss="offcanvas"
+            aria-label="Close"
+            v-on:click="searchProfilesSpecs"
+          >
             cambia specializzazione (nuova chiamata axios)
           </button>
         </div>
         <div class="dropdown mt-3">
-          <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+          <button
+            class="btn btn-secondary dropdown-toggle"
+            type="button"
+            data-bs-toggle="dropdown"
+          >
             Dropdown button
           </button>
         </div>
@@ -103,7 +163,7 @@
   </div>
 </template>
 
-  <script>
+<script>
 export default {
   name: "SearchPage",
   components: {},
@@ -224,9 +284,17 @@ export default {
       });
       console.log(this.profiles);
     },
+    getVoteAverage(parametro) {
+      let voteSum = 0;
+      parametro.forEach((rating) => {
+        voteSum += rating.vote;
+      });
+      let voteAverage = voteSum / parametro.length;
+      return Math.round(voteAverage);
+    },
   },
 };
 </script>
 
-  <style lang="scss" scoped>
+<style lang="scss" scoped>
 </style>

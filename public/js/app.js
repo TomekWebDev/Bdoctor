@@ -2216,6 +2216,14 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
       console.log(this.profiles);
+    },
+    getVoteAverage: function getVoteAverage(parametro) {
+      var voteSum = 0;
+      parametro.forEach(function (rating) {
+        voteSum += rating.vote;
+      });
+      var voteAverage = voteSum / parametro.length;
+      return Math.round(voteAverage);
     }
   }
 });
@@ -2315,7 +2323,7 @@ var render = function render() {
         name: "homepage"
       }
     }
-  }, [_vm._v("\n        BDoctors.it\n      ")]), _vm._v(" "), _vm._m(0), _vm._v(" "), _c("div", {
+  }, [_vm._v("\n                BDoctors.it\n            ")]), _vm._v(" "), _vm._m(0), _vm._v(" "), _c("div", {
     staticClass: "collapse navbar-collapse",
     attrs: {
       id: "navbarNav"
@@ -2332,7 +2340,7 @@ var render = function render() {
         name: "homepage"
       }
     }
-  }, [_vm._v("\n              Home\n            ")])], 1), _vm._v(" "), _vm._m(1), _vm._v(" "), _vm._m(2)])])], 1)])]);
+  }, [_vm._v("\n                            Home\n                        ")])], 1), _vm._v(" "), _vm._m(1), _vm._v(" "), _vm._m(2)])])], 1)])]);
 };
 var staticRenderFns = [function () {
   var _vm = this,
@@ -2738,32 +2746,32 @@ var render = function render() {
     on: {
       click: _vm.reviewsFilterTopDown
     }
-  }, [_vm._v("Filtra per recensioni + -")])]), _vm._v(" "), _c("li", {
+  }, [_vm._v("\n              Filtra per recensioni + -\n            ")])]), _vm._v(" "), _c("li", {
     staticClass: "nav-item mx-1"
   }, [_c("button", {
     staticClass: "btn btn-outline-primary",
     on: {
       click: _vm.reviewsFilterDownTop
     }
-  }, [_vm._v("Filtra per recensioni + -")])]), _vm._v(" "), _c("li", {
+  }, [_vm._v("\n              Filtra per recensioni - +\n            ")])]), _vm._v(" "), _c("li", {
     staticClass: "nav-item mx-1"
   }, [_c("button", {
     staticClass: "btn btn-outline-primary",
     on: {
       click: _vm.ratingFilterTopDown
     }
-  }, [_vm._v("Filtra per recensioni + -")])]), _vm._v(" "), _c("li", {
+  }, [_vm._v("\n              Filtra per rating + -\n            ")])]), _vm._v(" "), _c("li", {
     staticClass: "nav-item mx-1"
   }, [_c("button", {
     staticClass: "btn btn-outline-primary",
     on: {
       click: _vm.ratingFilterDownTop
     }
-  }, [_vm._v("Filtra per recensioni + -")])]), _vm._v(" "), _vm._m(0)])])])]), _vm._v(" "), _vm.profiles.length <= 0 ? _c("div", {
+  }, [_vm._v("\n              Filtra per rating - +\n            ")])]), _vm._v(" "), _vm._m(0)])])])]), _vm._v(" "), _vm.profiles.length <= 0 ? _c("div", {
     staticClass: "card mt-3"
   }, [_c("div", {
     staticClass: "card-body"
-  }, [_vm._v("\n        Non ci sono specialisti\n    ")])]) : _vm._l(_vm.profiles, function (profile) {
+  }, [_vm._v("Non ci sono specialisti")])]) : _vm._l(_vm.profiles, function (profile) {
     return _c("div", {
       key: profile.id,
       staticClass: "card mt-3"
@@ -2791,7 +2799,15 @@ var render = function render() {
       }
     })])]), _vm._v(" "), _c("div", {
       staticClass: "col-6"
-    })])])]);
+    }, [_c("h5", [_c("router-link", {
+      attrs: {
+        to: "/profile/".concat(profile.id)
+      }
+    }, [_vm._v("\n              Dr. " + _vm._s(profile.user.name) + " " + _vm._s(profile.user.surname) + "\n            ")])], 1), _vm._v(" "), _c("h5", [_vm._v(_vm._s(profile.reviews.length) + " recensioni")]), _vm._v(" "), _c("h5", [_vm._v("Voto medio " + _vm._s(_vm.getVoteAverage(profile.ratings)))]), _vm._v(" "), _c("h5", [_vm._v(_vm._s(profile.address) + "," + _vm._s(profile.city))]), _vm._v(" "), _c("router-link", {
+      attrs: {
+        to: "/profile/".concat(profile.id)
+      }
+    }, [_vm._v("\n            Vedi medico\n          ")])], 1)])])]);
   }), _vm._v(" "), _c("div", {
     staticClass: "offcanvas offcanvas-top",
     attrs: {
@@ -54500,8 +54516,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Applications/MAMP/htdocs/laravel/Bdoctor/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/laravel/Bdoctor/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/Mangiagalli/Desktop/Progetto finale/Bdoctor/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/Mangiagalli/Desktop/Progetto finale/Bdoctor/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
