@@ -16,6 +16,10 @@ class ProfileControllerGuest extends Controller
      */
     public function index()
     {
+        // Step 1
+        // Questa funzione di index ci serve per mandare il json delle specs
+        // alla homepage per averle nella select
+        // vai a homepage vue per step 2
         $specs = Spec::all();
         return response()->json($specs);
     }
@@ -39,15 +43,23 @@ class ProfileControllerGuest extends Controller
     public function store(Request $request)
     {
 
-        //Questo codice esegue una query per recuperare tutti i profili che hanno una determinata specializzazione. In particolare, estrae il parametro spec dalla richiesta in ingresso ($request->input('spec')) e quindi utilizza questo parametro per filtrare i profili attraverso il metodo whereHas() di Laravel.
+        // Step 6
+        // Salviamo in una var il dato
 
-        // Il metodo whereHas() viene utilizzato per aggiungere una clausola "has" alla query, in modo da filtrare i risultati in base all'esistenza di relazioni con altre tabelle. In questo caso, la clausola "has" viene applicata alla relazione specs del modello Profile, e viene usata per cercare tutti i profili che hanno almeno una specializzazione con un ID corrispondente al valore di $specId.
-
-        // Il metodo with() invece viene utilizzato per caricare in anticipo le relazioni specs e user dei profili recuperati, in modo da evitare il problema dell'N+1, dove per ogni profilo recuperato verrebbe eseguita una query separata per recuperare le sue relazioni.
-
-        // In sintesi, questo codice recupera tutti i profili che hanno una determinata specializzazione, e per ciascun profilo recuperato carica in anticipo le sue relazioni specs e user
 
         $specId = $request->input('spec');
+
+        //Step 6
+        // Interrogazione database dei profili con associate le spec e lo user
+        // ->whereHas dove ha una relazione specs (valore tra apici) dentro questa relazione "cerchiamo"
+        // con una funzione che come parametro ha $query (builder instance di Eloquent) che permette di aggiungere vincoli
+        // alla ricerca nel db.
+        // use ($specId) permette alla $query di usare la variabile appena passata dal metodo post.
+        // In questo modo possiamo usare un metodo where su $query  che va a pescare tabella specs e colonna id (specs.id) e la associa
+        // alla variabile $specId appena passata.
+        // A questo punto il return della funzione passa il secondo parametro dicendo esattamente qual'è l'id della spec che stiamo cercando.
+        // In questo modo cerchiamo i profili che abbiano una relazione a spec e che abbiano una spec con l'id che abbiamo cercato.
+
 
         $profiles = Profile::with('specs', 'user')
             ->whereHas('specs', function ($query) use ($specId) {
@@ -62,6 +74,10 @@ class ProfileControllerGuest extends Controller
             // 'specs' => $specs,
 
         ];
+
+        // Step 7
+        // A questo punto senza dover fare un'altra chiamata get dal nostro componente vue, approfittiamo della response
+        // della chiamata post per passare il json dei profili che abbiamo cercato con quei vincoli.
 
         return response()->json($data);
     }
