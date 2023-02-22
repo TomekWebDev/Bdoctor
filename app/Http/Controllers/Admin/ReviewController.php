@@ -20,7 +20,7 @@ class ReviewController extends Controller
     public function index()
     {
         $profile = Auth::user();
-        $reviews = Review::where('profile_id', Auth::user()->id)->get();
+        $reviews = Review::where('profile_id', Auth::user()->id)->orderBy('created_at', 'desc')->get();
         $ratings = ProfileRating::where('profile_id', Auth::user()->id)->get();
 
         return view('admin.reviews.index', compact('reviews', 'profile', 'ratings'));
