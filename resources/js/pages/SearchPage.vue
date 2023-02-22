@@ -1,23 +1,55 @@
 <template>
-  <div>
-    <h1>Questa è SearchPage</h1>
 
-    <select v-model="selectedSpecId" name="" id="">
-      <option v-for="spec in specializations" :key="spec.id" :value="spec.id">
-        {{ spec.name }}
-      </option>
-    </select>
+  <div class="container">
 
-    <button v-on:click="searchProfilesSpecs">
-      cambia specializzazione (nuova chiamata axios)
-    </button>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
 
-    <button v-on:click="reviewsFilterTopDown">Filtra per recensioni + -</button>
-    <button v-on:click="reviewsFilterDownTop">Filtra per recensioni - +</button>
-    <button v-on:click="ratingFilterTopDown">Filtra per rating + -</button>
-    <button v-on:click="ratingFilterDownTop">Filtra per rating - +</button>
+        <div class="collapse navbar-collapse d-flex justify-content-center" id="navbarNav">
+          <ul class="navbar-nav ">
+            <li class="nav-item mx-1">
+              <button class="btn btn-outline-primary" v-on:click="reviewsFilterTopDown">Filtra per recensioni + -</button>
+            </li>
+            <li class="nav-item mx-1">
+              <button class="btn btn-outline-primary" v-on:click="reviewsFilterDownTop">Filtra per recensioni + -</button>
+            </li>
+            <li class="nav-item mx-1">
+              <button class="btn btn-outline-primary" v-on:click="ratingFilterTopDown">Filtra per recensioni + -</button>
+            </li>
+            <li class="nav-item mx-1">
+              <button class="btn btn-outline-primary" v-on:click="ratingFilterDownTop">Filtra per recensioni + -</button>
+            </li>
+            <li class="nav-item mx-1">
+              <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+                Nuova ricerca
+              </button>            
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
 
-    <div v-if="profiles.length <= 0">Non ci sono specialisti in</div>
+    <!-- Se non ci sono specialisti -->
+    <div class="card mt-3" v-if="profiles.length <= 0">
+      <div class="card-body" >
+          Non ci sono specialisti
+      </div>
+    </div>
+
+    <!-- Se ci sono specialisti -->
+    <div v-else v-for="profile in profiles" :key="profile.id" class="card mt-3">
+      <div class="card-body">
+        <div class="row">
+          
+          <img class="img-fluid" v-if="!profile.image" src="../../../public/img/userDoctor.jpeg" alt="">
+          <img class="img-fluid" v-else :src="`storage/${profile.image}`" alt="">
+
+        </div>
+      </div>
+    </div>
+
+    
+  
 
     <ul v-else v-for="profile in profiles" :key="profile.id">
       <li>Profile id: {{ profile.id }}</li>
@@ -31,6 +63,33 @@
         </router-link>
       </li>
     </ul>
+
+    <!-- Offcanvas -->
+    <div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <div>
+          <select v-model="selectedSpecId" name="" id="">
+            <option v-for="spec in specializations" :key="spec.id" :value="spec.id">
+              {{ spec.name }}
+            </option>
+          </select>
+      
+          <button class="btn btn-primary" data-bs-dismiss="offcanvas" aria-label="Close" v-on:click="searchProfilesSpecs">
+            cambia specializzazione (nuova chiamata axios)
+          </button>
+        </div>
+        <div class="dropdown mt-3">
+          <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+            Dropdown button
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- end offcanvas -->
   </div>
 </template>
 

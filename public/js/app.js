@@ -2631,13 +2631,38 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", [_c("h1", [_vm._v("Questa è HomePage")]), _vm._v(" "), _c("select", {
+  return _c("div", {
+    staticClass: "container"
+  }, [_c("div", {
+    staticClass: "card mt-2"
+  }, [_c("div", {
+    staticClass: "card-body"
+  }, [_c("div", {
+    staticClass: "d-flex justify-content-between"
+  }, [_c("h1", [_vm._v("Questa è HomePage")]), _vm._v(" "), _c("router-link", {
+    staticClass: "btn btn-primary align-self-center",
+    attrs: {
+      to: {
+        name: "search",
+        params: {
+          specializations: _vm.specs
+        }
+      }
+    }
+  }, [_vm._v("Vai a ricerca avanzata")])], 1)]), _vm._v(" "), _c("div", {
+    staticClass: "card mt-2"
+  }, [_c("div", {
+    staticClass: "card-body"
+  }, [_c("div", {
+    staticClass: "d-flex justify-content-center m-auto"
+  }, [_c("select", {
     directives: [{
       name: "model",
       rawName: "v-model",
       value: _vm.selectedSpecId,
       expression: "selectedSpecId"
     }],
+    staticClass: "w-75 p-2 mx-2",
     attrs: {
       name: "",
       id: ""
@@ -2659,9 +2684,9 @@ var render = function render() {
       domProps: {
         value: spec.id
       }
-    }, [_vm._v("\n      " + _vm._s(spec.name) + "\n    ")]);
+    }, [_vm._v("\n              " + _vm._s(spec.name) + "\n            ")]);
   }), 0), _vm._v(" "), _c("router-link", {
-    staticClass: "btn btn-primary",
+    staticClass: "btn btn-primary mx-2",
     attrs: {
       to: {
         name: "search",
@@ -2671,17 +2696,7 @@ var render = function render() {
         }
       }
     }
-  }, [_vm._v("Search")]), _vm._v(" "), _c("router-link", {
-    staticClass: "btn btn-primary",
-    attrs: {
-      to: {
-        name: "search",
-        params: {
-          specializations: _vm.specs
-        }
-      }
-    }
-  }, [_vm._v("Vai a ricerca avanzata")])], 1);
+  }, [_vm._v("Search")])], 1)])])])]);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -2703,7 +2718,82 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", [_c("h1", [_vm._v("Questa è SearchPage")]), _vm._v(" "), _c("select", {
+  return _c("div", {
+    staticClass: "container"
+  }, [_c("nav", {
+    staticClass: "navbar navbar-expand-lg bg-body-tertiary"
+  }, [_c("div", {
+    staticClass: "container-fluid"
+  }, [_c("div", {
+    staticClass: "collapse navbar-collapse d-flex justify-content-center",
+    attrs: {
+      id: "navbarNav"
+    }
+  }, [_c("ul", {
+    staticClass: "navbar-nav"
+  }, [_c("li", {
+    staticClass: "nav-item mx-1"
+  }, [_c("button", {
+    staticClass: "btn btn-outline-primary",
+    on: {
+      click: _vm.reviewsFilterTopDown
+    }
+  }, [_vm._v("Filtra per recensioni + -")])]), _vm._v(" "), _c("li", {
+    staticClass: "nav-item mx-1"
+  }, [_c("button", {
+    staticClass: "btn btn-outline-primary",
+    on: {
+      click: _vm.reviewsFilterDownTop
+    }
+  }, [_vm._v("Filtra per recensioni + -")])]), _vm._v(" "), _c("li", {
+    staticClass: "nav-item mx-1"
+  }, [_c("button", {
+    staticClass: "btn btn-outline-primary",
+    on: {
+      click: _vm.ratingFilterTopDown
+    }
+  }, [_vm._v("Filtra per recensioni + -")])]), _vm._v(" "), _c("li", {
+    staticClass: "nav-item mx-1"
+  }, [_c("button", {
+    staticClass: "btn btn-outline-primary",
+    on: {
+      click: _vm.ratingFilterDownTop
+    }
+  }, [_vm._v("Filtra per recensioni + -")])]), _vm._v(" "), _vm._m(0)])])])]), _vm._v(" "), _vm.profiles.length <= 0 ? _c("div", {
+    staticClass: "card mt-3"
+  }, [_c("div", {
+    staticClass: "card-body"
+  }, [_vm._v("\n        Non ci sono specialisti\n    ")])]) : _vm._l(_vm.profiles, function (profile) {
+    return _c("div", {
+      key: profile.id,
+      staticClass: "card mt-3"
+    }, [_c("div", {
+      staticClass: "card-body"
+    }, [_c("div", {
+      staticClass: "row"
+    }, [!profile.image ? _c("img", {
+      staticClass: "img-fluid",
+      attrs: {
+        src: __webpack_require__(/*! ../../../public/img/userDoctor.jpeg */ "./public/img/userDoctor.jpeg"),
+        alt: ""
+      }
+    }) : _c("img", {
+      staticClass: "img-fluid",
+      attrs: {
+        src: "storage/".concat(profile.image),
+        alt: ""
+      }
+    })])])]);
+  }), _vm._v(" "), _c("div", {
+    staticClass: "offcanvas offcanvas-top",
+    attrs: {
+      tabindex: "-1",
+      id: "offcanvasExample",
+      "aria-labelledby": "offcanvasExampleLabel"
+    }
+  }, [_vm._m(1), _vm._v(" "), _c("div", {
+    staticClass: "offcanvas-body"
+  }, [_c("div", [_c("select", {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -2731,42 +2821,63 @@ var render = function render() {
       domProps: {
         value: spec.id
       }
-    }, [_vm._v("\n      " + _vm._s(spec.name) + "\n    ")]);
+    }, [_vm._v("\n            " + _vm._s(spec.name) + "\n          ")]);
   }), 0), _vm._v(" "), _c("button", {
+    staticClass: "btn btn-primary",
+    attrs: {
+      "data-bs-dismiss": "offcanvas",
+      "aria-label": "Close"
+    },
     on: {
       click: _vm.searchProfilesSpecs
     }
-  }, [_vm._v("\n    cambia specializzazione (nuova chiamata axios)\n  ")]), _vm._v(" "), _c("button", {
-    on: {
-      click: _vm.reviewsFilterTopDown
-    }
-  }, [_vm._v("Filtra per recensioni + -")]), _vm._v(" "), _c("button", {
-    on: {
-      click: _vm.reviewsFilterDownTop
-    }
-  }, [_vm._v("Filtra per recensioni - +")]), _vm._v(" "), _c("button", {
-    on: {
-      click: _vm.ratingFilterTopDown
-    }
-  }, [_vm._v("Filtra per rating + -")]), _vm._v(" "), _c("button", {
-    on: {
-      click: _vm.ratingFilterDownTop
-    }
-  }, [_vm._v("Filtra per rating - +")]), _vm._v(" "), _vm.profiles.length <= 0 ? _c("div", [_vm._v("Non ci sono specialisti in")]) : _vm._l(_vm.profiles, function (profile) {
-    return _c("ul", {
-      key: profile.id
-    }, [_c("li", [_vm._v("Profile id: " + _vm._s(profile.id))]), _vm._v(" "), _vm._l(profile.specs, function (spec) {
-      return _c("li", {
-        key: spec.id
-      }, [_vm._v("\n      Nome della spec: " + _vm._s(spec.name) + "\n    ")]);
-    }), _vm._v(" "), _c("li", [_vm._v("Media voti: " + _vm._s(profile.ratings))]), _vm._v(" "), _c("li", [_c("router-link", {
-      attrs: {
-        to: "/profile/".concat(profile.id)
-      }
-    }, [_vm._v("\n        " + _vm._s(profile.user.name) + "\n      ")])], 1)], 2);
-  })], 2);
+  }, [_vm._v("\n          cambia specializzazione (nuova chiamata axios)\n        ")])]), _vm._v(" "), _vm._m(2)])])], 2);
 };
-var staticRenderFns = [];
+var staticRenderFns = [function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("li", {
+    staticClass: "nav-item mx-1"
+  }, [_c("button", {
+    staticClass: "btn btn-primary",
+    attrs: {
+      type: "button",
+      "data-bs-toggle": "offcanvas",
+      "data-bs-target": "#offcanvasExample",
+      "aria-controls": "offcanvasExample"
+    }
+  }, [_vm._v("\n              Nuova ricerca\n            ")])]);
+}, function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("div", {
+    staticClass: "offcanvas-header"
+  }, [_c("h5", {
+    staticClass: "offcanvas-title",
+    attrs: {
+      id: "offcanvasExampleLabel"
+    }
+  }, [_vm._v("Offcanvas")]), _vm._v(" "), _c("button", {
+    staticClass: "btn-close",
+    attrs: {
+      type: "button",
+      "data-bs-dismiss": "offcanvas",
+      "aria-label": "Close"
+    }
+  })]);
+}, function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("div", {
+    staticClass: "dropdown mt-3"
+  }, [_c("button", {
+    staticClass: "btn btn-secondary dropdown-toggle",
+    attrs: {
+      type: "button",
+      "data-bs-toggle": "dropdown"
+    }
+  }, [_vm._v("\n          Dropdown button\n        ")])]);
+}];
 render._withStripped = true;
 
 
@@ -53676,6 +53787,17 @@ module.exports = function(module) {
 	return module;
 };
 
+
+/***/ }),
+
+/***/ "./public/img/userDoctor.jpeg":
+/*!************************************!*\
+  !*** ./public/img/userDoctor.jpeg ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/userDoctor.jpeg?2bf716d6ce74ba9fe01ae7a5d4a49c73";
 
 /***/ }),
 
