@@ -2115,6 +2115,7 @@ __webpack_require__.r(__webpack_exports__);
       specs: this.$route.params.specializations,
       isLoading: false,
       pagination: {},
+      sorted: [],
       // Step 4
       // Associamo il dato passato nel router link a un nuovo data di vue.
       // $route è l'oggetto che arriva tramite router .params per entrare nell'oggetto parametro
@@ -2138,9 +2139,83 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function () {
         _this.isLoading = false;
       });
-    } // Step 5
+    },
+    // Step 5
     // In questa chiamata axios (post) mandiamo il nuovo data che abbiamo salvato
     // vai alla store di profile controller guest per step 6
+    reviewsFilterTopDown: function reviewsFilterTopDown() {
+      this.profiles.sort(function (a, b) {
+        // sort prende gli oggetti a coppie e li paragona
+        // in questo caso gli diciamo di confrontare quanto sono lunghe le array delle recensioni.
+        return b.reviews.length - a.reviews.length;
+      });
+
+      // display the sorted array of objects
+      console.log(this.profiles);
+    },
+    reviewsFilterDownTop: function reviewsFilterDownTop() {
+      this.profiles.sort(function (a, b) {
+        return a.reviews.length - b.reviews.length;
+      });
+
+      // display the sorted array of objects
+      console.log(this.profiles);
+    },
+    ratingFilterTopDown: function ratingFilterTopDown() {
+      this.profiles.sort(function (a, b) {
+        // salviamo variabili che rappresentano le array di singoli rating (che sono oggetti) per il profilo a e b che verranno confrontati.
+        var ratingA = a.ratings;
+        var ratingB = b.ratings;
+        // inizzializzo var per le somme
+        var sumA = 0;
+        var sumB = 0;
+        ratingA.forEach(function (element, index) {
+          // nel foreach vado a prendere ad ogni giro di ciclo il voto numerico all'interno dell'oggetto rating
+          sumA += element.vote;
+        });
+        // calcolo media dei voti numerici facendo (Somma voti numerici di A) diviso (la lunghezza dell'array di oggetti dei singoli rating di A)
+        var avgA = sumA / ratingA.length;
+        ratingB.forEach(function (element, index) {
+          sumB += element.vote;
+        });
+        var avgB = sumB / ratingB.length;
+
+        // con questa condizione diciamo alla funzione sort quali sono i termini che deve prendere in considerazione per ordinare gli oggetti.
+        // se non glie lo indichiamo, sort esegue in automatico la comparazione tra i parametri di partenza (a, b)
+        if (avgB < avgA) {
+          return -1;
+        } else if (avgB > avgA) {
+          return 1;
+        } else {
+          return 0;
+        }
+      });
+      console.log(this.profiles);
+    },
+    ratingFilterDownTop: function ratingFilterDownTop() {
+      this.profiles.sort(function (a, b) {
+        var ratingA = a.ratings;
+        var ratingB = b.ratings;
+        var sumA = 0;
+        var sumB = 0;
+        ratingA.forEach(function (element, index) {
+          sumA += element.vote;
+        });
+        var avgA = sumA / ratingA.length;
+        ratingB.forEach(function (element, index) {
+          sumB += element.vote;
+        });
+        var avgB = sumB / ratingB.length;
+        if (avgA < avgB) {
+          return -1;
+        } else if (avgA > avgB) {
+          return 1;
+        } else {
+          return 0;
+        }
+      });
+      console.log(this.profiles);
+    }
   }
 });
 
@@ -2626,14 +2701,30 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", [_c("h1", [_vm._v("Questa è SearchPage")]), _vm._v(" "), _vm.profiles.length <= 0 ? _c("div", [_vm._v("Non ci sono specialisti in")]) : _vm._l(_vm.profiles, function (profile) {
+  return _c("div", [_c("h1", [_vm._v("Questa è SearchPage")]), _vm._v(" "), _c("button", {
+    on: {
+      click: _vm.reviewsFilterTopDown
+    }
+  }, [_vm._v("Filtra per recensioni + -")]), _vm._v(" "), _c("button", {
+    on: {
+      click: _vm.reviewsFilterDownTop
+    }
+  }, [_vm._v("Filtra per recensioni - +")]), _vm._v(" "), _c("button", {
+    on: {
+      click: _vm.ratingFilterTopDown
+    }
+  }, [_vm._v("Filtra per rating + -")]), _vm._v(" "), _c("button", {
+    on: {
+      click: _vm.ratingFilterDownTop
+    }
+  }, [_vm._v("Filtra per rating - +")]), _vm._v(" "), _vm.profiles.length <= 0 ? _c("div", [_vm._v("Non ci sono specialisti in")]) : _vm._l(_vm.profiles, function (profile) {
     return _c("ul", {
       key: profile.id
     }, [_c("li", [_vm._v("Profile id: " + _vm._s(profile.id))]), _vm._v(" "), _vm._l(profile.specs, function (spec) {
       return _c("li", {
         key: spec.id
       }, [_vm._v("\n      Nome della spec: " + _vm._s(spec.name) + "\n    ")]);
-    }), _vm._v(" "), _c("li", [_c("router-link", {
+    }), _vm._v(" "), _c("li", [_vm._v("Media voti: " + _vm._s(profile.ratings))]), _vm._v(" "), _c("li", [_c("router-link", {
       attrs: {
         to: "/profile/".concat(profile.id)
       }

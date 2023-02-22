@@ -61,7 +61,7 @@ class ProfileControllerGuest extends Controller
         // In questo modo cerchiamo i profili che abbiano una relazione a spec e che abbiano una spec con l'id che abbiamo cercato.
 
 
-        $profiles = Profile::with('specs', 'user')
+        $profiles = Profile::with('specs', 'user', 'ratings', 'reviews')
             ->whereHas('specs', function ($query) use ($specId) {
                 $query->where('specs.id', $specId);
             })
