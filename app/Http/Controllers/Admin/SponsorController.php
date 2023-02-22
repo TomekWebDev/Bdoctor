@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Sponsor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SponsorController extends Controller
 {
@@ -16,8 +17,9 @@ class SponsorController extends Controller
     public function index()
     {
         $sponsors = Sponsor::All();
+        $profile = Auth::user();
 
-        return view('admin.sponsors.index', compact('sponsors'));
+        return view('admin.sponsors.index', compact('sponsors', 'profile'));
     }
 
     /**
