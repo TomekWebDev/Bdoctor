@@ -25,12 +25,21 @@
       }"
       >Search</router-link
     >
+
+    <router-link
+      class="btn btn-primary"
+      :to="{
+        name: 'search',
+        params: { specializations: specs },
+      }"
+      >Vai a ricerca avanzata</router-link
+    >
   </div>
 </template>
 
   <script>
 export default {
-  name: "SearchPage",
+  name: "HomePage",
   components: {},
   data() {
     return {

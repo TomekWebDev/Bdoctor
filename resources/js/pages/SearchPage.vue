@@ -2,6 +2,16 @@
   <div>
     <h1>Questa è SearchPage</h1>
 
+    <select v-model="selectedSpecId" name="" id="">
+      <option v-for="spec in specializations" :key="spec.id" :value="spec.id">
+        {{ spec.name }}
+      </option>
+    </select>
+
+    <button v-on:click="searchProfilesSpecs">
+      cambia specializzazione (nuova chiamata axios)
+    </button>
+
     <button v-on:click="reviewsFilterTopDown">Filtra per recensioni + -</button>
     <button v-on:click="reviewsFilterDownTop">Filtra per recensioni - +</button>
     <button v-on:click="ratingFilterTopDown">Filtra per rating + -</button>
@@ -31,14 +41,14 @@ export default {
   data() {
     return {
       profiles: [],
-      specs: this.$route.params.specializations,
+      specializations: this.$route.params.specializations,
       isLoading: false,
       pagination: {},
-      sorted: [],
       // Step 4
       // Associamo il dato passato nel router link a un nuovo data di vue.
       // $route è l'oggetto che arriva tramite router .params per entrare nell'oggetto parametro
       selectedSpecId: this.$route.params.spec,
+      newSelectedSpecId: "",
     };
   },
 
@@ -55,7 +65,7 @@ export default {
         .then((res) => {
           //   console.log(res.data);
           this.profiles = res.data.profiles;
-          this.specs = res.data.specs;
+          //   this.specs = res.data.specs;
         })
         .catch((err) => {
           console.log(err);
@@ -63,7 +73,9 @@ export default {
         .then(() => {
           this.isLoading = false;
         });
+      //   this.selectedSpecId = "";
     },
+
     // Step 5
     // In questa chiamata axios (post) mandiamo il nuovo data che abbiamo salvato
     // vai alla store di profile controller guest per step 6

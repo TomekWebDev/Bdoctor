@@ -29,11 +29,11 @@
               </router-link>
             </li>
 
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <router-link class="nav-link" :to="{ name: 'search' }"
                 >Pagina di ricerca
               </router-link>
-            </li>
+            </li> -->
             <li class="nav-item">
               <a class="nav-link active" href="/login">Login</a>
             </li>

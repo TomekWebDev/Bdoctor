@@ -2066,7 +2066,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "SearchPage",
+  name: "HomePage",
   components: {},
   data: function data() {
     return {
@@ -2112,14 +2112,14 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       profiles: [],
-      specs: this.$route.params.specializations,
+      specializations: this.$route.params.specializations,
       isLoading: false,
       pagination: {},
-      sorted: [],
       // Step 4
       // Associamo il dato passato nel router link a un nuovo data di vue.
       // $route è l'oggetto che arriva tramite router .params per entrare nell'oggetto parametro
-      selectedSpecId: this.$route.params.spec
+      selectedSpecId: this.$route.params.spec,
+      newSelectedSpecId: ""
     };
   },
   mounted: function mounted() {
@@ -2133,12 +2133,13 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (res) {
         //   console.log(res.data);
         _this.profiles = res.data.profiles;
-        _this.specs = res.data.specs;
+        //   this.specs = res.data.specs;
       })["catch"](function (err) {
         console.log(err);
       }).then(function () {
         _this.isLoading = false;
       });
+      //   this.selectedSpecId = "";
     },
     // Step 5
     // In questa chiamata axios (post) mandiamo il nuovo data che abbiamo salvato
@@ -2331,16 +2332,7 @@ var render = function render() {
         name: "homepage"
       }
     }
-  }, [_vm._v("\n              Home\n            ")])], 1), _vm._v(" "), _c("li", {
-    staticClass: "nav-item"
-  }, [_c("router-link", {
-    staticClass: "nav-link",
-    attrs: {
-      to: {
-        name: "search"
-      }
-    }
-  }, [_vm._v("Pagina di ricerca\n            ")])], 1), _vm._v(" "), _vm._m(1), _vm._v(" "), _vm._m(2)])])], 1)])]);
+  }, [_vm._v("\n              Home\n            ")])], 1), _vm._v(" "), _vm._m(1), _vm._v(" "), _vm._m(2)])])], 1)])]);
 };
 var staticRenderFns = [function () {
   var _vm = this,
@@ -2679,7 +2671,17 @@ var render = function render() {
         }
       }
     }
-  }, [_vm._v("Search")])], 1);
+  }, [_vm._v("Search")]), _vm._v(" "), _c("router-link", {
+    staticClass: "btn btn-primary",
+    attrs: {
+      to: {
+        name: "search",
+        params: {
+          specializations: _vm.specs
+        }
+      }
+    }
+  }, [_vm._v("Vai a ricerca avanzata")])], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -2701,7 +2703,40 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", [_c("h1", [_vm._v("Questa è SearchPage")]), _vm._v(" "), _c("button", {
+  return _c("div", [_c("h1", [_vm._v("Questa è SearchPage")]), _vm._v(" "), _c("select", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.selectedSpecId,
+      expression: "selectedSpecId"
+    }],
+    attrs: {
+      name: "",
+      id: ""
+    },
+    on: {
+      change: function change($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
+          return o.selected;
+        }).map(function (o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val;
+        });
+        _vm.selectedSpecId = $event.target.multiple ? $$selectedVal : $$selectedVal[0];
+      }
+    }
+  }, _vm._l(_vm.specializations, function (spec) {
+    return _c("option", {
+      key: spec.id,
+      domProps: {
+        value: spec.id
+      }
+    }, [_vm._v("\n      " + _vm._s(spec.name) + "\n    ")]);
+  }), 0), _vm._v(" "), _c("button", {
+    on: {
+      click: _vm.searchProfilesSpecs
+    }
+  }, [_vm._v("\n    cambia specializzazione (nuova chiamata axios)\n  ")]), _vm._v(" "), _c("button", {
     on: {
       click: _vm.reviewsFilterTopDown
     }
