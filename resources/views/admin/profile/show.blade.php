@@ -26,10 +26,18 @@
             <div class="col-sm-8">
                 <div class="card mt-3">
                     <div class="card-body">
-                        <div>{{ $this_user->name }}</div>
-                        <div>{{ $this_user->surname }}</div>
-                        <div>{{ $this_profile->city }}</div>
-                        <div>{{ $this_profile->address }}</div>
+                        <h3>Il mio profilo</h3>
+                        <div class="dropdown-divider"></div>
+                        <div class="text-muted mt-1">Nome: <span class="text-black">{{ $this_user->name }}</span></div>
+                        <div class="text-muted mt-1">Cognome: <span class="text-black">{{ $this_user->surname }}</span></div>
+                        <div class="text-muted mt-1">Città: <span class="text-black">{{ $this_profile->city }}</span></div>
+                        <div class="text-muted mt-1">Indirizzo: <span class="text-black">{{ $this_profile->address }}</span></div>
+                        <div class="text-muted mt-1">Telefono: <span class="text-black">{{ $this_profile->phone }}</span></div>
+                    </div>
+                </div>
+                <div class="card mt-3">
+                    <div class="card-body">
+                        <a class="btn btn-outline-primary btn-sm btn-block" href="{{ route('admin.profile.edit', $this_profile->id) }}">Modifica Profilo</a>
                     </div>
                 </div>
             </div>
@@ -42,12 +50,29 @@
         <div class="modal-dialog modal-fullscreen">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Curriculum Vitae</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <embed src="{{ asset("Storage/$this_profile->resume") }}" class="img-fluid w-100 h-100"
-                        type='application/pdf' />
+                    @if ($this_profile->resume)
+                        <embed src="{{ asset("Storage/$this_profile->resume") }}" class="img-fluid w-100 h-100" type='application/pdf' />
+                        <hr>
+                        <div class="card">
+                            <div class="card-body">
+                                <a class="btn btn-outline-primary btn-sm btn-block" href="{{ route('admin.profile.edit', $this_profile->id) }}">Modifica Profilo</a>
+                            </div>
+                        </div>
+                    @else
+                    <h3>Non hai inserito ancora il tuo curriculum</h3>
+                    <hr>
+                    <h5>Aggiungi il tuo CV nella pagina Modifica profilo</h5>
+                    <hr>
+                    <div class="card">
+                        <div class="card-body">
+                            <a class="btn btn-outline-primary btn-sm btn-block" href="{{ route('admin.profile.edit', $this_profile->id) }}">Modifica Profilo</a>
+                        </div>
+                    </div>
+                    @endif
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
