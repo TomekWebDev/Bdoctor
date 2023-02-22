@@ -44,7 +44,7 @@
                         @method('DELETE')
                     </form>
                     </ul>
-                  </div>
+                </div>
             </div>
             
         </div>

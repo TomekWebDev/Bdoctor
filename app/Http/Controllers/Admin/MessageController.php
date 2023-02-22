@@ -17,8 +17,9 @@ class MessageController extends Controller
      */
     public function index()
     {
+        $profile = Auth::user();
         $messages = Message::where('profile_id', Auth::user()->id)->get();
-        return view('admin.messages.index', compact('messages'));
+        return view('admin.messages.index', compact('messages', 'profile'));
     }
 
     /**

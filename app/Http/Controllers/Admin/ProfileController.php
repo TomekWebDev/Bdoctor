@@ -111,6 +111,7 @@ class ProfileController extends Controller
     {
 
         $profile_to_edit = Profile::findOrFail($id);
+        $user = Auth::user();
 
         if ($profile_to_edit->user_id !== auth()->user()->id) {
             abort(403, 'Non puoi modificare il profilo altrui.');
@@ -118,7 +119,7 @@ class ProfileController extends Controller
 
         $specs = Spec::All();
 
-        return view('admin.profile.edit', compact('profile_to_edit', 'specs'));
+        return view('admin.profile.edit', compact('profile_to_edit', 'specs', 'user'));
     }
 
     /**

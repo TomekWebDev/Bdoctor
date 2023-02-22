@@ -26,7 +26,32 @@
             <div class="col-sm-8">
                 <div class="card mt-3">
                     <div class="card-body">
-                        <h3>Il mio profilo</h3>
+                        <div class="d-flex justify-content-between">
+                            <h3>Il mio profilo</h3>
+                            <div class="dropdown mr-3">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+                                    Action
+                                </button>
+                                <ul class="dropdown-menu">
+                                  <li> 
+                                    <a class="dropdown-item" href="{{route('admin.profile.edit', $this_profile->id)}}">Modifica Profilo</a>
+                                  </li>
+                                <li>
+                                    <a class="dropdown-item" href="{{route('admin.messages.index', $this_profile->id)}}">Messaggi ricevuti</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="{{route('admin.reviews.index', $this_profile->id)}}">Le mie Recensioni</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="{{route('admin.sponsors.index', $this_profile->id)}}">Aggiungi Sponsor</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="{{route('admin.statistics.index', $this_profile->id)}}">Statistiche</a>
+                                </li>
+                                </ul>
+                            </div>
+                        </div>
+                        
                         <div class="dropdown-divider"></div>
                         <div class="text-muted mt-1">Nome: <span class="text-black">{{ $this_user->name }}</span></div>
                         <div class="text-muted mt-1">Cognome: <span class="text-black">{{ $this_user->surname }}</span></div>
