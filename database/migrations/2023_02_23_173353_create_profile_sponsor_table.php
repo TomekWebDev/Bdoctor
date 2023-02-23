@@ -21,8 +21,6 @@ class CreateProfileSponsorTable extends Migration
             $table->foreign('profile_id')->references('id')->on('profiles');
 
             $table->dateTime('expiration_date')->nullable();
-
-
         });
     }
 

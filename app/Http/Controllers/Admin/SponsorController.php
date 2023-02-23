@@ -58,11 +58,6 @@ class SponsorController extends Controller
         $sponsor = Sponsor::where('price', $price)->first();
         $sponsor_id = $sponsor->id;
 
-        $pivot = new ProfileSponsor;
-
-        $pivot->sponsor_id = $sponsor_id;
-        $pivot->profile_id = $profile_id;
-
         if($price == 2.99){
             $expiration_date = Carbon::now()->addDays(1);
         }
@@ -72,9 +67,12 @@ class SponsorController extends Controller
         else{
             $expiration_date = Carbon::now()->addDays(3);
         }
-
-        
-
+        $pivot = new ProfileSponsor;
+            $pivot->sponsor_id = $sponsor_id;
+            $pivot->profile_id = $profile_id;
+            $pivot->timestamps = false;
+            $pivot->expiration_date = $expiration_date;
+            $pivot->save();
 
         $gateway= new \Braintree\Gateway([
             'environment' => config('services.braintree.environment'),
@@ -95,8 +93,6 @@ class SponsorController extends Controller
         ]);
         
         if ($result->success) {
-            $pivot->expiration_date = $expiration_date;
-            $pivot->save();
             return back()->with('success', 'successoooooo');
         } else {
             return back()->with('error', 'kitemmuort');
