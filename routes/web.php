@@ -27,8 +27,8 @@ Route::middleware('auth')
     ->prefix('admin') //localhost:8080/admin/posts
     ->name('admin.')
     ->group(function () {
-
         Route::get('/', 'HomeController@index')->name('index');
+        Route::get('/payment', 'PaymentController@process')->name('process');
         Route::resource('/profile', ProfileController::class);
         Route::resource('/messages', MessageController::class);
         Route::resource('/reviews', ReviewController::class);
@@ -41,6 +41,6 @@ Route::get('/', function () {
     return view('guest.home');
 })->name('guest.home');
 
-Route::get('{any?}', function(){
+Route::get('{any?}', function () {
     return view('guest.home');
 })->where('any', '.*');
