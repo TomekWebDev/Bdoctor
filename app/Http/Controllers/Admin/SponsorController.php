@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\ProfileSponsor;
 use App\Models\Sponsor;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class SponsorController extends Controller
@@ -16,10 +18,12 @@ class SponsorController extends Controller
      */
     public function index()
     {
-        $sponsors = Sponsor::All();
+        $bronze = Sponsor::whereId(1)->first();
+        $silver = Sponsor::whereId(2)->first();
+        $gold = Sponsor::whereId(3)->first();
         $profile = Auth::user();
 
-        return view('admin.sponsors.index', compact('sponsors', 'profile'));
+        return view('admin.sponsors.index', compact('bronze', 'silver', 'gold', 'profile'));
     }
 
     /**
@@ -27,9 +31,18 @@ class SponsorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function token($type)
     {
-        //
+        $gateway = new \Braintree\Gateway([
+            'environment' => config('services.braintree.environment'),
+            'merchantId' => config('services.braintree.merchantId'),
+            'publicKey' => config('services.braintree.publicKey'),
+            'privateKey' => config('services.braintree.privateKey')
+        ]);
+
+        $token = $gateway->ClientToken()->generate();
+        $subscription = Sponsor::where('name', $type)->first();
+        return view('admin.sponsors.braintree', ['token' => $token, 'type' => $subscription]);
     }
 
     /**
@@ -38,9 +51,58 @@ class SponsorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function checkout(Request $request, $price)
     {
-        //
+        $profile_id = Auth::user()->id;
+
+        $sponsor = Sponsor::where('price', $price)->first();
+        $sponsor_id = $sponsor->id;
+
+        $pivot = new ProfileSponsor;
+
+        $pivot->sponsor_id = $sponsor_id;
+        $pivot->profile_id = $profile_id;
+
+        if($price == 2.99){
+            $expiration_date = Carbon::now()->addDays(1);
+        }
+        elseif($price == 5.99){
+            $expiration_date = Carbon::now()->addDays(2);
+        }
+        else{
+            $expiration_date = Carbon::now()->addDays(3);
+        }
+
+        
+
+
+        $gateway= new \Braintree\Gateway([
+            'environment' => config('services.braintree.environment'),
+            'merchantId' => config('services.braintree.merchantId'),
+            'publicKey'=> config('services.braintree.publicKey'),
+            'privateKey'=>config('services.braintree.privateKey')
+        ]);
+
+        $amount= $price;
+        $nonce= $request->payment_method_nonce;
+        
+        $result= $gateway->transaction()->sale([
+            'amount' => $amount,
+            'paymentMethodNonce' => $nonce,
+            'options' => [
+            'submitForSettlement' => true
+            ]
+        ]);
+        
+        if ($result->success) {
+            $pivot->expiration_date = $expiration_date;
+            $pivot->save();
+            return back()->with('success', 'successoooooo');
+        } else {
+            return back()->with('error', 'kitemmuort');
+        }
+    
+        
     }
 
     /**
