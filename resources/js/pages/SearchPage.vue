@@ -134,11 +134,7 @@
       <div class="offcanvas-body">
         <div>
           <select v-model="selectedSpecId" name="" id="">
-            <option
-              v-for="spec in specializations"
-              :key="spec.id"
-              :value="spec.id"
-            >
+            <option v-for="spec in specs" :key="spec.id" :value="spec.id">
               {{ spec.name }}
             </option>
           </select>
@@ -165,7 +161,7 @@ export default {
   data() {
     return {
       profiles: [],
-      specializations: this.$route.params.specializations,
+      specs: [],
       isLoading: false,
       pagination: {},
       // Step 4
@@ -178,6 +174,7 @@ export default {
 
   mounted() {
     this.searchProfilesSpecs();
+    this.getSpecs();
   },
 
   methods: {
@@ -189,6 +186,7 @@ export default {
         .then((res) => {
           //   console.log(res.data);
           this.profiles = res.data.profiles;
+          this.specs = res.data.specs;
           //   this.specs = res.data.specs;
         })
         .catch((err) => {

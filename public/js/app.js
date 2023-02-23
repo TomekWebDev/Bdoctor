@@ -2112,7 +2112,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       profiles: [],
-      specializations: this.$route.params.specializations,
+      specs: [],
       isLoading: false,
       pagination: {},
       // Step 4
@@ -2124,6 +2124,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     this.searchProfilesSpecs();
+    this.getSpecs();
   },
   methods: {
     searchProfilesSpecs: function searchProfilesSpecs() {
@@ -2133,6 +2134,7 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (res) {
         //   console.log(res.data);
         _this.profiles = res.data.profiles;
+        _this.specs = res.data.specs;
         //   this.specs = res.data.specs;
       })["catch"](function (err) {
         console.log(err);
@@ -2699,8 +2701,7 @@ var render = function render() {
       to: {
         name: "search",
         params: {
-          spec: _vm.selectedSpecId,
-          specializations: _vm.specs
+          spec: _vm.selectedSpecId
         }
       }
     }
@@ -2840,7 +2841,7 @@ var render = function render() {
         _vm.selectedSpecId = $event.target.multiple ? $$selectedVal : $$selectedVal[0];
       }
     }
-  }, _vm._l(_vm.specializations, function (spec) {
+  }, _vm._l(_vm.specs, function (spec) {
     return _c("option", {
       key: spec.id,
       domProps: {

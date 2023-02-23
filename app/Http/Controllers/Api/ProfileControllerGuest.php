@@ -24,6 +24,21 @@ class ProfileControllerGuest extends Controller
         return response()->json($specs);
     }
 
+    // /**
+    //  * Display a listing of the resource.
+    //  *
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function indexAll()
+    // {
+    //     // Step 1
+    //     // Questa funzione di index ci serve per mandare il json delle specs
+    //     // alla homepage per averle nella select
+    //     // vai a homepage vue per step 2
+    //     $profiles = Profile::with('specs', 'user', 'ratings', 'reviews');
+    //     return response()->json($profiles);
+    // }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -67,11 +82,11 @@ class ProfileControllerGuest extends Controller
             })
             ->get();
 
-        // $specs = Spec::all();
+        $specs = Spec::all();
 
         $data = [
             'profiles' => $profiles,
-            // 'specs' => $specs,
+            'specs' => $specs,
 
         ];
 

@@ -22,6 +22,7 @@ Route::namespace('Api')
     ->prefix('/profiles')
     ->group(function () {
         Route::get('/', 'ProfileControllerGuest@index');
+        // Route::get('/all', 'ProfileControllerGuest@indexAll');
         Route::get('/{id}', 'ProfileControllerGuest@show');
         Route::post('/', 'ProfileControllerGuest@store');
     });
