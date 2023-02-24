@@ -75,15 +75,16 @@ $specs = Spec::all();
 
                                 <div class="col-md-6">
                                     <input id="password" type="password"
-                                        class="form-control @error('password') is-invalid @enderror" name="password" pattern=".{8,}"
-                                        required autocomplete="new-password" oninput="validatePassword()">
+                                        class="form-control @error('password') is-invalid @enderror" name="password"
+                                        pattern=".{8,}" required autocomplete="new-password" oninput="validatePassword()">
 
                                     @error('password')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
-                                    <p id="password-error" style="display:none; color: red;">La password deve contenere almeno 8 caratteri.</p>
+                                    <p id="password-error" style="display:none; color: red;">La password deve contenere
+                                        almeno 8 caratteri.</p>
                                 </div>
                             </div>
 
@@ -166,18 +167,25 @@ $specs = Spec::all();
 @endsection
 
 @push('script')
-<script>
-    function validatePassword() {
-        var password = document.getElementById("password");
-        var passwordError = document.getElementById("password-error");
+    <script>
+        function validatePassword() {
+            var password = document.getElementById("password");
+            var passwordConfirm = document.getElementById("password-confirm");
+            var passwordError = document.getElementById("password-error");
 
-        if (password.value.length < 8) {
-            passwordError.style.display = "block";
-            password.setCustomValidity("Inserisci almeno 8 caratteri");
-        } else {
-            passwordError.style.display = "none";
-            password.setCustomValidity("");
+            if (password.value.length < 8) {
+                passwordError.style.display = "block";
+                password.setCustomValidity("Inserisci almeno 8 caratteri");
+            } else if (password.value !== passwordConfirm.value) {
+                passwordError.style.display = "none";
+                password.setCustomValidity("Le password non corrispondono");
+            } else {
+                passwordError.style.display = "none";
+                password.setCustomValidity("");
+            }
         }
-    }
+
+        var passwordConfirm = document.getElementById("password-confirm");
+        passwordConfirm.addEventListener("input", validatePassword);
     </script>
 @endpush
