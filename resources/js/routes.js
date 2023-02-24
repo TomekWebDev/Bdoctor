@@ -16,7 +16,7 @@ const router = new VueRouter({
     routes: [
         // aggiungo tutte le rotte sotto forma di oggetti
         {
-            path: '/homepage',
+            path: '/',
             name: 'homepage',
             component: HomePage
         },
@@ -30,7 +30,7 @@ const router = new VueRouter({
             name: 'singleProfile',
             component: ShowPage
         },
-        
+
     ]
 });
 
