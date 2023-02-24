@@ -30,7 +30,7 @@ const router = new VueRouter({
             name: 'singleProfile',
             component: ShowPage
         },
-        
+
     ]
 });
 
