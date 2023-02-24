@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Profile;
 use App\Models\Spec;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProfileControllerGuest extends Controller
 {
@@ -63,6 +64,8 @@ class ProfileControllerGuest extends Controller
 
 
         $specId = $request->input('spec');
+        $reviewFilter = $request->input('reviewFilter');
+        $ratingFilter = $request->input('ratingFilter');
 
         //Step 6
         // Interrogazione database dei profili con associate le spec e lo user
@@ -76,10 +79,20 @@ class ProfileControllerGuest extends Controller
         // In questo modo cerchiamo i profili che abbiano una relazione a spec e che abbiano una spec con l'id che abbiamo cercato.
 
 
-        $profiles = Profile::with('specs', 'user', 'ratings', 'reviews', 'sponsors')
+        $profiles = Profile::with(['specs', 'user', 'ratings', 'reviews', 'sponsors'])
             ->whereHas('specs', function ($query) use ($specId) {
                 $query->where('specs.id', $specId);
             })
+            ->whereHas('reviews', function ($query) use ($reviewFilter) {
+                $query->select('profile_id')
+                    ->groupBy('profile_id')
+                    ->havingRaw('COUNT(*) > ?', [$reviewFilter]);
+            })
+            // ->select('profiles.*', DB::raw('AVG(ratings.vote) as avg_rating'))
+            // ->join('profile_rating', 'profiles.id', '=', 'profile_rating.profile_id')
+            // ->join('ratings', 'profile_rating.rating_id', '=', 'ratings.id')
+            // ->groupBy('profiles.id')
+            // ->havingRaw('AVG(ratings.vote) >= ?', [$ratingFilter])
             ->get();
 
         $specs = Spec::all();
@@ -130,9 +143,8 @@ class ProfileControllerGuest extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function filters(Request $request, $id)
     {
-        //
     }
 
     /**

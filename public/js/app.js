@@ -2073,11 +2073,13 @@ __webpack_require__.r(__webpack_exports__);
       selectedSpecId: "",
       specs: [],
       isLoading: false,
-      pagination: {}
+      pagination: {},
+      profiles: []
     };
   },
   mounted: function mounted() {
     this.getSpecs();
+    this.getSponsoredProfiles();
   },
   methods: {
     getSpecs: function getSpecs() {
@@ -2090,6 +2092,22 @@ __webpack_require__.r(__webpack_exports__);
         console.log(err);
       }).then(function () {
         _this.isLoading = false;
+      });
+    },
+    getSponsoredProfiles: function getSponsoredProfiles() {
+      var _this2 = this;
+      this.isLoading = true;
+      axios.get("http://localhost:8000/api/profiles/sponsored").then(function (res) {
+        //   console.log(res.data);
+        var allProfiles = res.data;
+        allProfiles.filter(function (profile) {
+          var thisSponsors = profile.sponsors;
+          var expiration = thisSponsors;
+        });
+      })["catch"](function (err) {
+        console.log(err);
+      }).then(function () {
+        _this2.isLoading = false;
       });
     }
   }
@@ -2119,6 +2137,8 @@ __webpack_require__.r(__webpack_exports__);
       // Associamo il dato passato nel router link a un nuovo data di vue.
       // $route è l'oggetto che arriva tramite router .params per entrare nell'oggetto parametro
       selectedSpecId: this.$route.params.spec,
+      reviewFilter: 0,
+      ratingFilter: 0,
       newSelectedSpecId: ""
     };
   },
@@ -2130,7 +2150,9 @@ __webpack_require__.r(__webpack_exports__);
     searchProfilesSpecs: function searchProfilesSpecs() {
       var _this = this;
       axios.post("http://localhost:8000/api/profiles", {
-        spec: this.selectedSpecId
+        spec: this.selectedSpecId,
+        reviewFilter: this.reviewFilter
+        // ratingFilter: this.ratingFilter,
       }).then(function (res) {
         //   console.log(res.data);
         _this.profiles = res.data.profiles;
@@ -2226,6 +2248,18 @@ __webpack_require__.r(__webpack_exports__);
       });
       var voteAverage = voteSum / parametro.length;
       return Math.round(voteAverage);
+    },
+    getSpecs: function getSpecs() {
+      var _this2 = this;
+      this.isLoading = true;
+      axios.get("http://localhost:8000/api/profiles").then(function (res) {
+        //   console.log(res.data);
+        _this2.specs = res.data;
+      })["catch"](function (err) {
+        console.log(err);
+      }).then(function () {
+        _this2.isLoading = false;
+      });
     }
   }
 });
@@ -2454,6 +2488,7 @@ var render = function render() {
       expression: "email"
     }],
     attrs: {
+      required: "",
       type: "email",
       placeholder: "email"
     },
@@ -2474,6 +2509,7 @@ var render = function render() {
       expression: "message"
     }],
     attrs: {
+      required: "",
       name: "message"
     },
     domProps: {
@@ -2523,6 +2559,7 @@ var render = function render() {
       expression: "voteId"
     }],
     attrs: {
+      required: "",
       name: "vote",
       id: ""
     },
@@ -2747,28 +2784,28 @@ var render = function render() {
     on: {
       click: _vm.reviewsFilterTopDown
     }
-  }, [_vm._v("\n              Filtra per recensioni + -\n            ")])]), _vm._v(" "), _c("li", {
+  }, [_vm._v("\n                            Filtra per recensioni + -\n                        ")])]), _vm._v(" "), _c("li", {
     staticClass: "nav-item mx-1"
   }, [_c("button", {
     staticClass: "btn btn-outline-primary",
     on: {
       click: _vm.reviewsFilterDownTop
     }
-  }, [_vm._v("\n              Filtra per recensioni - +\n            ")])]), _vm._v(" "), _c("li", {
+  }, [_vm._v("\n                            Filtra per recensioni - +\n                        ")])]), _vm._v(" "), _c("li", {
     staticClass: "nav-item mx-1"
   }, [_c("button", {
     staticClass: "btn btn-outline-primary",
     on: {
       click: _vm.ratingFilterTopDown
     }
-  }, [_vm._v("\n              Filtra per rating + -\n            ")])]), _vm._v(" "), _c("li", {
+  }, [_vm._v("\n                            Filtra per rating + -\n                        ")])]), _vm._v(" "), _c("li", {
     staticClass: "nav-item mx-1"
   }, [_c("button", {
     staticClass: "btn btn-outline-primary",
     on: {
       click: _vm.ratingFilterDownTop
     }
-  }, [_vm._v("\n              Filtra per rating - +\n            ")])]), _vm._v(" "), _vm._m(0)])])])]), _vm._v(" "), _vm.profiles.length <= 0 ? _c("div", {
+  }, [_vm._v("\n                            Filtra per rating - +\n                        ")])]), _vm._v(" "), _vm._m(0)])])])]), _vm._v(" "), _vm.profiles.length <= 0 ? _c("div", {
     staticClass: "card mt-3"
   }, [_c("div", {
     staticClass: "card-body"
@@ -2804,12 +2841,12 @@ var render = function render() {
       attrs: {
         to: "/profile/".concat(profile.id)
       }
-    }, [_vm._v("\n              Dr. " + _vm._s(profile.user.name) + " " + _vm._s(profile.user.surname) + "\n            ")])], 1), _vm._v(" "), _c("h5", [_vm._v(_vm._s(profile.reviews.length) + " recensioni")]), _vm._v(" "), _c("h5", [_vm._v("Voto medio " + _vm._s(_vm.getVoteAverage(profile.ratings)))]), _vm._v(" "), _c("h5", [_vm._v(_vm._s(profile.address) + "," + _vm._s(profile.city))]), _vm._v(" "), _c("h5", [_vm._v("Tu chiamami sul trap phone: " + _vm._s(profile.phone))]), _vm._v(" "), _c("router-link", {
+    }, [_vm._v("\n                            Dr. " + _vm._s(profile.user.name) + " " + _vm._s(profile.user.surname) + "\n                        ")])], 1), _vm._v(" "), _c("h5", [_vm._v(_vm._s(profile.reviews.length) + " recensioni")]), _vm._v(" "), _c("h5", [_vm._v("Voto medio " + _vm._s(_vm.getVoteAverage(profile.ratings)))]), _vm._v(" "), _c("h5", [_vm._v(_vm._s(profile.address) + "," + _vm._s(profile.city))]), _vm._v(" "), _c("h5", [_vm._v("Tu chiamami sul trap phone: " + _vm._s(profile.phone))]), _vm._v(" "), _c("router-link", {
       staticClass: "btn btn-outline-primary",
       attrs: {
         to: "/profile/".concat(profile.id)
       }
-    }, [_vm._v("\n            Vedi medico\n          ")])], 1)])])]);
+    }, [_vm._v("\n                        Vedi medico\n                    ")])], 1)])])]);
   }), _vm._v(" "), _c("div", {
     staticClass: "offcanvas offcanvas-top",
     attrs: {
@@ -2847,7 +2884,7 @@ var render = function render() {
       domProps: {
         value: spec.id
       }
-    }, [_vm._v("\n            " + _vm._s(spec.name) + "\n          ")]);
+    }, [_vm._v("\n                        " + _vm._s(spec.name) + "\n                    ")]);
   }), 0), _vm._v(" "), _c("button", {
     staticClass: "btn btn-primary",
     attrs: {
@@ -2857,7 +2894,7 @@ var render = function render() {
     on: {
       click: _vm.searchProfilesSpecs
     }
-  }, [_vm._v("\n          cambia specializzazione (nuova chiamata axios)\n        ")])])])])], 2);
+  }, [_vm._v("\n                    cambia specializzazione (nuova chiamata axios)\n                ")])])])])], 2);
 };
 var staticRenderFns = [function () {
   var _vm = this,
@@ -2872,7 +2909,7 @@ var staticRenderFns = [function () {
       "data-bs-target": "#offcanvasExample",
       "aria-controls": "offcanvasExample"
     }
-  }, [_vm._v("\n              Nuova ricerca\n            ")])]);
+  }, [_vm._v("\n                            Nuova ricerca\n                        ")])]);
 }, function () {
   var _vm = this,
     _c = _vm._self._c;
@@ -54402,7 +54439,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   routes: [
   // aggiungo tutte le rotte sotto forma di oggetti
   {
-    path: '/homepage',
+    path: '/',
     name: 'homepage',
     component: _pages_HomePage_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   }, {
@@ -54506,8 +54543,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Applications/MAMP/htdocs/laravel/Bdoctor/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/laravel/Bdoctor/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/Mangiagalli/Desktop/Progetto finale/Bdoctor/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/Mangiagalli/Desktop/Progetto finale/Bdoctor/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
