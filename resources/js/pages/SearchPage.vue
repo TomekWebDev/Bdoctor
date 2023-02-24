@@ -125,7 +125,7 @@
                 // $route è l'oggetto che arriva tramite router .params per entrare nell'oggetto parametro
                 selectedSpecId: this.$route.params.spec,
                 reviewFilter: 0,
-                ratingFilter: 0,
+                ratingFilter: 3,
                 newSelectedSpecId: "",
             };
         },

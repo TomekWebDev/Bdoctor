@@ -79,6 +79,11 @@ class ProfileControllerGuest extends Controller
         // In questo modo cerchiamo i profili che abbiano una relazione a spec e che abbiano una spec con l'id che abbiamo cercato.
 
 
+
+
+
+
+
         $profiles = Profile::with(['specs', 'user', 'ratings', 'reviews', 'sponsors'])
             ->whereHas('specs', function ($query) use ($specId) {
                 $query->where('specs.id', $specId);
@@ -94,6 +99,25 @@ class ProfileControllerGuest extends Controller
             // ->groupBy('profiles.id')
             // ->havingRaw('AVG(ratings.vote) >= ?', [$ratingFilter])
             ->get();
+
+
+        // metodo non server
+
+        // $profiles = array_filter($profiless, function ($profile) use ($ratingFilter) {
+        //     $totalRating = 0;
+        //     $ratingCount = count($profile->ratings);
+        //     foreach ($profile->ratings as $rating) {
+        //         $totalRating += $rating->vote;
+        //     }
+        //     $averageRating = $totalRating / $ratingCount;
+        //     if ($averageRating >= $ratingFilter) {
+        //         return true;
+        //     }
+        // });
+
+
+
+
 
         $specs = Spec::all();
 
