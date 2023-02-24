@@ -68,20 +68,22 @@ $specs = Spec::all();
                                 </div>
                             </div>
 
+                            {{-- Form Password --}}
                             <div class="form-group row">
                                 <label for="password"
                                     class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="password" type="password"
-                                        class="form-control @error('password') is-invalid @enderror" name="password"
-                                        required autocomplete="new-password">
+                                        class="form-control @error('password') is-invalid @enderror" name="password" pattern=".{8,}"
+                                        required autocomplete="new-password" oninput="validatePassword()">
 
                                     @error('password')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
+                                    <p id="password-error" style="display:none; color: red;">La password deve contenere almeno 8 caratteri.</p>
                                 </div>
                             </div>
 
@@ -162,3 +164,20 @@ $specs = Spec::all();
         </div>
     </div>
 @endsection
+
+@push('script')
+<script>
+    function validatePassword() {
+        var password = document.getElementById("password");
+        var passwordError = document.getElementById("password-error");
+
+        if (password.value.length < 8) {
+            passwordError.style.display = "block";
+            password.setCustomValidity("Inserisci almeno 8 caratteri");
+        } else {
+            passwordError.style.display = "none";
+            password.setCustomValidity("");
+        }
+    }
+    </script>
+@endpush

@@ -61,6 +61,8 @@ class RegisterController extends Controller
                 'city' => ['required', 'string', 'max:255'],
                 'address' => ['required', 'string', 'max:255'],
                 'spec_id' => ['required'],
+            ], [
+                'password.confirmed' => 'Le password non corrispondono.'
             ]
         );
     }
