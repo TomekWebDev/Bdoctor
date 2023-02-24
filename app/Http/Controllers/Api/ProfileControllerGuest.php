@@ -76,7 +76,7 @@ class ProfileControllerGuest extends Controller
         // In questo modo cerchiamo i profili che abbiano una relazione a spec e che abbiano una spec con l'id che abbiamo cercato.
 
 
-        $profiles = Profile::with('specs', 'user', 'ratings', 'reviews')
+        $profiles = Profile::with('specs', 'user', 'ratings', 'reviews', 'sponsors')
             ->whereHas('specs', function ($query) use ($specId) {
                 $query->where('specs.id', $specId);
             })
@@ -117,9 +117,10 @@ class ProfileControllerGuest extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function indexSponsored(Request $request)
     {
-        //
+        $profiles = Profile::with('specs', 'user', 'ratings', 'reviews', 'sponsors')->get();
+        return response()->json($profiles);
     }
 
     /**

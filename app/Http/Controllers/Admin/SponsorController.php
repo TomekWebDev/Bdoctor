@@ -58,47 +58,43 @@ class SponsorController extends Controller
         $sponsor = Sponsor::where('price', $price)->first();
         $sponsor_id = $sponsor->id;
 
-        if($price == 2.99){
+        if ($price == 2.99) {
             $expiration_date = Carbon::now()->addDays(1);
-        }
-        elseif($price == 5.99){
+        } elseif ($price == 5.99) {
             $expiration_date = Carbon::now()->addDays(2);
-        }
-        else{
+        } else {
             $expiration_date = Carbon::now()->addDays(3);
         }
         $pivot = new ProfileSponsor;
-            $pivot->sponsor_id = $sponsor_id;
-            $pivot->profile_id = $profile_id;
-            $pivot->timestamps = false;
-            $pivot->expiration_date = $expiration_date;
-            $pivot->save();
+        $pivot->sponsor_id = $sponsor_id;
+        $pivot->profile_id = $profile_id;
+        $pivot->timestamps = false;
+        $pivot->expiration_date = $expiration_date;
+        $pivot->save();
 
-        $gateway= new \Braintree\Gateway([
+        $gateway = new \Braintree\Gateway([
             'environment' => config('services.braintree.environment'),
             'merchantId' => config('services.braintree.merchantId'),
-            'publicKey'=> config('services.braintree.publicKey'),
-            'privateKey'=>config('services.braintree.privateKey')
+            'publicKey' => config('services.braintree.publicKey'),
+            'privateKey' => config('services.braintree.privateKey')
         ]);
 
-        $amount= $price;
-        $nonce= $request->payment_method_nonce;
-        
-        $result= $gateway->transaction()->sale([
+        $amount = $price;
+        $nonce = $request->payment_method_nonce;
+
+        $result = $gateway->transaction()->sale([
             'amount' => $amount,
             'paymentMethodNonce' => $nonce,
             'options' => [
-            'submitForSettlement' => true
+                'submitForSettlement' => true
             ]
         ]);
-        
+
         if ($result->success) {
-            return back()->with('success', 'successoooooo');
+            return back()->with('success', 'Ordine confermato');
         } else {
-            return back()->with('error', 'kitemmuort');
+            return back()->with('error', 'Ordine rifiutato ');
         }
-    
-        
     }
 
     /**

@@ -63,11 +63,13 @@ export default {
       specs: [],
       isLoading: false,
       pagination: {},
+      profiles: [],
     };
   },
 
   mounted() {
     this.getSpecs();
+    this.getSponsoredProfiles();
   },
 
   methods: {
@@ -78,6 +80,26 @@ export default {
         .then((res) => {
           //   console.log(res.data);
           this.specs = res.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+        .then(() => {
+          this.isLoading = false;
+        });
+    },
+    getSponsoredProfiles() {
+      this.isLoading = true;
+      axios
+        .get("http://localhost:8000/api/profiles/sponsored")
+        .then((res) => {
+          //   console.log(res.data);
+          let allProfiles = res.data;
+
+          allProfiles.filter(function (profile) {
+            let thisSponsors = profile.sponsors;
+            let expiration = thisSponsors;
+          });
         })
         .catch((err) => {
           console.log(err);

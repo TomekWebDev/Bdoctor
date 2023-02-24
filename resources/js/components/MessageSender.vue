@@ -1,10 +1,10 @@
 <template>
   <div>
     <form v-on:submit="sendMessage">
-      <input v-model="name" type="text" placeholder="name" />
-      <input v-model="surname" type="text" placeholder="surname" />
-      <input v-model="email" type="email" placeholder="email" />
-      <textarea v-model="message" name="message"></textarea>
+      <input required v-model="name" type="text" placeholder="name" />
+      <input required v-model="surname" type="text" placeholder="surname" />
+      <input required v-model="email" type="email" placeholder="email" />
+      <textarea required v-model="message" name="message"></textarea>
       <button type="submit">Send Message</button>
     </form>
   </div>

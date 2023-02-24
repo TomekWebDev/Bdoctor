@@ -1,7 +1,7 @@
 <template>
   <div>
     <form v-on:submit="sendRating">
-      <select v-model="voteId" name="vote" id="">
+      <select required v-model="voteId" name="vote" id="">
         <option v-for="rating in ratings" :key="rating" :value="rating.id">
           {{ rating.vote }}
         </option>

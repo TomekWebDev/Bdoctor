@@ -35,19 +35,48 @@
                         </ul>
                     </div>
                 </div>
-                <div class="card mt-3">
+                {{-- <div class="card mt-3">
                     <div class="card-body">
-                            <a href="{{ route('admin.sponsor.pay', $bronze->name) }}">{{ $bronze->name }}</a>
-                            <a href="{{ route('admin.sponsor.pay', $silver->name) }}">{{ $silver->name }}</a>
-                            <a href="{{ route('admin.sponsor.pay', $gold->name) }}">{{ $gold->name }}</a>
+                        <a href="{{ route('admin.sponsor.pay', $bronze->name, $profile->name) }}">{{ $bronze->name }}</a>
+                        <a href="{{ route('admin.sponsor.pay', $silver->name, $profile->name) }}">{{ $silver->name }}</a>
+                        <a href="{{ route('admin.sponsor.pay', $gold->name, $profile->name) }}">{{ $gold->name }}</a>
+                    </div>
+                </div> --}}
+
+                <div class="card mt-2 p-2">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ $bronze->name }}</h5>
+                        <p class="card-text">Boost your profile for 24 hours</p>
+                        <a href="{{ route('admin.sponsor.pay', $bronze->name, $profile->name) }}"
+                            class="btn btn-primary">Buy {{ $bronze->name }} sponsor</a>
                     </div>
                 </div>
+
+                <div class="card mt-2 p-2">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ $silver->name }}</h5>
+                        <p class="card-text">Boost your profile for 48 hours</p>
+                        <a href="{{ route('admin.sponsor.pay', $silver->name, $profile->name) }}"
+                            class="btn btn-primary">Buy {{ $silver->name }} sponsor</a>
+                    </div>
+                </div>
+
+                <div class="card mt-2 p-2">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ $gold->name }}</h5>
+                        <p class="card-text">Boost your profile for 72 hours</p>
+                        <a href="{{ route('admin.sponsor.pay', $gold->name, $profile->name) }}" class="btn btn-primary">Buy
+                            {{ $gold->name }} sponsor</a>
+                    </div>
+                </div>
+
 
 
 
             </div>
         </div>
     </div>
-    
 @endsection
-

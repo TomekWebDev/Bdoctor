@@ -131,7 +131,7 @@ $specs = Spec::all();
 
                             <div class="form-group row ">
                                 <div class="col-md-6 offset-md-4">
-                                    <select name="spec_id" id=""
+                                    <select required name="spec_id" id=""
                                         class="form-control @error('spec_id') is-invalid @enderror">
                                         <option value="" disabled selected>Seleziona la tua specializzazione</option>
                                         @foreach ($specs as $spec)
