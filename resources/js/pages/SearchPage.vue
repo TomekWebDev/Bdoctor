@@ -125,7 +125,7 @@
                 // $route è l'oggetto che arriva tramite router .params per entrare nell'oggetto parametro
                 selectedSpecId: this.$route.params.spec,
                 reviewFilter: 0,
-                ratingFilter: 3,
+                ratingFilter: 1,
                 newSelectedSpecId: "",
             };
         },
@@ -141,7 +141,7 @@
                     .post("http://localhost:8000/api/profiles", {
                         spec: this.selectedSpecId,
                         reviewFilter: this.reviewFilter,
-                        // ratingFilter: this.ratingFilter,
+                        ratingFilter: this.ratingFilter,
                     })
                     .then((res) => {
                         //   console.log(res.data);

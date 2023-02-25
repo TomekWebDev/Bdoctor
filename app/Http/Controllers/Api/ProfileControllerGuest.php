@@ -62,7 +62,6 @@ class ProfileControllerGuest extends Controller
         // Step 6
         // Salviamo in una var il dato
 
-
         $specId = $request->input('spec');
         $reviewFilter = $request->input('reviewFilter');
         $ratingFilter = $request->input('ratingFilter');
@@ -78,12 +77,6 @@ class ProfileControllerGuest extends Controller
         // A questo punto il return della funzione passa il secondo parametro dicendo esattamente qual'è l'id della spec che stiamo cercando.
         // In questo modo cerchiamo i profili che abbiano una relazione a spec e che abbiano una spec con l'id che abbiamo cercato.
 
-
-
-
-
-
-
         $profiles = Profile::with(['specs', 'user', 'ratings', 'reviews', 'sponsors'])
             ->whereHas('specs', function ($query) use ($specId) {
                 $query->where('specs.id', $specId);
@@ -91,13 +84,13 @@ class ProfileControllerGuest extends Controller
             ->whereHas('reviews', function ($query) use ($reviewFilter) {
                 $query->select('profile_id')
                     ->groupBy('profile_id')
-                    ->havingRaw('COUNT(*) > ?', [$reviewFilter]);
+                    ->havingRaw('COUNT(*) >= ?', [$reviewFilter]);
             })
-            // ->select('profiles.*', DB::raw('AVG(ratings.vote) as avg_rating'))
-            // ->join('profile_rating', 'profiles.id', '=', 'profile_rating.profile_id')
-            // ->join('ratings', 'profile_rating.rating_id', '=', 'ratings.id')
-            // ->groupBy('profiles.id')
-            // ->havingRaw('AVG(ratings.vote) >= ?', [$ratingFilter])
+            ->select('profiles.*', DB::raw('AVG(ratings.vote) as avg_rating'))
+            ->join('profile_rating', 'profiles.id', '=', 'profile_rating.profile_id')
+            ->join('ratings', 'profile_rating.rating_id', '=', 'ratings.id')
+            ->groupBy('profiles.id')
+            ->havingRaw('AVG(ratings.vote) >= ?', [$ratingFilter])
             ->get();
 
 

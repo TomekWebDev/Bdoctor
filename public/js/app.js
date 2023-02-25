@@ -2138,7 +2138,7 @@ __webpack_require__.r(__webpack_exports__);
       // $route è l'oggetto che arriva tramite router .params per entrare nell'oggetto parametro
       selectedSpecId: this.$route.params.spec,
       reviewFilter: 0,
-      ratingFilter: 3,
+      ratingFilter: 1,
       newSelectedSpecId: ""
     };
   },
@@ -2151,8 +2151,8 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
       axios.post("http://localhost:8000/api/profiles", {
         spec: this.selectedSpecId,
-        reviewFilter: this.reviewFilter
-        // ratingFilter: this.ratingFilter,
+        reviewFilter: this.reviewFilter,
+        ratingFilter: this.ratingFilter
       }).then(function (res) {
         //   console.log(res.data);
         _this.profiles = res.data.profiles;
