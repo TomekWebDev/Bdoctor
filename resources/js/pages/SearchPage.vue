@@ -35,6 +35,52 @@
             </div>
         </nav>
 
+        <!-- sposnorizzati -->
+
+        <div v-for="sponsored in sponsoredProfiles" :key="sponsored.id" class="card mt-3">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-6 d-flex">
+                        <div v-if="!sponsored.image" class="col-5">
+                            <img class="img-fluid" src="../../../public/img/userDoctor.jpeg" alt="" />
+                            <div class="d-block text-warning">
+                                This is a sponsored profile
+                            </div>
+                        </div>
+                        <div v-else class="col-5">
+                            <img class="img-fluid rounded-circle" :src="`storage/${sponsored.image}`" alt="" />
+                            <div class="d-block text-warning">
+                                This is a sponsored profile
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <h5>
+                            <router-link :to="`/profile/${sponsored.id}`">
+                                Dr. {{ sponsored.user.name }} {{ sponsored.user.surname }}
+                            </router-link>
+                        </h5>
+                        <h5>{{ sponsored.reviews.length }} recensioni</h5>
+                        <h5>specializzazioni:
+                            <ul>
+                                <li v-for="spec in sponsored.specs" :key="spec.id">
+                                    {{spec.name}}
+                                </li>
+                            </ul>
+                        </h5>
+                        <h5>{{ sponsored.address }},{{ sponsored.city }}</h5>
+                        <h5>Tu chiamami sul trap phone: {{ sponsored.phone }}</h5>
+                        <router-link class="btn btn-outline-primary" :to="`/profile/${sponsored.id}`">
+                            Vedi medico
+                        </router-link>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- end sponsorizzati -->
+
+
         <!-- Se non ci sono specialisti -->
         <div class="card mt-3" v-if="profiles.length <= 0">
             <div class="card-body">Non ci sono specialisti</div>
@@ -58,6 +104,13 @@
                             <router-link :to="`/profile/${profile.id}`">
                                 Dr. {{ profile.user.name }} {{ profile.user.surname }}
                             </router-link>
+                        </h5>
+                        <h5>specializzazioni:
+                            <ul>
+                                <li v-for="spec in profile.specs" :key="spec.id">
+                                    {{spec.name}}
+                                </li>
+                            </ul>
                         </h5>
                         <h5>{{ profile.reviews.length }} recensioni</h5>
                         <h5>Voto medio {{ getVoteAverage(profile.ratings) }}</h5>
@@ -117,6 +170,7 @@
         data() {
             return {
                 profiles: [],
+                sponsoredProfiles: [],
                 specs: [],
                 isLoading: false,
                 pagination: {},
@@ -125,18 +179,33 @@
                 // $route è l'oggetto che arriva tramite router .params per entrare nell'oggetto parametro
                 selectedSpecId: this.$route.params.spec,
                 reviewFilter: 0,
-                ratingFilter: 1,
-                newSelectedSpecId: "",
+                ratingFilter: 0,
+
             };
         },
 
         mounted() {
-            this.searchProfilesSpecs();
             this.getSpecs();
+            this.searchFilteredProfiles();
+            this.getSponsoredWithSpecs();
         },
 
         methods: {
-            searchProfilesSpecs() {
+            getSpecs() {
+                axios
+                    .get("http://localhost:8000/api/profiles/specs")
+                    .then((res) => {
+                        this.specs = res.data;
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    })
+                    .then(() => {
+                        this.isLoading = false;
+                    });
+            },
+
+            searchFilteredProfiles() {
                 axios
                     .post("http://localhost:8000/api/profiles", {
                         spec: this.selectedSpecId,
@@ -144,10 +213,7 @@
                         ratingFilter: this.ratingFilter,
                     })
                     .then((res) => {
-                        //   console.log(res.data);
                         this.profiles = res.data.profiles;
-                        this.specs = res.data.specs;
-                        //   this.specs = res.data.specs;
                     })
                     .catch((err) => {
                         console.log(err);
@@ -161,6 +227,21 @@
             // Step 5
             // In questa chiamata axios (post) mandiamo il nuovo data che abbiamo salvato
             // vai alla store di profile controller guest per step 6
+
+            getSponsoredWithSpecs() {
+                this.isLoading = true;
+                axios
+                    .post("http://localhost:8000/api/profiles/sponsored", { spec: this.selectedSpecId, })
+                    .then((res) => {
+                        this.sponsoredProfiles = res.data;
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    })
+                    .then(() => {
+                        this.isLoading = false;
+                    });
+            },
 
             reviewsFilterTopDown() {
                 this.profiles.sort((a, b) => {
@@ -245,21 +326,7 @@
                 let voteAverage = voteSum / parametro.length;
                 return Math.round(voteAverage);
             },
-            getSpecs() {
-                this.isLoading = true;
-                axios
-                    .get("http://localhost:8000/api/profiles")
-                    .then((res) => {
-                        //   console.log(res.data);
-                        this.specs = res.data;
-                    })
-                    .catch((err) => {
-                        console.log(err);
-                    })
-                    .then(() => {
-                        this.isLoading = false;
-                    });
-            },
+
         },
     };
 </script>

@@ -2073,37 +2073,33 @@ __webpack_require__.r(__webpack_exports__);
       selectedSpecId: "",
       specs: [],
       isLoading: false,
-      pagination: {},
-      profiles: []
+      sponsoredProfiles: []
     };
   },
   mounted: function mounted() {
     this.getSpecs();
-    this.getSponsoredProfiles();
+    this.getAllSponsored();
   },
   methods: {
     getSpecs: function getSpecs() {
       var _this = this;
-      this.isLoading = true;
-      axios.get("http://localhost:8000/api/profiles").then(function (res) {
+      axios.get("http://localhost:8000/api/profiles/specs").then(function (res) {
         //   console.log(res.data);
         _this.specs = res.data;
+        //   this.specs = res.data.specs;
       })["catch"](function (err) {
         console.log(err);
       }).then(function () {
         _this.isLoading = false;
       });
+      //   this.selectedSpecId = "";
     },
-    getSponsoredProfiles: function getSponsoredProfiles() {
+    getAllSponsored: function getAllSponsored() {
       var _this2 = this;
       this.isLoading = true;
       axios.get("http://localhost:8000/api/profiles/sponsored").then(function (res) {
         //   console.log(res.data);
-        var allProfiles = res.data;
-        allProfiles.filter(function (profile) {
-          var thisSponsors = profile.sponsors;
-          var expiration = thisSponsors;
-        });
+        _this2.sponsoredProfiles = res.data;
       })["catch"](function (err) {
         console.log(err);
       }).then(function () {
@@ -2130,6 +2126,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       profiles: [],
+      sponsoredProfiles: [],
       specs: [],
       isLoading: false,
       pagination: {},
@@ -2138,36 +2135,56 @@ __webpack_require__.r(__webpack_exports__);
       // $route è l'oggetto che arriva tramite router .params per entrare nell'oggetto parametro
       selectedSpecId: this.$route.params.spec,
       reviewFilter: 0,
-      ratingFilter: 1,
-      newSelectedSpecId: ""
+      ratingFilter: 0
     };
   },
   mounted: function mounted() {
-    this.searchProfilesSpecs();
     this.getSpecs();
+    this.searchFilteredProfiles();
+    this.getSponsoredWithSpecs();
   },
   methods: {
-    searchProfilesSpecs: function searchProfilesSpecs() {
+    getSpecs: function getSpecs() {
       var _this = this;
+      axios.get("http://localhost:8000/api/profiles/specs").then(function (res) {
+        _this.specs = res.data;
+      })["catch"](function (err) {
+        console.log(err);
+      }).then(function () {
+        _this.isLoading = false;
+      });
+    },
+    searchFilteredProfiles: function searchFilteredProfiles() {
+      var _this2 = this;
       axios.post("http://localhost:8000/api/profiles", {
         spec: this.selectedSpecId,
         reviewFilter: this.reviewFilter,
         ratingFilter: this.ratingFilter
       }).then(function (res) {
-        //   console.log(res.data);
-        _this.profiles = res.data.profiles;
-        _this.specs = res.data.specs;
-        //   this.specs = res.data.specs;
+        _this2.profiles = res.data.profiles;
       })["catch"](function (err) {
         console.log(err);
       }).then(function () {
-        _this.isLoading = false;
+        _this2.isLoading = false;
       });
       //   this.selectedSpecId = "";
     },
     // Step 5
     // In questa chiamata axios (post) mandiamo il nuovo data che abbiamo salvato
     // vai alla store di profile controller guest per step 6
+    getSponsoredWithSpecs: function getSponsoredWithSpecs() {
+      var _this3 = this;
+      this.isLoading = true;
+      axios.post("http://localhost:8000/api/profiles/sponsored", {
+        spec: this.selectedSpecId
+      }).then(function (res) {
+        _this3.sponsoredProfiles = res.data;
+      })["catch"](function (err) {
+        console.log(err);
+      }).then(function () {
+        _this3.isLoading = false;
+      });
+    },
     reviewsFilterTopDown: function reviewsFilterTopDown() {
       this.profiles.sort(function (a, b) {
         // sort prende gli oggetti a coppie e li paragona
@@ -2248,18 +2265,6 @@ __webpack_require__.r(__webpack_exports__);
       });
       var voteAverage = voteSum / parametro.length;
       return Math.round(voteAverage);
-    },
-    getSpecs: function getSpecs() {
-      var _this2 = this;
-      this.isLoading = true;
-      axios.get("http://localhost:8000/api/profiles").then(function (res) {
-        //   console.log(res.data);
-        _this2.specs = res.data;
-      })["catch"](function (err) {
-        console.log(err);
-      }).then(function () {
-        _this2.isLoading = false;
-      });
     }
   }
 });
@@ -2731,7 +2736,7 @@ var render = function render() {
       domProps: {
         value: spec.id
       }
-    }, [_vm._v("\n              " + _vm._s(spec.name) + "\n            ")]);
+    }, [_vm._v("\n                            " + _vm._s(spec.name) + "\n                        ")]);
   }), 0), _vm._v(" "), _c("router-link", {
     staticClass: "btn btn-primary mx-2",
     attrs: {
@@ -2742,7 +2747,49 @@ var render = function render() {
         }
       }
     }
-  }, [_vm._v("Search")])], 1)])])])]);
+  }, [_vm._v("Search")])], 1)])])]), _vm._v(" "), _vm._l(_vm.sponsoredProfiles, function (sponsored) {
+    return _c("div", {
+      key: sponsored.id,
+      staticClass: "card mt-3"
+    }, [_c("div", {
+      staticClass: "card-body"
+    }, [_c("div", {
+      staticClass: "row"
+    }, [_c("div", {
+      staticClass: "col-6 d-flex"
+    }, [!sponsored.image ? _c("div", {
+      staticClass: "col-5"
+    }, [_c("img", {
+      staticClass: "img-fluid",
+      attrs: {
+        src: __webpack_require__(/*! ../../../public/img/userDoctor.jpeg */ "./public/img/userDoctor.jpeg"),
+        alt: ""
+      }
+    })]) : _c("div", {
+      staticClass: "col-5"
+    }, [_c("img", {
+      staticClass: "img-fluid rounded-circle",
+      attrs: {
+        src: "storage/".concat(sponsored.image),
+        alt: ""
+      }
+    })])]), _vm._v(" "), _c("div", {
+      staticClass: "col-6"
+    }, [_c("h5", [_c("router-link", {
+      attrs: {
+        to: "/profile/".concat(sponsored.id)
+      }
+    }, [_vm._v("\n                            Dr. " + _vm._s(sponsored.user.name) + " " + _vm._s(sponsored.user.surname) + "\n                        ")])], 1), _vm._v(" "), _c("h5", [_vm._v(_vm._s(sponsored.reviews.length) + " recensioni")]), _vm._v(" "), _c("h5", [_vm._v("specializzazioni:\n                        "), _c("ul", _vm._l(sponsored.specs, function (spec) {
+      return _c("li", {
+        key: spec.id
+      }, [_vm._v("\n                                " + _vm._s(spec.name) + "\n                            ")]);
+    }), 0)]), _vm._v(" "), _c("h5", [_vm._v(_vm._s(sponsored.address) + "," + _vm._s(sponsored.city))]), _vm._v(" "), _c("h5", [_vm._v("Tu chiamami sul trap phone: " + _vm._s(sponsored.phone))]), _vm._v(" "), _c("router-link", {
+      staticClass: "btn btn-outline-primary",
+      attrs: {
+        to: "/profile/".concat(sponsored.id)
+      }
+    }, [_vm._v("\n                        Vedi medico\n                    ")])], 1)])])]);
+  })], 2);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -2805,7 +2852,53 @@ var render = function render() {
     on: {
       click: _vm.ratingFilterDownTop
     }
-  }, [_vm._v("\n                            Filtra per rating - +\n                        ")])]), _vm._v(" "), _vm._m(0)])])])]), _vm._v(" "), _vm.profiles.length <= 0 ? _c("div", {
+  }, [_vm._v("\n                            Filtra per rating - +\n                        ")])]), _vm._v(" "), _vm._m(0)])])])]), _vm._v(" "), _vm._l(_vm.sponsoredProfiles, function (sponsored) {
+    return _c("div", {
+      key: sponsored.id,
+      staticClass: "card mt-3"
+    }, [_c("div", {
+      staticClass: "card-body"
+    }, [_c("div", {
+      staticClass: "row"
+    }, [_c("div", {
+      staticClass: "col-6 d-flex"
+    }, [!sponsored.image ? _c("div", {
+      staticClass: "col-5"
+    }, [_c("img", {
+      staticClass: "img-fluid",
+      attrs: {
+        src: __webpack_require__(/*! ../../../public/img/userDoctor.jpeg */ "./public/img/userDoctor.jpeg"),
+        alt: ""
+      }
+    }), _vm._v(" "), _c("div", {
+      staticClass: "d-block text-warning"
+    }, [_vm._v("\n                            This is a sponsored profile\n                        ")])]) : _c("div", {
+      staticClass: "col-5"
+    }, [_c("img", {
+      staticClass: "img-fluid rounded-circle",
+      attrs: {
+        src: "storage/".concat(sponsored.image),
+        alt: ""
+      }
+    }), _vm._v(" "), _c("div", {
+      staticClass: "d-block text-warning"
+    }, [_vm._v("\n                            This is a sponsored profile\n                        ")])])]), _vm._v(" "), _c("div", {
+      staticClass: "col-6"
+    }, [_c("h5", [_c("router-link", {
+      attrs: {
+        to: "/profile/".concat(sponsored.id)
+      }
+    }, [_vm._v("\n                            Dr. " + _vm._s(sponsored.user.name) + " " + _vm._s(sponsored.user.surname) + "\n                        ")])], 1), _vm._v(" "), _c("h5", [_vm._v(_vm._s(sponsored.reviews.length) + " recensioni")]), _vm._v(" "), _c("h5", [_vm._v("specializzazioni:\n                        "), _c("ul", _vm._l(sponsored.specs, function (spec) {
+      return _c("li", {
+        key: spec.id
+      }, [_vm._v("\n                                " + _vm._s(spec.name) + "\n                            ")]);
+    }), 0)]), _vm._v(" "), _c("h5", [_vm._v(_vm._s(sponsored.address) + "," + _vm._s(sponsored.city))]), _vm._v(" "), _c("h5", [_vm._v("Tu chiamami sul trap phone: " + _vm._s(sponsored.phone))]), _vm._v(" "), _c("router-link", {
+      staticClass: "btn btn-outline-primary",
+      attrs: {
+        to: "/profile/".concat(sponsored.id)
+      }
+    }, [_vm._v("\n                        Vedi medico\n                    ")])], 1)])])]);
+  }), _vm._v(" "), _vm.profiles.length <= 0 ? _c("div", {
     staticClass: "card mt-3"
   }, [_c("div", {
     staticClass: "card-body"
@@ -2841,7 +2934,11 @@ var render = function render() {
       attrs: {
         to: "/profile/".concat(profile.id)
       }
-    }, [_vm._v("\n                            Dr. " + _vm._s(profile.user.name) + " " + _vm._s(profile.user.surname) + "\n                        ")])], 1), _vm._v(" "), _c("h5", [_vm._v(_vm._s(profile.reviews.length) + " recensioni")]), _vm._v(" "), _c("h5", [_vm._v("Voto medio " + _vm._s(_vm.getVoteAverage(profile.ratings)))]), _vm._v(" "), _c("h5", [_vm._v(_vm._s(profile.address) + "," + _vm._s(profile.city))]), _vm._v(" "), _c("h5", [_vm._v("Tu chiamami sul trap phone: " + _vm._s(profile.phone))]), _vm._v(" "), _c("router-link", {
+    }, [_vm._v("\n                            Dr. " + _vm._s(profile.user.name) + " " + _vm._s(profile.user.surname) + "\n                        ")])], 1), _vm._v(" "), _c("h5", [_vm._v("specializzazioni:\n                        "), _c("ul", _vm._l(profile.specs, function (spec) {
+      return _c("li", {
+        key: spec.id
+      }, [_vm._v("\n                                " + _vm._s(spec.name) + "\n                            ")]);
+    }), 0)]), _vm._v(" "), _c("h5", [_vm._v(_vm._s(profile.reviews.length) + " recensioni")]), _vm._v(" "), _c("h5", [_vm._v("Voto medio " + _vm._s(_vm.getVoteAverage(profile.ratings)))]), _vm._v(" "), _c("h5", [_vm._v(_vm._s(profile.address) + "," + _vm._s(profile.city))]), _vm._v(" "), _c("h5", [_vm._v("Tu chiamami sul trap phone: " + _vm._s(profile.phone))]), _vm._v(" "), _c("router-link", {
       staticClass: "btn btn-outline-primary",
       attrs: {
         to: "/profile/".concat(profile.id)
