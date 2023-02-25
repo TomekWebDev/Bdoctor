@@ -6,8 +6,7 @@
                     <h1>Questa è HomePage</h1>
 
                     <router-link class="btn btn-primary align-self-center" :to="{
-              name: 'search',
-              params: { specializations: specs },
+              name: 'search'
             }">Vai a ricerca avanzata</router-link>
                 </div>
             </div>

@@ -2129,7 +2129,6 @@ __webpack_require__.r(__webpack_exports__);
       sponsoredProfiles: [],
       specs: [],
       isLoading: false,
-      pagination: {},
       // Step 4
       // Associamo il dato passato nel router link a un nuovo data di vue.
       // $route è l'oggetto che arriva tramite router .params per entrare nell'oggetto parametro
@@ -2146,7 +2145,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     getSpecs: function getSpecs() {
       var _this = this;
-      axios.get("http://localhost:8000/api/profiles/specs").then(function (res) {
+      axios.get("/api/profiles/specs").then(function (res) {
         _this.specs = res.data;
       })["catch"](function (err) {
         console.log(err);
@@ -2156,18 +2155,16 @@ __webpack_require__.r(__webpack_exports__);
     },
     searchFilteredProfiles: function searchFilteredProfiles() {
       var _this2 = this;
-      axios.post("http://localhost:8000/api/profiles", {
+      axios.post("/api/profiles", {
         spec: this.selectedSpecId,
         reviewFilter: this.reviewFilter,
         ratingFilter: this.ratingFilter
       }).then(function (res) {
-        _this2.profiles = res.data.profiles;
+        console.log(res);
+        _this2.profiles = res.data;
       })["catch"](function (err) {
         console.log(err);
-      }).then(function () {
-        _this2.isLoading = false;
       });
-      //   this.selectedSpecId = "";
     },
     // Step 5
     // In questa chiamata axios (post) mandiamo il nuovo data che abbiamo salvato
@@ -2175,7 +2172,7 @@ __webpack_require__.r(__webpack_exports__);
     getSponsoredWithSpecs: function getSponsoredWithSpecs() {
       var _this3 = this;
       this.isLoading = true;
-      axios.post("http://localhost:8000/api/profiles/sponsored", {
+      axios.post("/api/profiles/sponsored", {
         spec: this.selectedSpecId
       }).then(function (res) {
         _this3.sponsoredProfiles = res.data;
@@ -2695,10 +2692,7 @@ var render = function render() {
     staticClass: "btn btn-primary align-self-center",
     attrs: {
       to: {
-        name: "search",
-        params: {
-          specializations: _vm.specs
-        }
+        name: "search"
       }
     }
   }, [_vm._v("Vai a ricerca avanzata")])], 1)]), _vm._v(" "), _c("div", {
@@ -2989,7 +2983,10 @@ var render = function render() {
       "aria-label": "Close"
     },
     on: {
-      click: _vm.searchProfilesSpecs
+      click: function click($event) {
+        _vm.searchFilteredProfiles();
+        _vm.getSponsoredWithSpecs();
+      }
     }
   }, [_vm._v("\n                    cambia specializzazione (nuova chiamata axios)\n                ")])])])])], 2);
 };
@@ -54640,8 +54637,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/Mangiagalli/Desktop/Progetto finale/Bdoctor/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/Mangiagalli/Desktop/Progetto finale/Bdoctor/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Applications/MAMP/htdocs/laravel/Bdoctor/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/laravel/Bdoctor/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

@@ -71,17 +71,18 @@ class ProfileControllerGuest extends Controller
             ->whereHas('specs', function ($query) use ($specId) {
                 $query->where('specs.id', $specId);
             })
-            ->whereHas('reviews', function ($query) use ($reviewFilter) {
-                $query->select('profile_id')
-                    ->groupBy('profile_id')
-                    ->havingRaw('COUNT(*) >= ?', [$reviewFilter]);
-            })
-            ->select('profiles.*', DB::raw('AVG(ratings.vote) as avg_rating'))
-            ->join('profile_rating', 'profiles.id', '=', 'profile_rating.profile_id')
-            ->join('ratings', 'profile_rating.rating_id', '=', 'ratings.id')
-            ->groupBy('profiles.id')
-            ->havingRaw('AVG(ratings.vote) >= ?', [$ratingFilter])
+            // ->whereHas('reviews', function ($query) use ($reviewFilter) {
+            //     $query->select('profile_id')
+            //         ->groupBy('profile_id')
+            //         ->havingRaw('COUNT(*) >= ?', [$reviewFilter]);
+            // })
+            // ->select('profiles.*', DB::raw('AVG(ratings.vote) as avg_rating'))
+            // ->join('profile_rating', 'profiles.id', '=', 'profile_rating.profile_id')
+            // ->join('ratings', 'profile_rating.rating_id', '=', 'ratings.id')
+            // ->groupBy('profiles.id')
+            // ->havingRaw('AVG(ratings.vote) >= ?', [$ratingFilter])
             ->get();
+
 
         return response()->json($profiles);
 
