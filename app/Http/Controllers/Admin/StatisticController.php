@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Message;
 use App\Models\Profile;
+use App\Models\Review;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -28,11 +29,17 @@ class StatisticController extends Controller
                 ->where('profile_id', $user_id)
                 ->groupBy('year', 'month')
                 ->get();
+        
+        $reviews = Review::select(DB::raw('YEAR(created_at) year, MONTH(created_at) month, count(*) as total'))
+                ->where('profile_id', $user_id)
+                ->groupBy('year', 'month')
+                ->get();
 
         $data = [
             'profile' => $profile,
             'user' => $user,
             'results' => $results,
+            'reviews' => $reviews,
         ];
 
 
