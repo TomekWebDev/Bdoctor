@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Message;
 use App\Models\Profile;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class StatisticController extends Controller
 {
@@ -15,9 +18,25 @@ class StatisticController extends Controller
      */
     public function index()
     {
-        $profile = Profile::with('messages', 'reviews')->get();
 
-        return view('admin.statistics.index', compact('profile'));
+        $profile = Profile::where('user_id', Auth::user()->id)->with('messages', 'reviews')->firstOrFail();
+        $user = Auth::user();
+
+        $user_id = Auth::user()->id;
+                
+        $results = Message::select(DB::raw('YEAR(created_at) year, MONTH(created_at) month, count(*) as total'))
+                ->where('profile_id', $user_id)
+                ->groupBy('year', 'month')
+                ->get();
+
+        $data = [
+            'profile' => $profile,
+            'user' => $user,
+            'results' => $results,
+        ];
+
+
+        return view('admin.statistics.index', $data);
     }
 
     /**
