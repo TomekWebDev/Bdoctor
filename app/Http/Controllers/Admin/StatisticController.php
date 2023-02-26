@@ -37,9 +37,9 @@ class StatisticController extends Controller
                 ->groupBy('year', 'month')
                 ->get();
         
-        $votes = ProfileRating::select(DB::raw('YEAR(created_at) year, MONTH(created_at) month, count(*) as total'))
+                $votes = ProfileRating::select(DB::raw('YEAR(created_at) year, MONTH(created_at) month, rating_id, COUNT(*) as total'))
                 ->where('profile_id', $user_id)
-                ->groupBy('year', 'month')
+                ->groupBy('year', 'month', 'rating_id')
                 ->get();
 
         $data = [
