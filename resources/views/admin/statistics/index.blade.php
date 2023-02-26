@@ -10,18 +10,18 @@
         </div>
 
         <div class="card mt-3">
-          <div class="card-body">
-            {{-- Passando gli oggetti json da controller --}}
-            <div id="results" data-array="{{ json_encode($results) }}"></div>
-            <div id="review" data-array="{{ json_encode($reviews) }}"></div>
-          </div>
-      </div>
-
-        <div class="card mt-3">
             <div class="card-body">
+                <h2 class="py-3">Messaggi e Recensioni ricevute</h2>
                 <canvas id="myChart"></canvas>
             </div>
         </div>
+
+        <div class="card mt-3">
+          <div class="card-body">
+              <h2 class="py-3">Ratings ricevuto</h2>
+              <canvas id="myRating"></canvas>
+          </div>
+      </div>
     </div>
 
 @endsection
@@ -59,10 +59,10 @@ let novembreR = 0;
 let dicembreR = 0;
 
 // associo alla variabile messageData l'oggetto passato dal controller Statistic contentente mese anno e totale di messaggi
-let messageData = JSON.parse(document.getElementById('results').getAttribute('data-array'));
+let messageData = @json($results);
 
 // associo alla variabile reviewData l'oggetto passato dal controller Statistic contentente mese anno e totale di reviews
-let reviewData = JSON.parse(document.getElementById('review').getAttribute('data-array'));
+let reviewData = @json($reviews)
 
 console.log(reviewData);
 
@@ -180,6 +180,58 @@ new Chart("myChart", {
     legend: {display: false},
     scales: {
       yAxes: [{ticks: {min: 0, max:16}}],
+    }
+  }
+});
+
+// Rating grafico
+
+let yValues = [
+  [1,2,3,4,5],
+  [2,4,1,4,5],
+  [1,2,3,4,5],
+  [2,4,1,4,5],
+  [1,2,3,4,0],
+  [1,2,3,4,5],
+  [1,2,3,4,5],
+  [2,4,1,4,0],
+  [1,2,3,4,5],
+  [2,4,1,4,5],
+  [1,2,3,4,0],
+  [2,4,1,4,5],
+  
+];
+let barColors = ["#ffce54", "#a0d468", "#4fc1e9", "#ac92ec", "#ed5565"];
+
+let datasets = [];
+for (let i = 0; i < 5; i++) {
+  datasets.push({
+    label: "Vote " + (i+1),
+    backgroundColor: barColors[i],
+    data: yValues.map(function(item) { return item[i]; })
+  });
+}
+
+new Chart("myRating", {
+  type: "bar",
+  data: {
+    labels: xValues,
+    datasets: datasets
+  },
+  options: {
+    scales: {
+      yAxes: [{
+        scaleLabel: {
+          display: true,
+          labelString: "Total votes"
+        }
+      }],
+      xAxes: [{
+        scaleLabel: {
+          display: true,
+          labelString: "Month"
+        }
+      }]
     }
   }
 });
