@@ -21,10 +21,14 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::namespace('Api')
     ->prefix('/profiles')
     ->group(function () {
-        Route::get('/', 'ProfileControllerGuest@index');
-        Route::get('/sponsored', 'ProfileControllerGuest@indexSponsored');
+        //Homepage methods
+        Route::get('/specs', 'ProfileControllerGuest@getSpecs');
+        Route::get('/sponsored', 'ProfileControllerGuest@getAllSponsored');
+        // Search page methods
         Route::get('/{id}', 'ProfileControllerGuest@show');
-        Route::post('/', 'ProfileControllerGuest@store');
+        //post method
+        Route::post('/', 'ProfileControllerGuest@searchFilteredProfiles');
+        Route::post('/sponsored', 'ProfileControllerGuest@getSponsoredWithSpecs');
     });
 
 Route::namespace('Api')
