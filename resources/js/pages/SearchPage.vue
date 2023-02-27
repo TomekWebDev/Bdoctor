@@ -152,7 +152,7 @@
                     </select>
 
                     <button class="btn btn-primary" data-bs-dismiss="offcanvas" aria-label="Close"
-                        v-on:click="searchFilteredProfiles(); getSponsoredWithSpecs();">
+                        v-on:click="searchProfilesBySpec(); getSponsoredWithSpecs();">
                         cambia specializzazione (nuova chiamata axios)
                     </button>
                 </div>
@@ -184,7 +184,7 @@ export default {
 
     mounted() {
         this.getSpecs();
-        this.searchFilteredProfiles();
+        this.searchProfilesBySpec();
         this.getSponsoredWithSpecs();
     },
 
@@ -203,7 +203,7 @@ export default {
                 });
         },
 
-        searchFilteredProfiles() {
+        searchProfilesBySpec() {
             axios
                 .post("/api/profiles", {
                     spec: this.selectedSpecId,
