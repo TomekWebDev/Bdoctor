@@ -62,9 +62,7 @@ let dicembreR = 0;
 let messageData = @json($results);
 
 // associo alla variabile reviewData l'oggetto passato dal controller Statistic contentente mese anno e totale di reviews
-let reviewData = @json($reviews)
-
-console.log(reviewData);
+let reviewData = @json($reviews);
 
 // Associamo ai mesi il numero di messaggi
 Object.keys(messageData).forEach(function(key, index) {
@@ -186,37 +184,80 @@ new Chart("myChart", {
 
 // Rating grafico
 
-let yValues = [
-  [1,2,3,4,5],
-  [2,4,1,4,5],
-  [1,2,3,4,5],
-  [2,4,1,4,5],
-  [1,2,3,4,0],
-  [1,2,3,4,5],
-  [1,2,3,4,5],
-  [2,4,1,4,0],
-  [1,2,3,4,5],
-  [2,4,1,4,5],
-  [1,2,3,4,0],
-  [2,4,1,4,5],
-  
-];
+let votes = @json($votes);
+console.log(votes);
+
+//Variabili mesi votes
+let gennaioV = 0;
+let febbraioV = 0;
+let marzoV = 0;
+let aprileV = 0;
+let maggioV = 0;
+let giugnoV = 0;
+let luglioV = 0;
+let agostoV = 0;
+let settembreV = 0;
+let ottobreV = 0;
+let novembreV = 0;
+let dicembreV = 0;
+
+// Associamo ai mesi il numero di voti
+Object.keys(votes).forEach(function(key, index) {
+
+switch (votes[index].month) {
+case 1:
+  gennaioV = votes[index].total;
+  break;
+case 2:
+  febbraioV = votes[index].total;
+  break;
+case 3:
+  marzoV = votes[index].total;
+  break;
+case 4:
+  aprileV = votes[index].total;
+  break;
+case 5:
+  maggioV = votes[index].total;
+  break;
+case 6:
+  giugnoV = votes[index].total;
+  break;
+case 7:
+  luglioV = votes[index].total;
+  break;
+case 8:
+  agostoV = votes[index].total;
+  break;
+case 9:
+  settembreV = votes[index].total;
+  break;
+case 10:
+  ottobreV = votes[index].total;
+  break;
+case 11:
+  novembreV = votes[index].total;
+  break;
+case 12:
+  dicembreV = votes[index].total;
+  break;
+}
+
+});
+
+let votesMonth = [gennaioV,febbraioV,marzoV,aprileV,maggioV,giugnoV,luglioV,agostoV,settembreV,ottobreV,novembreV,dicembreV];
 let barColors = ["#ffce54", "#a0d468", "#4fc1e9", "#ac92ec", "#ed5565"];
 
-let datasets = [];
-for (let i = 0; i < 5; i++) {
-  datasets.push({
-    label: "Vote " + (i+1),
-    backgroundColor: barColors[i],
-    data: yValues.map(function(item) { return item[i]; })
-  });
-}
 
 new Chart("myRating", {
   type: "bar",
   data: {
     labels: xValues,
-    datasets: datasets
+    datasets: [{
+      label: 'Vote',
+      backgroundColor: '#ffce54',
+      data: votesMonth
+  }]
   },
   options: {
     scales: {

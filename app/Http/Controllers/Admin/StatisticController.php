@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Message;
 use App\Models\Profile;
+use App\Models\ProfileRating;
+use App\Models\Rating;
 use App\Models\Review;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -34,12 +36,18 @@ class StatisticController extends Controller
                 ->where('profile_id', $user_id)
                 ->groupBy('year', 'month')
                 ->get();
+        
+                $votes = ProfileRating::select(DB::raw('YEAR(created_at) year, MONTH(created_at) month, rating_id, COUNT(*) as total'))
+                ->where('profile_id', $user_id)
+                ->groupBy('year', 'month', 'rating_id')
+                ->get();
 
         $data = [
             'profile' => $profile,
             'user' => $user,
             'results' => $results,
             'reviews' => $reviews,
+            'votes' => $votes,
         ];
 
 
