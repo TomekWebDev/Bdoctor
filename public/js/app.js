@@ -2139,7 +2139,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     this.getSpecs();
-    this.searchFilteredProfiles();
+    this.searchProfilesBySpec();
     this.getSponsoredWithSpecs();
   },
   methods: {
@@ -2153,7 +2153,7 @@ __webpack_require__.r(__webpack_exports__);
         _this.isLoading = false;
       });
     },
-    searchFilteredProfiles: function searchFilteredProfiles() {
+    searchProfilesBySpec: function searchProfilesBySpec() {
       var _this2 = this;
       axios.post("/api/profiles", {
         spec: this.selectedSpecId,
@@ -2984,7 +2984,7 @@ var render = function render() {
     },
     on: {
       click: function click($event) {
-        _vm.searchFilteredProfiles();
+        _vm.searchProfilesBySpec();
         _vm.getSponsoredWithSpecs();
       }
     }

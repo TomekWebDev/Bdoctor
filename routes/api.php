@@ -27,7 +27,7 @@ Route::namespace('Api')
         // Search page methods
         Route::get('/{id}', 'ProfileControllerGuest@show');
         //post method
-        Route::post('/', 'ProfileControllerGuest@searchFilteredProfiles');
+        Route::post('/', 'ProfileControllerGuest@searchProfilesBySpec');
         Route::post('/sponsored', 'ProfileControllerGuest@getSponsoredWithSpecs');
     });
 

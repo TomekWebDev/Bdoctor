@@ -46,7 +46,7 @@ class ProfileControllerGuest extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function searchFilteredProfiles(Request $request)
+    public function searchProfilesBySpec(Request $request)
     {
 
         // Step 6
