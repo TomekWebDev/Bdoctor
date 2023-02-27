@@ -33,7 +33,8 @@ Route::middleware('auth')
         Route::resource('/messages', MessageController::class);
         Route::resource('/reviews', ReviewController::class);
         Route::resource('/ratings', RatingController::class);
-        Route::resource('/statistics', StatisticController::class);
+        Route::get('/statistics', 'StatisticController@index')->name('statistics.index');
+        Route::get('/statistics/{selectedMonth}', 'StatisticController@setMonth')->name('statistics.setMonth');
 
         // Rotte per sponsor
         Route::get('/sponsors', [SponsorController::class, 'index'])->name('sponsors.index');

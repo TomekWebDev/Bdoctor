@@ -8,6 +8,7 @@ use App\Models\Profile;
 use App\Models\ProfileRating;
 use App\Models\Rating;
 use App\Models\Review;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -26,108 +27,87 @@ class StatisticController extends Controller
         $user = Auth::user();
 
         $user_id = Auth::user()->id;
-                
-        $results = Message::select(DB::raw('YEAR(created_at) year, MONTH(created_at) month, count(*) as total'))
-                ->where('profile_id', $user_id)
-                ->groupBy('year', 'month')
-                ->get();
-        
-        $reviews = Review::select(DB::raw('YEAR(created_at) year, MONTH(created_at) month, count(*) as total'))
-                ->where('profile_id', $user_id)
-                ->groupBy('year', 'month')
-                ->get();
-        
-        $votes = ProfileRating::select(DB::raw('YEAR(created_at) year, MONTH(created_at) month, rating_id, COUNT(*) as total'))
-                ->where('profile_id', $user_id)
-                ->groupBy('year', 'month', 'rating_id')
-                ->get();
-        
-        // $month = 2; // Numero del mese di cui si vuole recuperare la somma dei voti (2 = febbraio)
 
-        // $votes = Profile::where('user_id', $user_id)
-        //     ->whereMonth('created_at', $month)
-        //     ->withCount([
-        //         'ratings as ratings_sum' => function ($query) {
-        //             $query->selectRaw('coalesce(sum(vote), 0)');
-        //         }
-        //     ])
-        //     ->first();
+        $results = Message::select(DB::raw('YEAR(created_at) year, MONTH(created_at) month, count(*) as total'))
+            ->where('profile_id', $user_id)
+            ->groupBy('year', 'month')
+            ->get();
+
+        $reviews = Review::select(DB::raw('YEAR(created_at) year, MONTH(created_at) month, count(*) as total'))
+            ->where('profile_id', $user_id)
+            ->groupBy('year', 'month')
+            ->get();
+
+
+
+        $year = Carbon::now()->year;
+        $month = Carbon::now()->month;
+
+        $voti = DB::table('profiles')
+            ->join('profile_rating', 'profiles.id', '=', 'profile_rating.profile_id')
+            ->join('ratings', 'profile_rating.rating_id', '=', 'ratings.id')
+            ->selectRaw('profiles.id, YEAR(profile_rating.created_at) as year, MONTH(profile_rating.created_at) as month, ratings.vote, COUNT(*) as count')
+            ->where('profiles.user_id', '=', auth()->user()->id)
+            ->whereYear('profile_rating.created_at', '=', $year)
+            ->whereMonth('profile_rating.created_at', '=', $month)
+            ->groupBy('profiles.id', 'year', 'month', 'ratings.vote')
+            ->get();
+
+
 
         $data = [
             'profile' => $profile,
             'user' => $user,
             'results' => $results,
             'reviews' => $reviews,
-            'votes' => $votes,
+            // 'votes' => $votes,
+            'voti' => $voti
         ];
 
 
         return view('admin.statistics.index', $data);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function setMonth($selectedMonth)
     {
-        //
-    }
+        $profile = Profile::where('user_id', Auth::user()->id)->with('messages', 'reviews')->firstOrFail();
+        $user = Auth::user();
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+        $user_id = Auth::user()->id;
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+        $results = Message::select(DB::raw('YEAR(created_at) year, MONTH(created_at) month, count(*) as total'))
+            ->where('profile_id', $user_id)
+            ->groupBy('year', 'month')
+            ->get();
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+        $reviews = Review::select(DB::raw('YEAR(created_at) year, MONTH(created_at) month, count(*) as total'))
+            ->where('profile_id', $user_id)
+            ->groupBy('year', 'month')
+            ->get();
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        $month = $selectedMonth;
+        $year = 2023;
+
+
+        $voti = DB::table('profiles')
+            ->join('profile_rating', 'profiles.id', '=', 'profile_rating.profile_id')
+            ->join('ratings', 'profile_rating.rating_id', '=', 'ratings.id')
+            ->selectRaw('profiles.id, YEAR(profile_rating.created_at) as year, MONTH(profile_rating.created_at) as month, ratings.vote, COUNT(*) as count')
+            ->where('profiles.user_id', '=', auth()->user()->id)
+            ->whereYear('profile_rating.created_at', '=', $year)
+            ->whereMonth('profile_rating.created_at', '=', $month)
+            ->groupBy('profiles.id', 'year', 'month', 'ratings.vote')
+            ->get();
+
+        $data = [
+            'profile' => $profile,
+            'user' => $user,
+            'results' => $results,
+            'reviews' => $reviews,
+            'voti' => $voti
+        ];
+
+        return view('admin.statistics.index', $data);
     }
 }
