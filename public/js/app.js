@@ -2351,7 +2351,13 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("header", [_c("nav", {
-    staticClass: "navbar navbar-expand-lg bg-body-tertiary"
+    staticClass: "navbar navbar-expand-lg",
+    staticStyle: {
+      "background-color": "#076DBB"
+    },
+    attrs: {
+      "data-bs-theme": "dark"
+    }
   }, [_c("div", {
     staticClass: "container-fluid"
   }, [_c("router-link", {
@@ -2805,16 +2811,16 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", {
-    staticClass: "container"
-  }, [_c("nav", {
+  return _c("div", [_c("nav", {
     staticClass: "navbar navbar-expand-lg bg-body-tertiary"
   }, [_c("div", {
     staticClass: "container-fluid"
   }, [_c("div", {
-    staticClass: "collapse navbar-collapse d-flex justify-content-center",
+    staticClass: "navbar-brand"
+  }, [_vm._v("\n                Ricerca Avanzata\n            ")]), _vm._v(" "), _vm._m(0), _vm._v(" "), _c("div", {
+    staticClass: "collapse navbar-collapse",
     attrs: {
-      id: "navbarNav"
+      id: "navbarNav2"
     }
   }, [_c("ul", {
     staticClass: "navbar-nav"
@@ -2846,7 +2852,9 @@ var render = function render() {
     on: {
       click: _vm.ratingFilterDownTop
     }
-  }, [_vm._v("\n                            Filtra per rating - +\n                        ")])]), _vm._v(" "), _vm._m(0)])])])]), _vm._v(" "), _vm._l(_vm.sponsoredProfiles, function (sponsored) {
+  }, [_vm._v("\n                            Filtra per rating - +\n                        ")])]), _vm._v(" "), _vm._m(1)])])])]), _vm._v(" "), _c("div", {
+    staticClass: "container"
+  }, [_vm._l(_vm.sponsoredProfiles, function (sponsored) {
     return _c("div", {
       key: sponsored.id,
       staticClass: "card mt-3"
@@ -2855,38 +2863,35 @@ var render = function render() {
     }, [_c("div", {
       staticClass: "row"
     }, [_c("div", {
-      staticClass: "col-6 d-flex"
+      staticClass: "col-lg-6 col-sm-12 d-flex align-items-center"
     }, [!sponsored.image ? _c("div", {
       staticClass: "col-5"
     }, [_c("img", {
-      staticClass: "img-fluid",
+      staticClass: "img-fluid rounded-circle border border-5 border-warning",
       attrs: {
         src: __webpack_require__(/*! ../../../public/img/userDoctor.jpeg */ "./public/img/userDoctor.jpeg"),
         alt: ""
       }
     }), _vm._v(" "), _c("div", {
-      staticClass: "d-block text-warning"
-    }, [_vm._v("\n                            This is a sponsored profile\n                        ")])]) : _c("div", {
-      staticClass: "col-5"
+      staticClass: "d-block text-warning text-center"
+    }, [_vm._v("\n                            Sponsorizzato\n                        ")])]) : _c("div", {
+      staticClass: "col-lg-6 col-sm-12 d-flex align-items-center"
     }, [_c("img", {
-      staticClass: "img-fluid rounded-circle",
+      staticClass: "img-fluid rounded-circle border border-5 border-warning",
       attrs: {
         src: "storage/".concat(sponsored.image),
         alt: ""
       }
     }), _vm._v(" "), _c("div", {
-      staticClass: "d-block text-warning"
-    }, [_vm._v("\n                            This is a sponsored profile\n                        ")])])]), _vm._v(" "), _c("div", {
-      staticClass: "col-6"
-    }, [_c("h5", [_c("router-link", {
-      attrs: {
-        to: "/profile/".concat(sponsored.id)
-      }
-    }, [_vm._v("\n                            Dr. " + _vm._s(sponsored.user.name) + " " + _vm._s(sponsored.user.surname) + "\n                        ")])], 1), _vm._v(" "), _c("h5", [_vm._v(_vm._s(sponsored.reviews.length) + " recensioni")]), _vm._v(" "), _c("h5", [_vm._v("specializzazioni:\n                        "), _c("ul", _vm._l(sponsored.specs, function (spec) {
-      return _c("li", {
-        key: spec.id
-      }, [_vm._v("\n                                " + _vm._s(spec.name) + "\n                            ")]);
-    }), 0)]), _vm._v(" "), _c("h5", [_vm._v(_vm._s(sponsored.address) + "," + _vm._s(sponsored.city))]), _vm._v(" "), _c("h5", [_vm._v("Tu chiamami sul trap phone: " + _vm._s(sponsored.phone))]), _vm._v(" "), _c("router-link", {
+      staticClass: "d-block text-warning text-center"
+    }, [_vm._v("\n                            Sponsorizzato\n                        ")])]), _vm._v(" "), _c("div", [_c("h4", [_vm._v("\n                            Dr. " + _vm._s(sponsored.user.name) + " " + _vm._s(sponsored.user.surname) + "\n                        ")]), _vm._v(" "), _vm._l(sponsored.specs, function (spec) {
+      return _c("small", {
+        key: spec.id,
+        staticClass: "text-muted"
+      }, [_vm._v("\n                            " + _vm._s(spec.name) + "\n                        ")]);
+    })], 2)]), _vm._v(" "), _c("div", {
+      staticClass: "col-lg-6 col-sm-12 d-flex align-items-center justify-content-around"
+    }, [_c("div", [_c("div", [_vm._v(_vm._s(sponsored.reviews.length) + " recensioni")]), _vm._v(" "), _c("div", [_vm._v("Voto medio " + _vm._s(_vm.getVoteAverage(sponsored.ratings)))]), _vm._v(" "), _c("div", [_vm._v(_vm._s(sponsored.address) + "," + _vm._s(sponsored.city))]), _vm._v(" "), sponsored.phone ? _c("div", [_vm._v("Telefono:" + _vm._s(sponsored.phone))]) : _vm._e()]), _vm._v(" "), _c("router-link", {
       staticClass: "btn btn-outline-primary",
       attrs: {
         to: "/profile/".concat(sponsored.id)
@@ -2929,20 +2934,20 @@ var render = function render() {
       }, [_vm._v("\n                            " + _vm._s(spec.name) + "\n                        ")]);
     })], 2)]), _vm._v(" "), _c("div", {
       staticClass: "col-lg-6 col-sm-12 d-flex align-items-center justify-content-around"
-    }, [_c("div", [_c("div", [_vm._v(_vm._s(profile.reviews.length) + " recensioni")]), _vm._v(" "), _c("div", [_vm._v("Voto medio " + _vm._s(_vm.getVoteAverage(profile.ratings)))]), _vm._v(" "), _c("div", [_vm._v(_vm._s(profile.address) + "," + _vm._s(profile.city))]), _vm._v(" "), _c("div", [_vm._v("Telefono:" + _vm._s(profile.phone))])]), _vm._v(" "), _c("router-link", {
+    }, [_c("div", [_c("div", [_vm._v(_vm._s(profile.reviews.length) + " recensioni")]), _vm._v(" "), _c("div", [_vm._v("Voto medio " + _vm._s(_vm.getVoteAverage(profile.ratings)))]), _vm._v(" "), _c("div", [_vm._v(_vm._s(profile.address) + "," + _vm._s(profile.city))]), _vm._v(" "), profile.phone ? _c("div", [_vm._v("Telefono:" + _vm._s(profile.phone))]) : _vm._e()]), _vm._v(" "), _c("router-link", {
       staticClass: "btn btn-outline-primary",
       attrs: {
         to: "/profile/".concat(profile.id)
       }
     }, [_vm._v("\n                        Vedi medico\n                    ")])], 1)])])]);
-  }), _vm._v(" "), _c("div", {
+  })], 2), _vm._v(" "), _c("div", {
     staticClass: "offcanvas offcanvas-top",
     attrs: {
       tabindex: "-1",
       id: "offcanvasExample",
       "aria-labelledby": "offcanvasExampleLabel"
     }
-  }, [_vm._m(1), _vm._v(" "), _c("div", {
+  }, [_vm._m(2), _vm._v(" "), _c("div", {
     staticClass: "offcanvas-body"
   }, [_c("div", [_c("select", {
     directives: [{
@@ -2985,9 +2990,25 @@ var render = function render() {
         _vm.getSponsoredWithSpecs();
       }
     }
-  }, [_vm._v("\n                    cambia specializzazione (nuova chiamata axios)\n                ")])])])])], 2);
+  }, [_vm._v("\n                    cambia specializzazione (nuova chiamata axios)\n                ")])])])])]);
 };
 var staticRenderFns = [function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("button", {
+    staticClass: "navbar-toggler",
+    attrs: {
+      type: "button",
+      "data-bs-toggle": "collapse",
+      "data-bs-target": "#navbarNav2",
+      "aria-controls": "navbarNav",
+      "aria-expanded": "false",
+      "aria-label": "Toggle navigation"
+    }
+  }, [_c("span", {
+    staticClass: "navbar-toggler-icon"
+  })]);
+}, function () {
   var _vm = this,
     _c = _vm._self._c;
   return _c("li", {

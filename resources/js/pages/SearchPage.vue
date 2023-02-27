@@ -1,9 +1,19 @@
 <template>
-    <div class="container">
+    <div>
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
-                <div class="collapse navbar-collapse d-flex justify-content-center" id="navbarNav">
-                    <ul class="navbar-nav">
+
+                <div class="navbar-brand">
+                    Ricerca Avanzata
+                </div>
+                
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav2"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav2">
+
+                        <ul class="navbar-nav">
                         <li class="nav-item mx-1">
                             <button class="btn btn-outline-primary" v-on:click="reviewsFilterTopDown">
                                 Filtra per recensioni + -
@@ -31,45 +41,47 @@
                             </button>
                         </li>
                     </ul>
+                    
                 </div>
             </div>
         </nav>
 
         <!-- sposnorizzati -->
-
+        <div class="container">
         <div v-for="sponsored in sponsoredProfiles" :key="sponsored.id" class="card mt-3">
             <div class="card-body">
                 <div class="row">
-                    <div class="col-6 d-flex">
+                    <div class="col-lg-6 col-sm-12 d-flex align-items-center">
                         <div v-if="!sponsored.image" class="col-5">
-                            <img class="img-fluid" src="../../../public/img/userDoctor.jpeg" alt="" />
-                            <div class="d-block text-warning">
-                                This is a sponsored profile
+                            <img class="img-fluid rounded-circle border border-5 border-warning" src="../../../public/img/userDoctor.jpeg" alt="" />
+                            <div class="d-block text-warning text-center">
+                                Sponsorizzato
                             </div>
                         </div>
-                        <div v-else class="col-5">
-                            <img class="img-fluid rounded-circle" :src="`storage/${sponsored.image}`" alt="" />
-                            <div class="d-block text-warning">
-                                This is a sponsored profile
+                        <div v-else class="col-lg-6 col-sm-12 d-flex align-items-center">
+                            <img class="img-fluid rounded-circle border border-5 border-warning" :src="`storage/${sponsored.image}`" alt="" />
+                            <div class="d-block text-warning text-center">
+                                Sponsorizzato
                             </div>
+                        </div>
+                        <div>    
+                            <h4>
+                                Dr. {{ sponsored.user.name }} {{ sponsored.user.surname }}
+                            </h4>
+
+                            <small v-for="spec in sponsored.specs" :key="spec.id" class="text-muted">
+                                {{ spec.name }}
+                            </small>
                         </div>
                     </div>
-                    <div class="col-6">
-                        <h5>
-                            <router-link :to="`/profile/${sponsored.id}`">
-                                Dr. {{ sponsored.user.name }} {{ sponsored.user.surname }}
-                            </router-link>
-                        </h5>
-                        <h5>{{ sponsored.reviews.length }} recensioni</h5>
-                        <h5>specializzazioni:
-                            <ul>
-                                <li v-for="spec in sponsored.specs" :key="spec.id">
-                                    {{ spec.name }}
-                                </li>
-                            </ul>
-                        </h5>
-                        <h5>{{ sponsored.address }},{{ sponsored.city }}</h5>
-                        <h5>Tu chiamami sul trap phone: {{ sponsored.phone }}</h5>
+                    <div class="col-lg-6 col-sm-12 d-flex align-items-center justify-content-around">
+                        <div>
+                            <div>{{ sponsored.reviews.length }} recensioni</div>
+                            <div>Voto medio {{ getVoteAverage(sponsored.ratings) }}</div>
+                            <div>{{ sponsored.address }},{{ sponsored.city }}</div>
+                            <div v-if="sponsored.phone">Telefono:{{ sponsored.phone }}</div>
+                        </div>
+                        
                         <router-link class="btn btn-outline-primary" :to="`/profile/${sponsored.id}`">
                             Vedi medico
                         </router-link>
@@ -79,7 +91,6 @@
         </div>
 
         <!-- end sponsorizzati -->
-
 
         <!-- Se non ci sono specialisti -->
         <div class="card mt-3" v-if="profiles.length <= 0">
@@ -114,7 +125,7 @@
                             <div>{{ profile.reviews.length }} recensioni</div>
                             <div>Voto medio {{ getVoteAverage(profile.ratings) }}</div>
                             <div>{{ profile.address }},{{ profile.city }}</div>
-                            <div>Telefono:{{ profile.phone }}</div>
+                            <div v-if="profile.phone">Telefono:{{ profile.phone }}</div>
                         </div>
                         
                         <router-link class="btn btn-outline-primary" :to="`/profile/${profile.id}`">
@@ -124,6 +135,7 @@
                 </div>
             </div>
         </div>
+    </div>
 
         <!-- <ul v-else v-for="profile in profiles" :key="profile.id">
       <li>Profile id: {{ profile.id }}</li>
