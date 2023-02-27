@@ -187,61 +187,71 @@ new Chart("myChart", {
 let votes = @json($votes);
 console.log(votes);
 
-//Variabili mesi votes
-let gennaioV = 0;
-let febbraioV = 0;
-let marzoV = 0;
-let aprileV = 0;
-let maggioV = 0;
-let giugnoV = 0;
-let luglioV = 0;
-let agostoV = 0;
-let settembreV = 0;
-let ottobreV = 0;
-let novembreV = 0;
-let dicembreV = 0;
+// Variabili mesi votes
+let gennaioV = [];
+let febbraioV = [];
+let marzoV = [];
+let aprileV = [];
+let maggioV = [];
+let giugnoV = [];
+let luglioV = [];
+let agostoV = [];
+let settembreV = [];
+let ottobreV = [];
+let novembreV = [];
+let dicembreV = [];
+
+let votesZero = 0;
+let votesOne = 0;
+let votesTwo = 0;
+let votesThree = 0;
+let votesFour = 0;
+let votesFive = 0;
 
 // Associamo ai mesi il numero di voti
 Object.keys(votes).forEach(function(key, index) {
 
 switch (votes[index].month) {
 case 1:
-  gennaioV = votes[index].total;
+  gennaioV.push(votes[index]);
   break;
 case 2:
-  febbraioV = votes[index].total;
+  febbraioV.push(votes[index]);
   break;
 case 3:
-  marzoV = votes[index].total;
+  marzoV.push(votes[index]);
   break;
 case 4:
-  aprileV = votes[index].total;
+  aprileV.push(votes[index]);
   break;
 case 5:
-  maggioV = votes[index].total;
+  maggioV.push(votes[index]);
   break;
 case 6:
-  giugnoV = votes[index].total;
+  giugnoV.push(votes[index]);
   break;
 case 7:
-  luglioV = votes[index].total;
+  luglioV.push(votes[index]);
   break;
 case 8:
-  agostoV = votes[index].total;
+  agostoV.push(votes[index]);
   break;
 case 9:
-  settembreV = votes[index].total;
+  settembreV.push(votes[index]);
   break;
 case 10:
-  ottobreV = votes[index].total;
+  ottobreV.push(votes[index]);
   break;
 case 11:
-  novembreV = votes[index].total;
+  novembreV.push(votes[index]);
   break;
 case 12:
-  dicembreV = votes[index].total;
+  dicembreV.push(votes[index]);
   break;
+
 }
+console.log(gennaioV)
+console.log(febbraioV)
 
 });
 
@@ -255,7 +265,7 @@ new Chart("myRating", {
     labels: xValues,
     datasets: [{
       label: 'Vote',
-      backgroundColor: '#ffce54',
+      backgroundColor: barColors,
       data: votesMonth
   }]
   },
@@ -276,5 +286,7 @@ new Chart("myRating", {
     }
   }
 });
+
+
 </script>
 @endpush
