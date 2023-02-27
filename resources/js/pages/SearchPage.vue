@@ -91,31 +91,32 @@
         <div v-else v-for="profile in profiles" :key="profile.id" class="card mt-3">
             <div class="card-body">
                 <div class="row">
-                    <div class="col-6 d-flex">
+                    <div class="col-lg-6 col-sm-12 d-flex align-items-center">
                         <div v-if="!profile.image" class="col-5">
-                            <img class="img-fluid" src="../../../public/img/userDoctor.jpeg" alt="" />
+                            <img class="img-fluid rounded-circle" src="../../../public/img/userDoctor.jpeg" alt="" />
                         </div>
                         <div v-else class="col-5">
                             <img class="img-fluid rounded-circle" :src="`storage/${profile.image}`" alt="" />
                         </div>
-                    </div>
-                    <div class="col-6">
-                        <h5>
-                            <router-link :to="`/profile/${profile.id}`">
+                        <div>    
+                            <h4>
                                 Dr. {{ profile.user.name }} {{ profile.user.surname }}
-                            </router-link>
-                        </h5>
-                        <h5>specializzazioni:
-                            <ul>
-                                <li v-for="spec in profile.specs" :key="spec.id">
-                                    {{ spec.name }}
-                                </li>
-                            </ul>
-                        </h5>
-                        <h5>{{ profile.reviews.length }} recensioni</h5>
-                        <h5>Voto medio {{ getVoteAverage(profile.ratings) }}</h5>
-                        <h5>{{ profile.address }},{{ profile.city }}</h5>
-                        <h5>Tu chiamami sul trap phone: {{ profile.phone }}</h5>
+                            </h4>
+
+                            <small v-for="spec in profile.specs" :key="spec.id" class="text-muted">
+                                {{ spec.name }}
+                            </small>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-12 d-flex align-items-center justify-content-around">
+                        
+                        <div>
+                            <div>{{ profile.reviews.length }} recensioni</div>
+                            <div>Voto medio {{ getVoteAverage(profile.ratings) }}</div>
+                            <div>{{ profile.address }},{{ profile.city }}</div>
+                            <div>Telefono:{{ profile.phone }}</div>
+                        </div>
+                        
                         <router-link class="btn btn-outline-primary" :to="`/profile/${profile.id}`">
                             Vedi medico
                         </router-link>
