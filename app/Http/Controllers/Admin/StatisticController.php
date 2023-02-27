@@ -37,10 +37,21 @@ class StatisticController extends Controller
                 ->groupBy('year', 'month')
                 ->get();
         
-                $votes = ProfileRating::select(DB::raw('YEAR(created_at) year, MONTH(created_at) month, rating_id, COUNT(*) as total'))
+        $votes = ProfileRating::select(DB::raw('YEAR(created_at) year, MONTH(created_at) month, rating_id, COUNT(*) as total'))
                 ->where('profile_id', $user_id)
                 ->groupBy('year', 'month', 'rating_id')
                 ->get();
+        
+        // $month = 2; // Numero del mese di cui si vuole recuperare la somma dei voti (2 = febbraio)
+
+        // $votes = Profile::where('user_id', $user_id)
+        //     ->whereMonth('created_at', $month)
+        //     ->withCount([
+        //         'ratings as ratings_sum' => function ($query) {
+        //             $query->selectRaw('coalesce(sum(vote), 0)');
+        //         }
+        //     ])
+        //     ->first();
 
         $data = [
             'profile' => $profile,
