@@ -2351,7 +2351,13 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("header", [_c("nav", {
-    staticClass: "navbar navbar-expand-lg bg-body-tertiary"
+    staticClass: "navbar navbar-expand-lg",
+    staticStyle: {
+      "background-color": "#076dbb"
+    },
+    attrs: {
+      "data-bs-theme": "dark"
+    }
   }, [_c("div", {
     staticClass: "container-fluid"
   }, [_c("router-link", {
@@ -2361,7 +2367,7 @@ var render = function render() {
         name: "homepage"
       }
     }
-  }, [_vm._v("\n                BDoctors.it\n            ")]), _vm._v(" "), _vm._m(0), _vm._v(" "), _c("div", {
+  }, [_vm._v("\n        BDoctors.it\n      ")]), _vm._v(" "), _vm._m(0), _vm._v(" "), _c("div", {
     staticClass: "collapse navbar-collapse",
     attrs: {
       id: "navbarNav"
@@ -2378,7 +2384,7 @@ var render = function render() {
         name: "homepage"
       }
     }
-  }, [_vm._v("\n                            Home\n                        ")])], 1), _vm._v(" "), _vm._m(1), _vm._v(" "), _vm._m(2)])])], 1)])]);
+  }, [_vm._v("\n              Home\n            ")])], 1), _vm._v(" "), _vm._m(1), _vm._v(" "), _vm._m(2)])])], 1)])]);
 };
 var staticRenderFns = [function () {
   var _vm = this,
