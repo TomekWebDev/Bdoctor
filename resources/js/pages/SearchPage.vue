@@ -267,8 +267,8 @@ export default {
       // Associamo il dato passato nel router link a un nuovo data di vue.
       // $route è l'oggetto che arriva tramite router .params per entrare nell'oggetto parametro
       selectedSpecId: this.$route.params.spec,
-      reviewFilter: 0,
-      ratingFilter: 0,
+      reviewFilter: "",
+      ratingFilter: "",
     };
   },
 
@@ -294,18 +294,30 @@ export default {
     },
 
     searchProfilesBySpec() {
+      let params = {};
+      if (this.selectedSpecId) {
+        params.selectedSpecId = this.selectedSpecId;
+      }
+      if (this.reviewFilter) {
+        params.reviewFilter = this.reviewFilter;
+      }
+      if (this.ratingFilter) {
+        params.ratingFilter = this.ratingFilter;
+      }
+      let queryParams = new URLSearchParams(params);
+      history.replaceState(null, "", "?" + queryParams.toString());
+      console.log(params);
       axios
-        .post("/api/profiles", {
-          spec: this.selectedSpecId,
-          reviewFilter: this.reviewFilter,
-          ratingFilter: this.ratingFilter,
+        .get("/api/profiles", {
+          params,
         })
         .then((res) => {
           console.log(res);
           this.profiles = res.data;
+          params = {};
         })
         .catch((err) => {
-          console.log(err);
+          //   console.log(err);
         });
     },
 
@@ -409,7 +421,7 @@ export default {
         voteSum += rating.vote;
       });
       let voteAverage = voteSum / parametro.length;
-      return Math.round(voteAverage);
+      return voteAverage;
     },
   },
 };
