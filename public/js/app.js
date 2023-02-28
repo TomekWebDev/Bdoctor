@@ -2499,7 +2499,7 @@ var render = function render() {
     attrs: {
       required: "",
       type: "email",
-      placeholder: "email"
+      placeholder: "email*"
     },
     domProps: {
       value: _vm.email
