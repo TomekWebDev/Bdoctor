@@ -1,17 +1,24 @@
 <template>
   <div>
-    
-    <h1></h1>
+    <h1>Commit</h1>
     <h5>Dr. {{ profile.user.name }} {{ profile.user.surname }}</h5>
     <h5>{{ profile.address }}, {{ profile.city }}</h5>
     <h5>{{ profile.phone }}</h5>
     <h5>{{ profile.description }}</h5>
     <h5>{{ profile.services }}</h5>
     <div v-if="profile.image" class="col-5">
-      <img class="img-fluid rounded-circle" :src="'storage/' + profile.image " alt="" />
+      <img
+        class="img-fluid rounded-circle"
+        :src="'storage/' + profile.image"
+        alt=""
+      />
     </div>
     <div v-else class="col-5">
-      <img class="img-fluid rounded-circle" src="../../../public/img/userDoctor.jpeg" alt="" />
+      <img
+        class="img-fluid rounded-circle"
+        src="../../../public/img/userDoctor.jpeg"
+        alt=""
+      />
     </div>
     <h2>manda messaggio</h2>
     <MessageSender />
@@ -28,7 +35,6 @@ import ReviewSender from "../components/ReviewSender.vue";
 import RatingSender from "../components/RatingSender.vue";
 
 export default {
-  name: "ShowPage",
   components: {
     MessageSender,
     ReviewSender,
@@ -36,7 +42,7 @@ export default {
   },
   data() {
     return {
-      profile: [],
+      profile: {},
     };
   },
 
@@ -47,7 +53,7 @@ export default {
   methods: {
     getProfiles() {
       axios
-        .get("/api/profiles/" + this.$route.params.id)
+        .get("http://localhost:8000/api/profiles/" + this.$route.params.id)
         .then((res) => {
           // this.posts = res.data.data;
           this.profile = res.data;
@@ -60,4 +66,5 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style>
+</style>

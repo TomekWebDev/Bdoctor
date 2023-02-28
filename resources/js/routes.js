@@ -27,7 +27,7 @@ const router = new VueRouter({
         },
         {
             path: '/profile/:id',
-            name: 'show',
+            name: 'singleProfile',
             component: ShowPage
         },
 

@@ -5,28 +5,13 @@
 
         <div class="card">
             <div class="card-body">
-              <h1>Statistiche</h1>
+                <h1>Statistiche</h1>
             </div>
         </div>
 
         <div class="card mt-3">
             <div class="card-body">
-              <div class="d-flex justify-content-between align-items-center">
                 <h2 class="py-3">Messaggi e Recensioni ricevute</h2>
-
-                <div>
-                  <div>
-                    <div style="width: 10px; height: 10px;" class="bg-danger d-inline-block"></div>
-                    <span>Review</span>
-                  </div>
-                  <div>
-                    <div style="width: 10px; height: 10px;" class="bg-primary d-inline-block"></div>
-                    <span>Messaggi</span>
-                  </div>
-
-                </div>
-              </div>
-                
                 <canvas id="myChart"></canvas>
             </div>
         </div>

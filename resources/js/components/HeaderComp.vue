@@ -1,7 +1,7 @@
 <template>
     <!-- <HeaderComp /> -->
     <header>
-        <nav class="navbar navbar-expand-lg" style="background-color: #076DBB" data-bs-theme="dark">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
                 <router-link class="navbar-brand" :to="{ name: 'homepage' }">
                     BDoctors.it
@@ -17,6 +17,12 @@
                                 Home
                             </router-link>
                         </li>
+
+                        <!-- <li class="nav-item">
+              <router-link class="nav-link" :to="{ name: 'search' }"
+                >Pagina di ricerca
+              </router-link>
+            </li> -->
                         <li class="nav-item">
                             <a class="nav-link active" href="/login">Login</a>
                         </li>
@@ -27,7 +33,6 @@
                 </div>
             </div>
         </nav>
-        
     </header>
 </template>
 
