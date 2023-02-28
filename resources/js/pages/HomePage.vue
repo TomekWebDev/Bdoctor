@@ -60,7 +60,7 @@
           <div class="col-6 d-flex">
             <div v-if="!sponsored.image" class="col-5">
               <img
-                class="img-fluid"
+                class="img-fluid rounded-circle border border-5 border-warning"
                 src="../../../public/img/userDoctor.jpeg"
                 alt=""
               />

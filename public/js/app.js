@@ -2762,7 +2762,7 @@ var render = function render() {
     }, [!sponsored.image ? _c("div", {
       staticClass: "col-5"
     }, [_c("img", {
-      staticClass: "img-fluid",
+      staticClass: "img-fluid rounded-circle border border-5 border-warning",
       attrs: {
         src: __webpack_require__(/*! ../../../public/img/userDoctor.jpeg */ "./public/img/userDoctor.jpeg"),
         alt: ""
