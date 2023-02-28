@@ -2630,7 +2630,7 @@ var render = function render() {
     attrs: {
       required: "",
       type: "text",
-      placeholder: "name"
+      placeholder: "name*"
     },
     domProps: {
       value: _vm.name
@@ -2650,7 +2650,8 @@ var render = function render() {
     }],
     attrs: {
       required: "",
-      name: "review"
+      name: "review",
+      placeholder: "review*"
     },
     domProps: {
       value: _vm.review

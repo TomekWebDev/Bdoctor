@@ -1,8 +1,13 @@
 <template>
   <div>
     <form v-on:submit="sendReview">
-      <input required v-model="name" type="text" placeholder="name" />
-      <textarea required v-model="review" name="review"></textarea>
+      <input required v-model="name" type="text" placeholder="name*" />
+      <textarea
+        required
+        v-model="review"
+        name="review"
+        placeholder="review*"
+      ></textarea>
       <button type="submit">Send Review</button>
     </form>
   </div>
