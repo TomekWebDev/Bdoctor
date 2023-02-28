@@ -35,6 +35,7 @@ import ReviewSender from "../components/ReviewSender.vue";
 import RatingSender from "../components/RatingSender.vue";
 
 export default {
+  name: "ShowPage",
   components: {
     MessageSender,
     ReviewSender,
@@ -42,7 +43,7 @@ export default {
   },
   data() {
     return {
-      profile: {},
+      profile: [],
     };
   },
 
@@ -53,7 +54,7 @@ export default {
   methods: {
     getProfiles() {
       axios
-        .get("http://localhost:8000/api/profiles/" + this.$route.params.id)
+        .get("/api/profiles/" + this.$route.params.id)
         .then((res) => {
           // this.posts = res.data.data;
           this.profile = res.data;
@@ -66,5 +67,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style lang="scss" scoped></style>
