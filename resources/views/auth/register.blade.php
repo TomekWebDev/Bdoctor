@@ -19,7 +19,7 @@ $specs = Spec::all();
 
                             <div class="form-group row">
                                 <label for="name"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+                                    class="col-md-4 col-form-label text-md-right"><span class="text-danger">*</span> {{ __('Name') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="name" type="text"
@@ -36,7 +36,7 @@ $specs = Spec::all();
 
                             <div class="form-group row">
                                 <label for="name"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Surname') }}</label>
+                                    class="col-md-4 col-form-label text-md-right"><span class="text-danger">*</span> {{ __('Surname') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="name" type="text"
@@ -53,7 +53,7 @@ $specs = Spec::all();
 
                             <div class="form-group row">
                                 <label for="email"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                                    class="col-md-4 col-form-label text-md-right"><span class="text-danger">*</span> {{ __('E-Mail Address') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="email" type="email"
@@ -71,7 +71,7 @@ $specs = Spec::all();
                             {{-- Form Password --}}
                             <div class="form-group row">
                                 <label for="password"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                                    class="col-md-4 col-form-label text-md-right"><span class="text-danger">*</span> {{ __('Password') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="password" type="password"
@@ -90,7 +90,7 @@ $specs = Spec::all();
 
                             <div class="form-group row">
                                 <label for="password-confirm"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+                                    class="col-md-4 col-form-label text-md-right"><span class="text-danger">*</span> {{ __('Confirm Password') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="password-confirm" type="password" class="form-control"
@@ -100,7 +100,7 @@ $specs = Spec::all();
                             {{-- form city --}}
                             <div class="form-group row">
                                 <label for="name"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('City') }}</label>
+                                    class="col-md-4 col-form-label text-md-right"><span class="text-danger">*</span> {{ __('City') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="city" type="text"
@@ -117,7 +117,7 @@ $specs = Spec::all();
                             {{-- form address --}}
                             <div class="form-group row">
                                 <label for="name"
-                                    class="col-md-4 col-form-label text-md-right">{{ __('Address') }}</label>
+                                    class="col-md-4 col-form-label text-md-right"><span class="text-danger">*</span> {{ __('Address') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="address" type="text"
@@ -133,7 +133,8 @@ $specs = Spec::all();
                             </div>
 
                             <div class="form-group row ">
-                                <div class="col-md-6 offset-md-4">
+                                <label for="name" class="col-md-4 col-form-label text-md-right"><span class="text-danger">*</span> Specializzazione</label>
+                                <div class="col-md-6">
                                     <select required name="spec_id" id=""
                                         class="form-control @error('spec_id') is-invalid @enderror">
                                         <option value="" disabled selected>Seleziona la tua specializzazione</option>
