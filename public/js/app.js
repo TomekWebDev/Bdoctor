@@ -3039,7 +3039,23 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", [_c("h1"), _vm._v(" "), _c("h5", [_vm._v("Dr. " + _vm._s(_vm.profile.user.name) + " " + _vm._s(_vm.profile.user.surname))]), _vm._v(" "), _c("h5", [_vm._v(_vm._s(_vm.profile.address) + ", " + _vm._s(_vm.profile.city))]), _vm._v(" "), _c("h5", [_vm._v(_vm._s(_vm.profile.phone))]), _vm._v(" "), _c("h5", [_vm._v(_vm._s(_vm.profile.description))]), _vm._v(" "), _c("h5", [_vm._v(_vm._s(_vm.profile.services))]), _vm._v(" "), _c("h2", [_vm._v("manda messaggio")]), _vm._v(" "), _c("MessageSender"), _vm._v(" "), _c("h2", [_vm._v("manda review")]), _vm._v(" "), _c("ReviewSender"), _vm._v(" "), _c("h2", [_vm._v("manda rating")]), _vm._v(" "), _c("RatingSender")], 1);
+  return _c("div", [_c("h1", [_vm._v("Commit")]), _vm._v(" "), _c("h5", [_vm._v("Dr. " + _vm._s(_vm.profile.user.name) + " " + _vm._s(_vm.profile.user.surname))]), _vm._v(" "), _c("h5", [_vm._v(_vm._s(_vm.profile.address) + ", " + _vm._s(_vm.profile.city))]), _vm._v(" "), _c("h5", [_vm._v(_vm._s(_vm.profile.phone))]), _vm._v(" "), _c("h5", [_vm._v(_vm._s(_vm.profile.description))]), _vm._v(" "), _c("h5", [_vm._v(_vm._s(_vm.profile.services))]), _vm._v(" "), _vm.profile.image ? _c("div", {
+    staticClass: "col-5"
+  }, [_c("img", {
+    staticClass: "img-fluid rounded-circle",
+    attrs: {
+      src: "storage/" + _vm.profile.image,
+      alt: ""
+    }
+  })]) : _c("div", {
+    staticClass: "col-5"
+  }, [_c("img", {
+    staticClass: "img-fluid rounded-circle",
+    attrs: {
+      src: __webpack_require__(/*! ../../../public/img/userDoctor.jpeg */ "./public/img/userDoctor.jpeg"),
+      alt: ""
+    }
+  })]), _vm._v(" "), _c("h2", [_vm._v("manda messaggio")]), _vm._v(" "), _c("MessageSender"), _vm._v(" "), _c("h2", [_vm._v("manda review")]), _vm._v(" "), _c("ReviewSender"), _vm._v(" "), _c("h2", [_vm._v("manda rating")]), _vm._v(" "), _c("RatingSender")], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;
