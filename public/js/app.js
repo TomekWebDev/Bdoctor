@@ -2133,8 +2133,8 @@ __webpack_require__.r(__webpack_exports__);
       // Associamo il dato passato nel router link a un nuovo data di vue.
       // $route è l'oggetto che arriva tramite router .params per entrare nell'oggetto parametro
       selectedSpecId: this.$route.params.spec,
-      reviewFilter: 0,
-      ratingFilter: 0
+      reviewFilter: "",
+      ratingFilter: ""
     };
   },
   mounted: function mounted() {
@@ -2155,15 +2155,27 @@ __webpack_require__.r(__webpack_exports__);
     },
     searchProfilesBySpec: function searchProfilesBySpec() {
       var _this2 = this;
-      axios.post("/api/profiles", {
-        spec: this.selectedSpecId,
-        reviewFilter: this.reviewFilter,
-        ratingFilter: this.ratingFilter
+      var params = {};
+      if (this.selectedSpecId) {
+        params.selectedSpecId = this.selectedSpecId;
+      }
+      if (this.reviewFilter) {
+        params.reviewFilter = this.reviewFilter;
+      }
+      if (this.ratingFilter) {
+        params.ratingFilter = this.ratingFilter;
+      }
+      var queryParams = new URLSearchParams(params);
+      history.replaceState(null, "", "?" + queryParams.toString());
+      console.log(params);
+      axios.get("/api/profiles", {
+        params: params
       }).then(function (res) {
         console.log(res);
         _this2.profiles = res.data;
+        params = {};
       })["catch"](function (err) {
-        console.log(err);
+        //   console.log(err);
       });
     },
     // Step 5
@@ -2261,7 +2273,7 @@ __webpack_require__.r(__webpack_exports__);
         voteSum += rating.vote;
       });
       var voteAverage = voteSum / parametro.length;
-      return Math.round(voteAverage);
+      return voteAverage;
     }
   }
 });
