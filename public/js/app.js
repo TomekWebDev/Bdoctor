@@ -2738,7 +2738,7 @@ var render = function render() {
       domProps: {
         value: spec.id
       }
-    }, [_vm._v("\n                            " + _vm._s(spec.name) + "\n                        ")]);
+    }, [_vm._v("\n              " + _vm._s(spec.name) + "\n            ")]);
   }), 0), _vm._v(" "), _c("router-link", {
     staticClass: "btn btn-primary mx-2",
     attrs: {
@@ -2771,6 +2771,10 @@ var render = function render() {
       staticClass: "col-5"
     }, [_c("img", {
       staticClass: "img-fluid rounded-circle",
+      staticStyle: {
+        "aspect-ratio": "1/1",
+        "object-fit": "cover"
+      },
       attrs: {
         src: "storage/".concat(sponsored.image),
         alt: ""
@@ -2781,16 +2785,16 @@ var render = function render() {
       attrs: {
         to: "/profile/".concat(sponsored.id)
       }
-    }, [_vm._v("\n                            Dr. " + _vm._s(sponsored.user.name) + " " + _vm._s(sponsored.user.surname) + "\n                        ")])], 1), _vm._v(" "), _c("h5", [_vm._v(_vm._s(sponsored.reviews.length) + " recensioni")]), _vm._v(" "), _c("h5", [_vm._v("specializzazioni:\n                        "), _c("ul", _vm._l(sponsored.specs, function (spec) {
+    }, [_vm._v("\n              Dr. " + _vm._s(sponsored.user.name) + " " + _vm._s(sponsored.user.surname) + "\n            ")])], 1), _vm._v(" "), _c("h5", [_vm._v(_vm._s(sponsored.reviews.length) + " recensioni")]), _vm._v(" "), _c("h5", [_vm._v("\n            specializzazioni:\n            "), _c("ul", _vm._l(sponsored.specs, function (spec) {
       return _c("li", {
         key: spec.id
-      }, [_vm._v("\n                                " + _vm._s(spec.name) + "\n                            ")]);
+      }, [_vm._v("\n                " + _vm._s(spec.name) + "\n              ")]);
     }), 0)]), _vm._v(" "), _c("h5", [_vm._v(_vm._s(sponsored.address) + "," + _vm._s(sponsored.city))]), _vm._v(" "), _c("h5", [_vm._v("Tu chiamami sul trap phone: " + _vm._s(sponsored.phone))]), _vm._v(" "), _c("router-link", {
       staticClass: "btn btn-outline-primary",
       attrs: {
         to: "/profile/".concat(sponsored.id)
       }
-    }, [_vm._v("\n                        Vedi medico\n                    ")])], 1)])])]);
+    }, [_vm._v("\n            Vedi medico\n          ")])], 1)])])]);
   })], 2);
 };
 var staticRenderFns = [];
@@ -2833,28 +2837,28 @@ var render = function render() {
     on: {
       click: _vm.reviewsFilterTopDown
     }
-  }, [_vm._v("\n              Filtra per recensioni + -\n            ")])]), _vm._v(" "), _c("li", {
+  }, [_vm._v("\n              Recensioni crescenti\n            ")])]), _vm._v(" "), _c("li", {
     staticClass: "nav-item mx-1"
   }, [_c("button", {
     staticClass: "btn btn-outline-primary",
     on: {
       click: _vm.reviewsFilterDownTop
     }
-  }, [_vm._v("\n              Filtra per recensioni - +\n            ")])]), _vm._v(" "), _c("li", {
+  }, [_vm._v("\n              Recensioni decrescenti\n            ")])]), _vm._v(" "), _c("li", {
     staticClass: "nav-item mx-1"
   }, [_c("button", {
     staticClass: "btn btn-outline-primary",
     on: {
       click: _vm.ratingFilterTopDown
     }
-  }, [_vm._v("\n              Filtra per rating + -\n            ")])]), _vm._v(" "), _c("li", {
+  }, [_vm._v("\n              Rating decrescenti\n            ")])]), _vm._v(" "), _c("li", {
     staticClass: "nav-item mx-1"
   }, [_c("button", {
     staticClass: "btn btn-outline-primary",
     on: {
       click: _vm.ratingFilterDownTop
     }
-  }, [_vm._v("\n              Filtra per rating - +\n            ")])]), _vm._v(" "), _vm._m(1)])])])]), _vm._v(" "), _c("div", {
+  }, [_vm._v("\n              Rating crescenti\n            ")])]), _vm._v(" "), _vm._m(1)])])])]), _vm._v(" "), _c("div", {
     staticClass: "container"
   }, [_vm._l(_vm.sponsoredProfiles, function (sponsored) {
     return _c("div", {
@@ -2877,9 +2881,13 @@ var render = function render() {
     }), _vm._v(" "), _c("div", {
       staticClass: "d-block text-warning text-center"
     }, [_vm._v("\n                Sponsorizzato\n              ")])]) : _c("div", {
-      staticClass: "col-lg-6 col-sm-12 d-flex align-items-center"
+      staticClass: "col-5"
     }, [_c("img", {
       staticClass: "img-fluid rounded-circle border border-5 border-warning",
+      staticStyle: {
+        "aspect-ratio": "1/1",
+        "object-fit": "cover"
+      },
       attrs: {
         src: "storage/".concat(sponsored.image),
         alt: ""
@@ -2925,6 +2933,10 @@ var render = function render() {
       staticClass: "col-5"
     }, [_c("img", {
       staticClass: "img-fluid rounded-circle",
+      staticStyle: {
+        "aspect-ratio": "1/1",
+        "object-fit": "cover"
+      },
       attrs: {
         src: "storage/".concat(profile.image),
         alt: ""
@@ -3062,7 +3074,13 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", [_c("h1", [_vm._v("Commit")]), _vm._v(" "), _c("h5", [_vm._v("Dr. " + _vm._s(_vm.profile.user.name) + " " + _vm._s(_vm.profile.user.surname))]), _vm._v(" "), _c("h5", [_vm._v(_vm._s(_vm.profile.address) + ", " + _vm._s(_vm.profile.city))]), _vm._v(" "), _c("h5", [_vm._v(_vm._s(_vm.profile.phone))]), _vm._v(" "), _c("h5", [_vm._v(_vm._s(_vm.profile.description))]), _vm._v(" "), _c("h5", [_vm._v(_vm._s(_vm.profile.services))]), _vm._v(" "), _vm.profile.image ? _c("div", {
+  return _c("div", {
+    staticClass: "container"
+  }, [_c("div", {
+    staticClass: "row"
+  }, [_c("div", {
+    staticClass: "col-6"
+  }, [_c("h5", [_vm._v("Dr. " + _vm._s(_vm.profile.user.name) + " " + _vm._s(_vm.profile.user.surname))]), _vm._v(" "), _c("h5", [_vm._v(_vm._s(_vm.profile.address) + ", " + _vm._s(_vm.profile.city))]), _vm._v(" "), _c("h5", [_vm._v(_vm._s(_vm.profile.phone))]), _vm._v(" "), _c("h5", [_vm._v(_vm._s(_vm.profile.description))]), _vm._v(" "), _c("h5", [_vm._v(_vm._s(_vm.profile.services))]), _vm._v(" "), _vm.profile.image ? _c("div", {
     staticClass: "col-5"
   }, [_c("img", {
     staticClass: "img-fluid rounded-circle",
@@ -3078,9 +3096,19 @@ var render = function render() {
       src: __webpack_require__(/*! ../../../public/img/userDoctor.jpeg */ "./public/img/userDoctor.jpeg"),
       alt: ""
     }
-  })]), _vm._v(" "), _c("h2", [_vm._v("manda messaggio")]), _vm._v(" "), _c("MessageSender"), _vm._v(" "), _c("h2", [_vm._v("manda review")]), _vm._v(" "), _c("ReviewSender"), _vm._v(" "), _c("h2", [_vm._v("manda rating")]), _vm._v(" "), _c("RatingSender")], 1);
+  })])]), _vm._v(" "), _c("div", {
+    staticClass: "col-6"
+  }, [_c("h2", [_vm._v("manda messaggio")]), _vm._v(" "), _c("MessageSender"), _vm._v(" "), _c("h2", [_vm._v("manda review")]), _vm._v(" "), _c("ReviewSender"), _vm._v(" "), _c("h2", [_vm._v("manda rating")]), _vm._v(" "), _c("RatingSender"), _vm._v(" "), _vm._m(0)], 1)])]);
 };
-var staticRenderFns = [];
+var staticRenderFns = [function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("div", {
+    staticClass: "mb-3 font-italic"
+  }, [_vm._v("\n        I campi contrassegnati con "), _c("span", {
+    staticClass: "text-danger"
+  }, [_vm._v("*")]), _vm._v(" sono\n        obbligatori\n      ")]);
+}];
 render._withStripped = true;
 
 
