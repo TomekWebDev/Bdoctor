@@ -54577,7 +54577,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     component: _pages_SearchPage_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
   }, {
     path: '/profile/:id',
-    name: 'singleProfile',
+    name: 'show',
     component: _pages_ShowPage_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
   }]
 });
