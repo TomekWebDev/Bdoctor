@@ -53,7 +53,7 @@
 
 
                     <div class="mb-3">
-                        <label class="form-label">City*</label>
+                        <label class="form-label"><span class="text-danger">*</span> City</label>
                         <input required name="city" type="string"
                             class="form-control @error('city') is-invalid @enderror" value="{{ $profile_to_edit->city }}">
 
@@ -65,7 +65,7 @@
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Address*</label>
+                        <label class="form-label"><span class="text-danger">*</span> Address</label>
                         <input required name="address" type="string"
                             class="form-control @error('address') is-invalid @enderror"
                             value="{{ $profile_to_edit->address }}">
@@ -105,7 +105,7 @@
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Specializzazioni *</label>
+                        <label class="form-label"><span class="text-danger">*</span> Specializzazioni</label>
 
                         @foreach ($specs as $spec)
                             <label class="form-label @error('specs') is-invalid @enderror">
@@ -123,8 +123,10 @@
                             </span>
                         @enderror
 
+                    </div>
 
-
+                    <div class="mb-3 font-italic">
+                        I campi contrassegnati con <span class="text-danger">*</span> sono obbligatori
                     </div>
 
                     <button type="submit" class="btn btn-primary" id="buttonAbilited">Modifica</button>

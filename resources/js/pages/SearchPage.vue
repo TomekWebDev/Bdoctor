@@ -22,7 +22,7 @@
                 class="btn btn-outline-primary"
                 v-on:click="reviewsFilterTopDown"
               >
-                Filtra per recensioni + -
+                Recensioni crescenti
               </button>
             </li>
             <li class="nav-item mx-1">
@@ -30,7 +30,7 @@
                 class="btn btn-outline-primary"
                 v-on:click="reviewsFilterDownTop"
               >
-                Filtra per recensioni - +
+                Recensioni decrescenti
               </button>
             </li>
             <li class="nav-item mx-1">
@@ -38,7 +38,7 @@
                 class="btn btn-outline-primary"
                 v-on:click="ratingFilterTopDown"
               >
-                Filtra per rating + -
+                Rating decrescenti
               </button>
             </li>
             <li class="nav-item mx-1">
@@ -46,7 +46,7 @@
                 class="btn btn-outline-primary"
                 v-on:click="ratingFilterDownTop"
               >
-                Filtra per rating - +
+                Rating crescenti
               </button>
             </li>
             <li class="nav-item mx-1">
@@ -85,8 +85,9 @@
                   Sponsorizzato
                 </div>
               </div>
-              <div v-else class="col-lg-6 col-sm-12 d-flex align-items-center">
+              <div v-else class="col-5">
                 <img
+                  style="aspect-ratio: 1/1; object-fit: cover"
                   class="img-fluid rounded-circle border border-5 border-warning"
                   :src="`storage/${sponsored.image}`"
                   alt=""
@@ -157,6 +158,7 @@
               </div>
               <div v-else class="col-5">
                 <img
+                  style="aspect-ratio: 1/1; object-fit: cover"
                   class="img-fluid rounded-circle"
                   :src="`storage/${profile.image}`"
                   alt=""
