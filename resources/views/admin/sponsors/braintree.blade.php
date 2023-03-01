@@ -39,12 +39,15 @@
             @if (session('success'))
                 <div class="alert alert-success mt-3">
                     {{ session('success') }}
+                    <li>redirecting to the dashboard in 5 seconds</li>
                 </div>
+                {{ header('refresh:5;url=http://127.0.0.1:8000/admin') }}
             @elseif (session('error'))
                 <div class="alert alert-danger mt-3">
                     {{ session('error') }}
                 </div>
             @endif
+
 
         </div>
 
