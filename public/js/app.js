@@ -3190,23 +3190,27 @@ var render = function render() {
     staticClass: "row"
   }, [_c("div", {
     staticClass: "col-6"
-  }, [_c("h5", [_vm._v("Dr. " + _vm._s(_vm.profile.user.name) + " " + _vm._s(_vm.profile.user.surname))]), _vm._v(" "), _c("h5", [_vm._v(_vm._s(_vm.profile.address) + ", " + _vm._s(_vm.profile.city))]), _vm._v(" "), _c("h5", [_vm._v(_vm._s(_vm.profile.phone))]), _vm._v(" "), _c("h5", [_vm._v(_vm._s(_vm.profile.description))]), _vm._v(" "), _c("h5", [_vm._v(_vm._s(_vm.profile.services))]), _vm._v(" "), _vm.profile.image ? _c("div", {
-    staticClass: "col-5"
+  }, [_vm.profile.image ? _c("div", {
+    staticClass: "col-5 my-3"
   }, [_c("img", {
     staticClass: "img-fluid rounded-circle",
+    staticStyle: {
+      "aspect-ratio": "1/1",
+      "object-fit": "cover"
+    },
     attrs: {
       src: _vm.profile.image,
       alt: ""
     }
   })]) : _c("div", {
-    staticClass: "col-5"
+    staticClass: "col-5 my-3"
   }, [_c("img", {
     staticClass: "img-fluid rounded-circle",
     attrs: {
       src: __webpack_require__(/*! ../../../public/img/userDoctor.jpeg */ "./public/img/userDoctor.jpeg"),
       alt: ""
     }
-  })])]), _vm._v(" "), _c("div", {
+  })]), _vm._v(" "), _c("h5", [_vm._v("Dr. " + _vm._s(_vm.profile.user.name) + " " + _vm._s(_vm.profile.user.surname))]), _vm._v(" "), _c("h5", [_vm._v(_vm._s(_vm.profile.address) + ", " + _vm._s(_vm.profile.city))]), _vm._v(" "), _c("h5", [_vm._v(_vm._s(_vm.profile.phone))]), _vm._v(" "), _c("h5", [_vm._v(_vm._s(_vm.profile.description))]), _vm._v(" "), _c("h5", [_vm._v(_vm._s(_vm.profile.services))])]), _vm._v(" "), _c("div", {
     staticClass: "col-6"
   }, [_c("h2", [_vm._v("manda messaggio")]), _vm._v(" "), _c("MessageSender"), _vm._v(" "), _c("h2", [_vm._v("manda review")]), _vm._v(" "), _c("ReviewSender"), _vm._v(" "), _c("h2", [_vm._v("manda rating")]), _vm._v(" "), _c("RatingSender"), _vm._v(" "), _vm._m(0)], 1)])]);
 };
@@ -3215,9 +3219,9 @@ var staticRenderFns = [function () {
     _c = _vm._self._c;
   return _c("div", {
     staticClass: "mb-3 font-italic"
-  }, [_vm._v("\n        I campi contrassegnati con "), _c("span", {
+  }, [_vm._v("\n                I campi contrassegnati con "), _c("span", {
     staticClass: "text-danger"
-  }, [_vm._v("*")]), _vm._v(" sono\n        obbligatori\n      ")]);
+  }, [_vm._v("*")]), _vm._v(" sono\n                obbligatori\n            ")]);
 }];
 render._withStripped = true;
 
@@ -54811,8 +54815,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Applications/MAMP/htdocs/laravel/Bdoctor/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/laravel/Bdoctor/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/Mangiagalli/Desktop/Progetto finale/Bdoctor/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/Mangiagalli/Desktop/Progetto finale/Bdoctor/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
