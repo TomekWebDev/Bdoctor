@@ -97,8 +97,14 @@ class ProfileControllerGuest extends Controller
      */
     public function show($id)
     {
-        $this_profile = Profile::with('specs', 'user')->find($id);
-        if (!$this_profile) return response('profilo non trovato', 404);
+        $this_profile = Profile::with('specs', 'user', 'reviews', 'ratings')->find($id);
+        if (!$this_profile){
+            return response('profilo non trovato', 404);
+        } 
+        
+        if ($this_profile->image) {
+            $this_profile->image = url("storage/" . $this_profile->image);
+        }
 
         return response()->json($this_profile);
     }
