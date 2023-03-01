@@ -2139,7 +2139,9 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     this.getSpecs();
-    this.searchProfilesBySpec();
+    if (this.selectedSpecId) {
+      this.searchProfilesBySpec();
+    }
     this.getSponsoredWithSpecs();
   },
   methods: {
@@ -2147,6 +2149,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
       axios.get("/api/profiles/specs").then(function (res) {
         _this.specs = res.data;
+        _this.findSpecName();
       })["catch"](function (err) {
         console.log(err);
       }).then(function () {
@@ -2174,6 +2177,8 @@ __webpack_require__.r(__webpack_exports__);
         console.log(res);
         _this2.profiles = res.data;
         params = {};
+        _this2.reviewFilter = "";
+        _this2.ratingFilter = "";
       })["catch"](function (err) {
         //   console.log(err);
       });
@@ -2274,6 +2279,12 @@ __webpack_require__.r(__webpack_exports__);
       });
       var voteAverage = voteSum / parametro.length;
       return voteAverage;
+    },
+    findSpecName: function findSpecName() {
+      var _this4 = this;
+      this.selectedSpecName = this.specs.find(function (obj) {
+        return obj.id === _this4.selectedSpecId;
+      }).name;
     }
   }
 });
@@ -2750,7 +2761,7 @@ var render = function render() {
       domProps: {
         value: spec.id
       }
-    }, [_vm._v("\n              " + _vm._s(spec.name) + "\n            ")]);
+    }, [_vm._v("\n                            " + _vm._s(spec.name) + "\n                        ")]);
   }), 0), _vm._v(" "), _c("router-link", {
     staticClass: "btn btn-primary mx-2",
     attrs: {
@@ -2797,16 +2808,16 @@ var render = function render() {
       attrs: {
         to: "/profile/".concat(sponsored.id)
       }
-    }, [_vm._v("\n              Dr. " + _vm._s(sponsored.user.name) + " " + _vm._s(sponsored.user.surname) + "\n            ")])], 1), _vm._v(" "), _c("h5", [_vm._v(_vm._s(sponsored.reviews.length) + " recensioni")]), _vm._v(" "), _c("h5", [_vm._v("\n            specializzazioni:\n            "), _c("ul", _vm._l(sponsored.specs, function (spec) {
+    }, [_vm._v("\n                            Dr. " + _vm._s(sponsored.user.name) + " " + _vm._s(sponsored.user.surname) + "\n                        ")])], 1), _vm._v(" "), _c("h5", [_vm._v(_vm._s(sponsored.reviews.length) + " recensioni")]), _vm._v(" "), _c("h5", [_vm._v("\n                        specializzazioni:\n                        "), _c("ul", _vm._l(sponsored.specs, function (spec) {
       return _c("li", {
         key: spec.id
-      }, [_vm._v("\n                " + _vm._s(spec.name) + "\n              ")]);
+      }, [_vm._v("\n                                " + _vm._s(spec.name) + "\n                            ")]);
     }), 0)]), _vm._v(" "), _c("h5", [_vm._v(_vm._s(sponsored.address) + "," + _vm._s(sponsored.city))]), _vm._v(" "), _c("h5", [_vm._v("Tu chiamami sul trap phone: " + _vm._s(sponsored.phone))]), _vm._v(" "), _c("router-link", {
       staticClass: "btn btn-outline-primary",
       attrs: {
         to: "/profile/".concat(sponsored.id)
       }
-    }, [_vm._v("\n            Vedi medico\n          ")])], 1)])])]);
+    }, [_vm._v("\n                        Vedi medico\n                    ")])], 1)])])]);
   })], 2);
 };
 var staticRenderFns = [];
@@ -2849,28 +2860,114 @@ var render = function render() {
     on: {
       click: _vm.reviewsFilterTopDown
     }
-  }, [_vm._v("\n              Recensioni crescenti\n            ")])]), _vm._v(" "), _c("li", {
+  }, [_vm._v("\n                            Recensioni crescenti\n                        ")])]), _vm._v(" "), _c("li", {
     staticClass: "nav-item mx-1"
   }, [_c("button", {
     staticClass: "btn btn-outline-primary",
     on: {
       click: _vm.reviewsFilterDownTop
     }
-  }, [_vm._v("\n              Recensioni decrescenti\n            ")])]), _vm._v(" "), _c("li", {
+  }, [_vm._v("\n                            Recensioni decrescenti\n                        ")])]), _vm._v(" "), _c("li", {
     staticClass: "nav-item mx-1"
   }, [_c("button", {
     staticClass: "btn btn-outline-primary",
     on: {
       click: _vm.ratingFilterTopDown
     }
-  }, [_vm._v("\n              Rating decrescenti\n            ")])]), _vm._v(" "), _c("li", {
+  }, [_vm._v("\n                            Rating decrescenti\n                        ")])]), _vm._v(" "), _c("li", {
     staticClass: "nav-item mx-1"
   }, [_c("button", {
     staticClass: "btn btn-outline-primary",
     on: {
       click: _vm.ratingFilterDownTop
     }
-  }, [_vm._v("\n              Rating crescenti\n            ")])]), _vm._v(" "), _vm._m(1)])])])]), _vm._v(" "), _c("div", {
+  }, [_vm._v("\n                            Rating crescenti\n                        ")])]), _vm._v(" "), _c("li", {
+    staticClass: "nav-item mx-1"
+  }, [_c("label", {
+    attrs: {
+      "for": "ratingFilterSelect"
+    }
+  }, [_vm._v("Seleziona filtro per media voti:")]), _vm._v(" "), _c("select", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.ratingFilter,
+      expression: "ratingFilter"
+    }],
+    attrs: {
+      id: "ratingFilterSelect"
+    },
+    on: {
+      change: function change($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
+          return o.selected;
+        }).map(function (o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val;
+        });
+        _vm.ratingFilter = $event.target.multiple ? $$selectedVal : $$selectedVal[0];
+      }
+    }
+  }, _vm._l(5, function (n) {
+    return _c("option", {
+      key: n,
+      domProps: {
+        value: n
+      }
+    }, [_vm._v(_vm._s(n))]);
+  }), 0)]), _vm._v(" "), _c("li", {
+    staticClass: "nav-item mx-1"
+  }, [_c("label", {
+    attrs: {
+      "for": "reviewFilterSelect"
+    }
+  }, [_vm._v("Seleziona filtro numero di recensioni:")]), _vm._v(" "), _c("select", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.reviewFilter,
+      expression: "reviewFilter"
+    }],
+    attrs: {
+      id: "reviewFilterSelect"
+    },
+    on: {
+      change: function change($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
+          return o.selected;
+        }).map(function (o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val;
+        });
+        _vm.reviewFilter = $event.target.multiple ? $$selectedVal : $$selectedVal[0];
+      }
+    }
+  }, _vm._l(10, function (n) {
+    return _c("option", {
+      key: n,
+      domProps: {
+        value: n
+      }
+    }, [_vm._v(_vm._s(n))]);
+  }), 0)]), _vm._v(" "), _vm._m(1), _vm._v(" "), _c("li", {
+    staticClass: "nav-item mx-1"
+  }, [_c("button", {
+    staticClass: "btn btn-primary",
+    attrs: {
+      type: "button"
+    },
+    on: {
+      click: function click($event) {
+        return _vm.searchProfilesBySpec();
+      }
+    }
+  }, [_vm._v("\n                            Nuova ricerca filtrata\n                        ")])])])])])]), _vm._v(" "), _c("div", {
+    staticClass: "container"
+  }, [_vm.selectedSpecId != undefined ? _c("div", {
+    staticClass: "card mt-3 p-3"
+  }, [_c("div", {
+    staticClass: "d-flex justify-content-between"
+  }, [_c("span", [_vm._v("Ecco i tuoi risultati per specializzazione: " + _vm._s(_vm.selectedSpecName))]), _vm._v(" "), _c("span", [_c("strong", [_vm._v(_vm._s(_vm.profiles.length + _vm.sponsoredProfiles.length))]), _vm._v(" risultati")])])]) : _vm._e()]), _vm._v(" "), _c("div", {
     staticClass: "container"
   }, [_vm._l(_vm.sponsoredProfiles, function (sponsored) {
     return _c("div", {
@@ -2892,7 +2989,7 @@ var render = function render() {
       }
     }), _vm._v(" "), _c("div", {
       staticClass: "d-block text-warning text-center"
-    }, [_vm._v("\n                Sponsorizzato\n              ")])]) : _c("div", {
+    }, [_vm._v("\n                                Sponsorizzato\n                            ")])]) : _c("div", {
       staticClass: "col-5"
     }, [_c("img", {
       staticClass: "img-fluid rounded-circle border border-5 border-warning",
@@ -2906,11 +3003,11 @@ var render = function render() {
       }
     }), _vm._v(" "), _c("div", {
       staticClass: "d-block text-warning text-center"
-    }, [_vm._v("\n                Sponsorizzato\n              ")])]), _vm._v(" "), _c("div", [_c("h4", [_vm._v("\n                Dr. " + _vm._s(sponsored.user.name) + " " + _vm._s(sponsored.user.surname) + "\n              ")]), _vm._v(" "), _vm._l(sponsored.specs, function (spec) {
+    }, [_vm._v("\n                                Sponsorizzato\n                            ")])]), _vm._v(" "), _c("div", [_c("h4", [_vm._v("\n                                Dr. " + _vm._s(sponsored.user.name) + " " + _vm._s(sponsored.user.surname) + "\n                            ")]), _vm._v(" "), _vm._l(sponsored.specs, function (spec) {
       return _c("small", {
         key: spec.id,
         staticClass: "text-muted"
-      }, [_vm._v("\n                " + _vm._s(spec.name) + "\n              ")]);
+      }, [_vm._v("\n                                " + _vm._s(spec.name) + "\n                            ")]);
     })], 2)]), _vm._v(" "), _c("div", {
       staticClass: "col-lg-6 col-sm-12 d-flex align-items-center justify-content-around"
     }, [_c("div", [_c("div", [_vm._v(_vm._s(sponsored.reviews.length) + " recensioni")]), _vm._v(" "), _c("div", [_vm._v("Voto medio " + _vm._s(_vm.getVoteAverage(sponsored.ratings)))]), _vm._v(" "), _c("div", [_vm._v(_vm._s(sponsored.address) + "," + _vm._s(sponsored.city))]), _vm._v(" "), sponsored.phone ? _c("div", [_vm._v("Telefono:" + _vm._s(sponsored.phone))]) : _vm._e()]), _vm._v(" "), _c("router-link", {
@@ -2918,7 +3015,7 @@ var render = function render() {
       attrs: {
         to: "/profile/".concat(sponsored.id)
       }
-    }, [_vm._v("\n              Vedi medico\n            ")])], 1)])])]);
+    }, [_vm._v("\n                            Vedi medico\n                        ")])], 1)])])]);
   }), _vm._v(" "), _vm.profiles.length <= 0 ? _c("div", {
     staticClass: "card mt-3"
   }, [_c("div", {
@@ -2957,7 +3054,7 @@ var render = function render() {
       return _c("small", {
         key: spec.id,
         staticClass: "text-muted"
-      }, [_vm._v("\n                " + _vm._s(spec.name) + "\n              ")]);
+      }, [_vm._v("\n                                " + _vm._s(spec.name) + "\n                            ")]);
     })], 2)]), _vm._v(" "), _c("div", {
       staticClass: "col-lg-6 col-sm-12 d-flex align-items-center justify-content-around"
     }, [_c("div", [_c("div", [_vm._v(_vm._s(profile.reviews.length) + " recensioni")]), _vm._v(" "), _c("div", [_vm._v("Voto medio " + _vm._s(_vm.getVoteAverage(profile.ratings)))]), _vm._v(" "), _c("div", [_vm._v(_vm._s(profile.address) + "," + _vm._s(profile.city))]), _vm._v(" "), profile.phone ? _c("div", [_vm._v("Telefono:" + _vm._s(profile.phone))]) : _vm._e()]), _vm._v(" "), _c("router-link", {
@@ -2965,7 +3062,7 @@ var render = function render() {
       attrs: {
         to: "/profile/".concat(profile.id)
       }
-    }, [_vm._v("\n              Vedi medico\n            ")])], 1)])])]);
+    }, [_vm._v("\n                            Vedi medico\n                        ")])], 1)])])]);
   })], 2), _vm._v(" "), _c("div", {
     staticClass: "offcanvas offcanvas-top",
     attrs: {
@@ -3003,7 +3100,7 @@ var render = function render() {
       domProps: {
         value: spec.id
       }
-    }, [_vm._v("\n            " + _vm._s(spec.name) + "\n          ")]);
+    }, [_vm._v("\n                        " + _vm._s(spec.name) + "\n                    ")]);
   }), 0), _vm._v(" "), _c("button", {
     staticClass: "btn btn-primary",
     attrs: {
@@ -3012,11 +3109,12 @@ var render = function render() {
     },
     on: {
       click: function click($event) {
+        _vm.findSpecName();
         _vm.searchProfilesBySpec();
         _vm.getSponsoredWithSpecs();
       }
     }
-  }, [_vm._v("\n          cambia specializzazione (nuova chiamata axios)\n        ")])])])])]);
+  }, [_vm._v("\n                    cambia specializzazione (nuova chiamata axios)\n                ")])])])])]);
 };
 var staticRenderFns = [function () {
   var _vm = this,
@@ -3047,7 +3145,7 @@ var staticRenderFns = [function () {
       "data-bs-target": "#offcanvasExample",
       "aria-controls": "offcanvasExample"
     }
-  }, [_vm._v("\n              Nuova ricerca\n            ")])]);
+  }, [_vm._v("\n                            Nuova ricerca\n                        ")])]);
 }, function () {
   var _vm = this,
     _c = _vm._self._c;
