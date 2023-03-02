@@ -91,14 +91,9 @@ class ProfileController extends Controller
      */
     public function show($id)
     {
-        $this_profile = Profile::findOrFail($id);
-        $this_user = Auth::user();
+        $profile = Profile::findOrFail($id);
 
-        if ($this_profile->user_id !== auth()->user()->id) {
-            abort(403, 'Non è il tuo profilo.');
-        }
-
-        return view('admin.profile.show', compact('this_profile', 'this_user'));
+        return redirect()->route('admin.index', ['profile' => $profile->id]);
     }
 
     /**
@@ -176,7 +171,7 @@ class ProfileController extends Controller
         }
 
 
-        return redirect()->route('admin.profile.show', ['profile' => $profile->id]);
+        return redirect()->route('admin.index', ['profile' => $profile->id]);
     }
 
     /**

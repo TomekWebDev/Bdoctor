@@ -13,12 +13,12 @@
                             Action
                         </button>
                         <ul class="dropdown-menu">
+                            <li>
+                                <a class="dropdown-item" href="{{route('admin.index', $profile->id)}}">Dashboard</a>
+                            </li>
                           <li> 
                             <a class="dropdown-item" href="{{route('admin.profile.edit', $profile->id)}}">Modifica Profilo</a>
                           </li>
-                        <li>
-                            <a class="dropdown-item" href="{{route('admin.profile.show', $profile->id)}}">Il mio profilo</a>
-                        </li>
                         <li>
                             <a class="dropdown-item" href="{{route('admin.reviews.index', $profile->id)}}">Le mie Recensioni</a>
                         </li>

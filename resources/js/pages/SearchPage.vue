@@ -1,75 +1,117 @@
 <template>
-    <div>
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
-            <div class="container-fluid">
-                <div class="navbar-brand">Ricerca Avanzata</div>
-
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav2"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav2">
-                    <ul class="navbar-nav">
-                        <li class="nav-item mx-1">
-                            <button class="btn btn-outline-primary" v-on:click="reviewsFilterTopDown">
-                                Recensioni crescenti
-                            </button>
-                        </li>
-                        <li class="nav-item mx-1">
-                            <button class="btn btn-outline-primary" v-on:click="reviewsFilterDownTop">
-                                Recensioni decrescenti
-                            </button>
-                        </li>
-                        <li class="nav-item mx-1">
-                            <button class="btn btn-outline-primary" v-on:click="ratingFilterTopDown">
-                                Rating decrescenti
-                            </button>
-                        </li>
-                        <li class="nav-item mx-1">
-                            <button class="btn btn-outline-primary" v-on:click="ratingFilterDownTop">
-                                Rating crescenti
-                            </button>
-                        </li>
-                        <li class="nav-item mx-1">
-                            <label for="ratingFilterSelect">Seleziona filtro per media voti:</label>
-                            <select id="ratingFilterSelect" v-model="ratingFilter">
-                                <option v-for="n in 5" :key="n" :value="n">{{ n }}</option>
+    <div class="container">
+        <!-- navbar advanced search -->
+        <nav class="navbar col-lg-12">
+            <div class="">
+                <div class="w-100 text-center my-3">
+                    <h2>Ricerca Avanzata</h2>
+                </div>
+                <div class="" id="navbarNav2">
+                    <div class="container">
+                        <div class="row w-100">
+                            <select required v-model="selectedSpecId" name="" id="" class="form-select mb-3 col-lg-12">
+                                <option disabled selected placeholder="Seleziona una
+                                    specializzazione">
+                                    <span class="text-danger">*</span>Seleziona una
+                                    specializzazione
+                                </option>
+                                <option v-for="spec in specs" :key="spec.id" :value="spec.id">
+                                    {{ spec.name }}
+                                </option>
                             </select>
-                        </li>
-                        <li class="nav-item mx-1">
-                            <label for="reviewFilterSelect">Seleziona filtro numero di recensioni:</label>
-                            <select id="reviewFilterSelect" v-model="reviewFilter">
-                                <option v-for="n in 10" :key="n" :value="n">{{ n }}</option>
-                            </select>
-                        </li>
-                        <li class="nav-item mx-1">
-                            <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas"
-                                data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
-                                Nuova ricerca
+                            <button v-on:click="
+                  reviewFilter = '';
+                  ratingFilter = '';
+                  currentRatingFilter = '';
+                  currentReviewFilter = '';
+                  findSpecName();
+                  searchProfilesBySpec();
+                  getSponsoredWithSpecs();
+                " style="background-color: #076dbb" class="btn btn-primary mb-3">
+                                Nuova ricerca per specializzazione
                             </button>
-                        </li>
-                        <li class="nav-item mx-1">
-                            <button class="btn btn-primary" type="button" v-on:click="searchProfilesBySpec()">
-                                Nuova ricerca filtrata
+                        </div>
+                        <div class="row w-100">
+                            <div class="col-lg-6">
+                                <label for="ratingFilterSelect">Seleziona filtro per media voti minima:</label>
+                                <select id="ratingFilterSelect" v-model="ratingFilter" class="form-select mb-3">
+                                    <option v-for="n in 5" :key="n" :value="n">{{ n }}</option>
+                                </select>
+                            </div>
+                            <div class="col-lg-6">
+                                <label for="reviewFilterSelect">Seleziona filtro per minimo numero di
+                                    recensioni:</label>
+                                <select id="reviewFilterSelect" v-model="reviewFilter" class="form-select mb-3">
+                                    <option v-for="n in 10" :key="n" :value="n">{{ n }}</option>
+                                </select>
+                            </div>
+                            <button class="btn btn-primary col-lg-12 mb-3" type="button" v-on:click="
+                  searchProfilesBySpec();
+                  currentRatingFilter = ratingFilter;
+                  currentReviewFilter = reviewFilter;
+                " style="background-color: #076dbb">
+                                Applica filtri
                             </button>
-                        </li>
-                    </ul>
+                        </div>
+                        <div class="col-lg-12 d-flex justify-content-end">
+                            <div class="dropdown p-0">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown"
+                                    aria-expanded="false" style="background-color: #076dbb">
+                                    Ordina risultati per
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <button class="dropdown-item" v-on:click="reviewsFilterTopDown">
+                                            Recensioni dal maggiore
+                                        </button>
+                                    </li>
+                                    <div class="dropdown-divider"></div>
+                                    <li>
+                                        <button class="dropdown-item" v-on:click="reviewsFilterDownTop">
+                                            Recensioni dal minore
+                                        </button>
+                                    </li>
+                                    <div class="dropdown-divider"></div>
+                                    <li>
+                                        <button class="dropdown-item" v-on:click="ratingFilterTopDown">
+                                            Voto medio dal maggiore
+                                        </button>
+                                    </li>
+                                    <div class="dropdown-divider"></div>
+                                    <li>
+                                        <button class="dropdown-item" v-on:click="ratingFilterDownTop">
+                                            Voto medio dal minore
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </nav>
+        <!-- end navbar -->
 
+        <!-- resume of the search results, filters and orders -->
         <div class="container">
             <div v-if="selectedSpecId != undefined" class="card mt-3 p-3">
                 <div class="row d-flex justify-content-between">
-                    <span>Risultati per la specializzazione:
-                        {{ selectedSpecName }}</span>
-                    <span><strong>{{ profiles.length + sponsoredProfiles.length }}</strong>
-                        risultati</span>
+                    <span>
+                        <strong>{{ profiles.length + sponsoredProfiles.length }}</strong>
+                        risultati trovati per
+                        <strong class="badge bg-primary m-1">{{ selectedSpecName }}</strong>
+                    </span>
+                    <span v-if="currentRatingFilter != ''">Filtro voto minimo:
+                        <strong>{{ currentRatingFilter }}</strong>
+                    </span>
+                    <span v-if="currentReviewFilter != ''">Filtro recensioni minime:
+                        <strong>{{ currentReviewFilter }}</strong>
+                    </span>
                 </div>
             </div>
         </div>
 
-        <!-- sposnorizzati -->
+        <!-- sponsored profiles -->
         <div class="container">
             <div v-for="sponsored in sponsoredProfiles" :key="sponsored.id" class="card mt-3">
                 <div class="card-body">
@@ -102,16 +144,20 @@
                         </div>
                         <div class="col-lg-4 col-sm-12">
                             <div class="my-4 text-center">
-                                <div v-if="sponsored.ratings.length" class="col-sm-12"> Voto <strong> {{
-                                        getVoteAverage(sponsored.ratings)
-                                        }}</strong>
-                                    in base a <strong>{{sponsored.ratings.length}}</strong> voti
+                                <div v-if="sponsored.ratings.length" class="col-sm-12">
+                                    Voto
+                                    <strong> {{ getVoteAverage(sponsored.ratings) }}</strong> in
+                                    base a <strong>{{ sponsored.ratings.length }}</strong> voti
                                 </div>
-                                <div v-else class="col-sm-12">Questo medico non ha ancora voti</div>
+                                <div v-else class="col-sm-12">
+                                    Questo medico non ha ancora voti
+                                </div>
                                 <div v-if="sponsored.reviews.length" class="col-sm-12">
                                     <strong>{{ sponsored.reviews.length }}</strong> recensioni
                                 </div>
-                                <div v-else class="col-sm-12">Questo medico non ha ancora recensioni</div>
+                                <div v-else class="col-sm-12">
+                                    Questo medico non ha ancora recensioni
+                                </div>
                             </div>
                         </div>
                         <div class="col-lg-2">
@@ -119,20 +165,18 @@
                                 Vedi medico
                             </router-link>
                         </div>
-
-
                     </div>
                 </div>
             </div>
 
-            <!-- end sponsorizzati -->
+            <!-- end sponsored -->
 
-            <!-- Se non ci sono specialisti -->
-            <div class="card mt-3" v-if="profiles.length <= 0">
+            <!-- If there are no sponsored AND normal profiles -->
+            <div class="card mt-3" v-if="profiles == 0 && sponsoredProfiles == 0">
                 <div class="card-body">Non ci sono specialisti</div>
             </div>
 
-            <!-- Se ci sono specialisti -->
+            <!-- normal profiles -->
 
             <div v-else v-for="profile in profiles" :key="profile.id" class="card mt-3">
                 <div class="card-body">
@@ -159,57 +203,32 @@
                         <!-- votes review columns -->
                         <div class="col-lg-4 col-sm-12">
                             <div class="my-4 text-center">
-                                <div v-if="profile.ratings.length" class="col-sm-12"> Voto <strong> {{
-                                        getVoteAverage(profile.ratings)
-                                        }}</strong>
-                                    in base a <strong>{{profile.ratings.length}}</strong> voti
+                                <div v-if="profile.ratings.length" class="col-sm-12">
+                                    Voto
+                                    <strong> {{ getVoteAverage(profile.ratings) }}</strong> in
+                                    base a <strong>{{ profile.ratings.length }}</strong> voti
                                 </div>
-                                <div v-else class="col-sm-12">Questo medico non ha ancora voti</div>
+                                <div v-else class="col-sm-12">
+                                    Questo medico non ha ancora voti
+                                </div>
                                 <div v-if="profile.reviews.length" class="col-sm-12">
                                     <strong>{{ profile.reviews.length }}</strong> recensioni
                                 </div>
-                                <div v-else class="col-sm-12">Questo medico non ha ancora recensioni</div>
+                                <div v-else class="col-sm-12">
+                                    Questo medico non ha ancora recensioni
+                                </div>
                             </div>
                         </div>
-                        <div class="col-lg-2 col-md-12 ">
+                        <div class="col-lg-2 col-md-12">
                             <router-link class="btn btn-outline-primary w-100" :to="`/profile/${profile.id}`">
                                 Vedi medico
                             </router-link>
                         </div>
-
-
                     </div>
                 </div>
             </div>
         </div>
-        <!-- end specialisti -->
-
-        <!-- Offcanvas -->
-        <div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvasExample"
-            aria-labelledby="offcanvasExampleLabel">
-            <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-            </div>
-            <div class="offcanvas-body">
-                <div>
-                    <select v-model="selectedSpecId" name="" id="">
-                        <option v-for="spec in specs" :key="spec.id" :value="spec.id">
-                            {{ spec.name }}
-                        </option>
-                    </select>
-
-                    <button class="btn btn-primary" data-bs-dismiss="offcanvas" aria-label="Close" v-on:click="
-              findSpecName();
-              searchProfilesBySpec();
-              getSponsoredWithSpecs();
-            ">
-                        cambia specializzazione (nuova chiamata axios)
-                    </button>
-                </div>
-            </div>
-        </div>
-        <!-- end offcanvas -->
+        <!-- end normal profiles -->
     </div>
 </template>
 
@@ -227,9 +246,11 @@
                 // Associamo il dato passato nel router link a un nuovo data di vue.
                 // $route è l'oggetto che arriva tramite router .params per entrare nell'oggetto parametro
                 selectedSpecId: this.$route.params.spec,
-                selectedSpecName: '',
+                selectedSpecName: "",
                 reviewFilter: "",
                 ratingFilter: "",
+                currentRatingFilter: "",
+                currentReviewFilter: "",
             };
         },
 
@@ -279,8 +300,8 @@
                         console.log(res);
                         this.profiles = res.data;
                         params = {};
-                        this.reviewFilter = "";
-                        this.ratingFilter = "";
+                        // this.reviewFilter = "";
+                        // this.ratingFilter = "";
                     })
                     .catch((err) => {
                         //   console.log(err);

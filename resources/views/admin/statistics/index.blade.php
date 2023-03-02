@@ -333,6 +333,7 @@
                     yAxes: [{
                         ticks: {
                             min: 0,
+                            max: 15,
                         },
                         scaleLabel: {
                             display: true,
