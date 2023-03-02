@@ -35,47 +35,36 @@
                         </ul>
                     </div>
                 </div>
-                {{-- <div class="card mt-3">
-                    <div class="card-body">
-                        <a href="{{ route('admin.sponsor.pay', $bronze->name, $profile->name) }}">{{ $bronze->name }}</a>
-                        <a href="{{ route('admin.sponsor.pay', $silver->name, $profile->name) }}">{{ $silver->name }}</a>
-                        <a href="{{ route('admin.sponsor.pay', $gold->name, $profile->name) }}">{{ $gold->name }}</a>
-                    </div>
-                </div> --}}
 
                 <div class="card mt-2 p-2">
-                    <img src="..." class="card-img-top" alt="...">
+                    {{-- <img src="../../imgA/bronze.png" class="card-img-top" alt="..."> --}}
                     <div class="card-body">
-                        <h5 class="card-title">{{ $bronze->name }}</h5>
-                        <p class="card-text">Boost your profile for 24 hours</p>
+                        <h1 class="card-title" style="color: #cd7f32; ">{{ $bronze->name }}</h1>
+                        <h5 class="card-text">Il tuo profilo comparirà nella Homepage del sito per 24 ore!</h5>
                         <a href="{{ route('admin.sponsor.pay', $bronze->name, $profile->name) }}"
                             class="btn btn-primary">Buy {{ $bronze->name }} sponsor</a>
                     </div>
                 </div>
 
                 <div class="card mt-2 p-2">
-                    <img src="..." class="card-img-top" alt="...">
+                    {{-- <img src="../../imgA/silver.png" class="card-img-top" alt="..."> --}}
                     <div class="card-body">
-                        <h5 class="card-title">{{ $silver->name }}</h5>
-                        <p class="card-text">Boost your profile for 48 hours</p>
+                        <h1 class="card-title" style="color: #c0c0c0; ">{{ $silver->name }}</h1>
+                        <h5 class="card-text">Il tuo profilo comparirà nella Homepage del sito per 48 ore!</h5>
                         <a href="{{ route('admin.sponsor.pay', $silver->name, $profile->name) }}"
                             class="btn btn-primary">Buy {{ $silver->name }} sponsor</a>
                     </div>
                 </div>
 
                 <div class="card mt-2 p-2">
-                    <img src="..." class="card-img-top" alt="...">
+                    {{-- <img src="../../imgA/gold.png" class="card-img-top" alt="..."> --}}
                     <div class="card-body">
-                        <h5 class="card-title">{{ $gold->name }}</h5>
-                        <p class="card-text">Boost your profile for 72 hours</p>
+                        <h1 class="card-title" style="color: #d4af37; ">{{ $gold->name }}</h1>
+                        <h5 class="card-text">Il tuo profilo comparirà nella Homepage del sito per 72 ore!</h5>
                         <a href="{{ route('admin.sponsor.pay', $gold->name, $profile->name) }}" class="btn btn-primary">Buy
                             {{ $gold->name }} sponsor</a>
                     </div>
                 </div>
-
-
-
-
             </div>
         </div>
     </div>

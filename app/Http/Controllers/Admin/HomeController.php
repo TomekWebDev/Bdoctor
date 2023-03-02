@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use App\Models\Message;
 use App\Models\Profile;
 use App\Models\ProfileRating;
+use App\Models\ProfileSponsor;
 use App\Models\Rating;
 use App\Models\Review;
 use App\User;
@@ -44,6 +46,20 @@ class HomeController extends Controller
             $message = 'Non hai ancora ricevuto messaggi';
         }
 
-        return view('admin.dashboard', compact('profile', 'user', 'review', 'rating', 'message'));
+        $expiration = ProfileSponsor::where('profile_id', Auth::user()->id)->pluck('expiration_date');
+            //  Converti la data di scadenza in un oggetto Carbon
+            $expiration_now = Carbon::now();
+
+            if($expiration->last() < $expiration_now){
+                $expirationS = 'La sponsorizzazione del tuo profilo è scaduta';
+            } 
+            else if(!$expiration){
+                $expirationS = 'Il tuo profilo non è sponsorizzato';
+            }
+            else {
+                $expirationS = 'Il tuo profilo è sponsorizzato fino al ' . $expiration;
+            }
+
+        return view('admin.dashboard', compact('profile', 'user', 'review', 'rating', 'message','expirationS'));
     }
 }

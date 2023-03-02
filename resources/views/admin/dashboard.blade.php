@@ -99,6 +99,9 @@
                         <div class="mt-3">
                             <h5>Totale Messaggi ricevuti: <small class="text-muted">{{ $message }}</small></h5>
                         </div>
+                        <div class="mt-3">
+                            <h5>La tua sponsorizzazione finirà: <small class="text-muted">{{ $expirationS }}</small></h5>
+                        </div>
         
                         <div class="mt-3 p-2 ">
                             <a href="{{ route('admin.statistics.index', $profile->id) }}" class="btn btn-primary">Statistiche</a>
@@ -154,8 +157,6 @@
             </div>
         </div>
     </div>
-
-    
 
 @endsection
 
