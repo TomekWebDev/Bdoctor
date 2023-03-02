@@ -15,6 +15,13 @@
                                     alt="" />
                             </div>
                         </div>
+                        <div>
+                            <button style="background-color:#076dbb ;" type="button"
+                                class="btn btn-primary btn-sm btn-block" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal">
+                                Mostra CV
+                            </button>
+                        </div>
                     </div>
                     <!-- main info -->
                     <div class="col-lg-8 col-md-7 col-sm-7 align-self-center">
@@ -23,6 +30,7 @@
                                 Dr. {{ profile.user.name }} {{ profile.user.surname }}
                             </h3>
                             <div class="mb-3">
+                                <small class="text-muted">Specialità:</small>
                                 <span v-for="spec in profile.specs" :key="spec.id" class="badge bg-primary m-1">
                                     {{ spec.name }}
                                 </span>
@@ -38,7 +46,6 @@
                                     <strong>{{ profile.reviews.length }}</strong> recensioni
                                 </div>
                                 <div v-else>Questo medico non ha ancora recensioni</div>
-
                             </div>
                             <div class="card mb-3 p-2">
                                 <div class="mb-1">
@@ -145,6 +152,30 @@
                 <h4>Prestazioni</h4>
                 <div class="card mb-3 p-2">
                     <div>{{ profile.services }}</div>
+                </div>
+            </div>
+        </div>
+        <!-- modal curriculum vitae -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">
+                            Curriculum Vitae
+                        </h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+                        <embed :src="profile.resume" class="img-fluid w-100 h-100" type='application/pdf' />
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            Close
+                        </button>
+
+                    </div>
                 </div>
             </div>
         </div>

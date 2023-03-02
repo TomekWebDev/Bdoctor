@@ -98,12 +98,16 @@ class ProfileControllerGuest extends Controller
     public function show($id)
     {
         $this_profile = Profile::with('specs', 'user', 'reviews', 'ratings')->find($id);
-        if (!$this_profile){
+        if (!$this_profile) {
             return response('profilo non trovato', 404);
-        } 
-        
+        }
+
         if ($this_profile->image) {
             $this_profile->image = url("storage/" . $this_profile->image);
+        }
+
+        if ($this_profile->resume) {
+            $this_profile->resume = url("storage/" . $this_profile->resume);
         }
 
         return response()->json($this_profile);

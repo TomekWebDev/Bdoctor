@@ -19,15 +19,9 @@
                                     {{ spec.name }}
                                 </option>
                             </select>
-                            <button v-on:click="
-                  reviewFilter = '';
-                  ratingFilter = '';
-                  currentRatingFilter = '';
-                  currentReviewFilter = '';
-                  findSpecName();
-                  searchProfilesBySpec();
-                  getSponsoredWithSpecs();
-                " style="background-color: #076dbb" class="btn btn-primary mb-3">
+                            <button
+                                v-on:click="reviewFilter = '';ratingFilter = '';currentRatingFilter = '';currentReviewFilter = '';findSpecName();searchProfilesBySpec();getSponsoredWithSpecs();"
+                                style="background-color: #076dbb" class="btn btn-primary mb-3">
                                 Nuova ricerca per specializzazione
                             </button>
                         </div>
