@@ -179,6 +179,10 @@
                 </div>
             </div>
         </div>
+
+        <div class="container-fluid">
+            <Footercomp />
+        </div>
     </div>
 </template>
 
@@ -186,6 +190,7 @@
     import MessageSender from "../components/MessageSender.vue";
     import ReviewSender from "../components/ReviewSender.vue";
     import RatingSender from "../components/RatingSender.vue";
+    import Footercomp from "../components/Footercomp.vue";
 
     export default {
         name: "ShowPage",
@@ -193,6 +198,7 @@
             MessageSender,
             ReviewSender,
             RatingSender,
+            Footercomp
         },
         data() {
             return {

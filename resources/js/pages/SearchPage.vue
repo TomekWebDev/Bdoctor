@@ -223,13 +223,19 @@
             </div>
         </div>
         <!-- end normal profiles -->
+
+        <Footercomp />
     </div>
 </template>
 
 <script>
+import Footercomp from "../components/Footercomp.vue";
+
     export default {
         name: "SearchPage",
-        components: {},
+        components: {
+            Footercomp,
+        },
         data() {
             return {
                 profiles: [],
