@@ -16,7 +16,7 @@
                             aria-expanded="false">
                             Action
                         </button>
-                        <ul class="dropdown-menu">
+                        <ul class="dropdown-menu dropdown-menu-right dropdown-menu-lg-right">
                             <li>
                                 <a class="dropdown-item" href="{{ route('admin.index', $profile_to_edit->id) }}">Dashboard</a>
                             </li>
@@ -45,7 +45,7 @@
         <div class="card mt-3">
             <div class="card-body">
                 <form id="myForm" enctype="multipart/form-data" method="POST"
-                    action="{{ route('admin.profile.update', $profile_to_edit->id) }}" class="mx-5 my-3">
+                    action="{{ route('admin.profile.update', $profile_to_edit->id) }}" class="mx-3 my-3">
 
                     @csrf
                     @method('PUT')
@@ -104,15 +104,20 @@
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label"><span class="text-danger">*</span> Specializzazioni</label>
-
-                        @foreach ($specs as $spec)
-                            <label class="form-label @error('specs') is-invalid @enderror">
-                                <input type="checkbox" name="specs[]" value="{{ $spec->id }}"
-                                    {{ $profile_to_edit->specs->contains($spec) ? 'checked' : '' }}>
-                                {{ $spec->name }}
-                            </label>
-                        @endforeach
+                        <div class="btn-group dropup">
+                            <button class="btn btn-outline-primary dropdown-toggle" type="button" data-toggle="dropdown"
+                                aria-expanded="false">
+                                Specializzazioni
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start overflow-auto" style="height: 200px">
+                                @foreach ($specs as $spec)
+                                    <li class="@error('specs') is-invalid @enderror">
+                                        <input class="form-check-input ml-1" type="checkbox" value="{{ $spec->id }}" id="{{ $spec->name }}" {{ $profile_to_edit->specs->contains($spec) ? 'checked' : '' }}>
+                                        <label class="dropdown-item form-check-label" for="{{ $spec->name }}">{{ $spec->name }}</label>
+                                    </li>
+                                 @endforeach
+                            </ul>
+                        </div>
                         <p>
                             <strong id="gatto"></strong>
                         </p>
@@ -121,7 +126,6 @@
                                 <strong>Seleziona almeno una specializzazione!</strong>
                             </span>
                         @enderror
-
                     </div>
 
                     <div class="mb-3 font-italic">
