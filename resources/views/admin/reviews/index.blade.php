@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <div class="dropdown mr-3">
+        <div class="dropdown mr-3 d-flex flex-row-reverse">
             <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
                 Action
             </button>
@@ -31,20 +31,22 @@
             <div class="card-body">
                 <button id="buttonReview" class="btn btn-primary mb-3 p-2" onclick="toggleReviews()">Mostra recensioni</button>
                 <div id="reviews" style="display: none;">
+
                     {{-- Qua sotto va fatto foreach --}}
                     @if (count($reviews) > 0)
-                        <div class="list-group">
+                        <div class="list-group list-group-flush">
                             @foreach ($reviews as $rev)
                                 <div class="list-group-item d-md-flex flex-md-row justify-content-between align-items-center">
-                                    <div class="col-md-3">
+                                    <div class="col-md-4">
                                         <h5><strong>Recensione di {{ $rev->name }}:</strong></h5>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <span>{{ $rev->review }} </span>
-                                    </div>
-                                    <div class="col-md-3">
                                         <span><i>Scritto il: {{ $rev->created_at->format('d M Y') }}</i></span>
                                     </div>
+                                    <div class="col-md-8">
+                                        <span>{{ $rev->review }} </span>
+                                    </div>
+                                    {{-- <div class="col-md-3">
+                                        <span><i>Scritto il: {{ $rev->created_at->format('d M Y') }}</i></span>
+                                    </div> --}}
                                 </div>
                             @endforeach
                         </div>
