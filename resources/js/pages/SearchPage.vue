@@ -60,9 +60,11 @@
 
         <div class="container">
             <div v-if="selectedSpecId != undefined" class="card mt-3 p-3">
-                <div class="d-flex justify-content-between">
-                    <span>Ecco i tuoi risultati per specializzazione: {{ selectedSpecName }}</span>
-                    <span><strong>{{ profiles.length + sponsoredProfiles.length }}</strong> risultati</span>
+                <div class="row d-flex justify-content-between">
+                    <span>Risultati per la specializzazione:
+                        {{ selectedSpecName }}</span>
+                    <span><strong>{{ profiles.length + sponsoredProfiles.length }}</strong>
+                        risultati</span>
                 </div>
             </div>
         </div>
@@ -71,7 +73,7 @@
         <div class="container">
             <div v-for="sponsored in sponsoredProfiles" :key="sponsored.id" class="card mt-3">
                 <div class="card-body">
-                    <div class="row">
+                    <div class="row d-flex align-items-center">
                         <div class="col-lg-6 col-sm-12 d-flex align-items-center">
                             <div v-if="!sponsored.image" class="col-5">
                                 <img class="img-fluid rounded-circle border border-5 border-warning"
@@ -98,18 +100,27 @@
                                 </small>
                             </div>
                         </div>
-                        <div class="col-lg-6 col-sm-12 d-flex align-items-center justify-content-around">
-                            <div>
-                                <div>{{ sponsored.reviews.length }} recensioni</div>
-                                <div>Voto medio {{ getVoteAverage(sponsored.ratings) }}</div>
-                                <div>{{ sponsored.address }},{{ sponsored.city }}</div>
-                                <div v-if="sponsored.phone">Telefono:{{ sponsored.phone }}</div>
+                        <div class="col-lg-4 col-sm-12">
+                            <div class="my-4 text-center">
+                                <div v-if="sponsored.ratings.length" class="col-sm-12"> Voto <strong> {{
+                                        getVoteAverage(sponsored.ratings)
+                                        }}</strong>
+                                    in base a <strong>{{sponsored.ratings.length}}</strong> voti
+                                </div>
+                                <div v-else class="col-sm-12">Questo medico non ha ancora voti</div>
+                                <div v-if="sponsored.reviews.length" class="col-sm-12">
+                                    <strong>{{ sponsored.reviews.length }}</strong> recensioni
+                                </div>
+                                <div v-else class="col-sm-12">Questo medico non ha ancora recensioni</div>
                             </div>
-
-                            <router-link class="btn btn-outline-primary" :to="`/profile/${sponsored.id}`">
+                        </div>
+                        <div class="col-lg-2">
+                            <router-link class="btn btn-outline-primary w-100" :to="`/profile/${sponsored.id}`">
                                 Vedi medico
                             </router-link>
                         </div>
+
+
                     </div>
                 </div>
             </div>
@@ -125,7 +136,8 @@
 
             <div v-else v-for="profile in profiles" :key="profile.id" class="card mt-3">
                 <div class="card-body">
-                    <div class="row">
+                    <div class="row d-flex align-items-center">
+                        <!-- image -->
                         <div class="col-lg-6 col-sm-12 d-flex align-items-center">
                             <div v-if="!profile.image" class="col-5">
                                 <img class="img-fluid rounded-circle" src="../../../public/img/userDoctor.jpeg"
@@ -135,6 +147,7 @@
                                 <img style="aspect-ratio: 1/1; object-fit: cover" class="img-fluid rounded-circle"
                                     :src="`storage/${profile.image}`" alt="" />
                             </div>
+                            <!-- name and specs -->
                             <div>
                                 <h4>Dr. {{ profile.user.name }} {{ profile.user.surname }}</h4>
 
@@ -143,35 +156,33 @@
                                 </small>
                             </div>
                         </div>
-                        <div class="col-lg-6 col-sm-12 d-flex align-items-center justify-content-around">
-                            <div>
-                                <div>{{ profile.reviews.length }} recensioni</div>
-                                <div>Voto medio {{ getVoteAverage(profile.ratings) }}</div>
-                                <div>{{ profile.address }},{{ profile.city }}</div>
-                                <div v-if="profile.phone">Telefono:{{ profile.phone }}</div>
+                        <!-- votes review columns -->
+                        <div class="col-lg-4 col-sm-12">
+                            <div class="my-4 text-center">
+                                <div v-if="profile.ratings.length" class="col-sm-12"> Voto <strong> {{
+                                        getVoteAverage(profile.ratings)
+                                        }}</strong>
+                                    in base a <strong>{{profile.ratings.length}}</strong> voti
+                                </div>
+                                <div v-else class="col-sm-12">Questo medico non ha ancora voti</div>
+                                <div v-if="profile.reviews.length" class="col-sm-12">
+                                    <strong>{{ profile.reviews.length }}</strong> recensioni
+                                </div>
+                                <div v-else class="col-sm-12">Questo medico non ha ancora recensioni</div>
                             </div>
-
-                            <router-link class="btn btn-outline-primary" :to="`/profile/${profile.id}`">
+                        </div>
+                        <div class="col-lg-2 col-md-12 ">
+                            <router-link class="btn btn-outline-primary w-100" :to="`/profile/${profile.id}`">
                                 Vedi medico
                             </router-link>
                         </div>
+
+
                     </div>
                 </div>
             </div>
         </div>
-
-        <!-- <ul v-else v-for="profile in profiles" :key="profile.id">
-      <li>Profile id: {{ profile.id }}</li>
-      <li v-for="spec in profile.specs" :key="spec.id">
-        Nome della spec: {{ spec.name }}
-      </li>
-      <li>Media voti: {{ profile.ratings }}</li>
-      <li>
-        <router-link :to="`/profile/${profile.id}`">
-          {{ profile.user.name }}
-        </router-link>
-      </li>
-    </ul> -->
+        <!-- end specialisti -->
 
         <!-- Offcanvas -->
         <div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvasExample"
@@ -216,6 +227,7 @@
                 // Associamo il dato passato nel router link a un nuovo data di vue.
                 // $route è l'oggetto che arriva tramite router .params per entrare nell'oggetto parametro
                 selectedSpecId: this.$route.params.spec,
+                selectedSpecName: '',
                 reviewFilter: "",
                 ratingFilter: "",
             };
@@ -374,7 +386,7 @@
                 parametro.forEach((rating) => {
                     voteSum += rating.vote;
                 });
-                let voteAverage = voteSum / parametro.length;
+                let voteAverage = Math.round(voteSum / parametro.length);
                 return voteAverage;
             },
             findSpecName() {
