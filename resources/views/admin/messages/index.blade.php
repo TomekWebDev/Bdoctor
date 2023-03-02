@@ -4,62 +4,63 @@
 
 
     <div class="container">
-        <div class="card">
+        <div class="dropdown mr-3 d-flex flex-row-reverse">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+                Action
+            </button>
+            <ul class="dropdown-menu">
+                <li>
+                    <a class="dropdown-item" href="{{ route('admin.index', $profile->id) }}">Dashboard</a>
+                </li>
+                <li>
+                    <a class="dropdown-item" href="{{ route('admin.profile.edit', $profile->id) }}">Modifica Profilo</a>
+                </li>
+                <li>
+                    <a class="dropdown-item" href="{{ route('admin.reviews.index', $profile->id) }}">Le mie Recensioni</a>
+                </li>
+                <li>
+                    <a class="dropdown-item" href="{{ route('admin.sponsors.index', $profile->id) }}">Aggiungi Sponsor</a>
+                </li>
+                <li>
+                    <a class="dropdown-item" href="{{ route('admin.statistics.index', $profile->id) }}">Statistiche</a>
+                </li>
+            </ul>
+        </div>
+
+        {{-- MESSAGGI --}}
+        <div class="card mt-4 text-center">
+            <h1 class="mt-3">I tuoi messaggi</h1>
             <div class="card-body">
-                <div class="d-flex justify-content-between">
-                    <h1>Messaggi ricevuti</h1>
-                    <div class="dropdown mr-3 align-self-center">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-                            Action
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a class="dropdown-item" href="{{route('admin.index', $profile->id)}}">Dashboard</a>
-                            </li>
-                          <li> 
-                            <a class="dropdown-item" href="{{route('admin.profile.edit', $profile->id)}}">Modifica Profilo</a>
-                          </li>
-                        <li>
-                            <a class="dropdown-item" href="{{route('admin.reviews.index', $profile->id)}}">Le mie Recensioni</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="{{route('admin.sponsors.index', $profile->id)}}">Aggiungi Sponsor</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="{{route('admin.statistics.index', $profile->id)}}">Statistiche</a>
-                        </li>
+                {{-- <button id="buttonMessage" class="btn btn-primary mb-3 p-2" onclick="toggleMessages()">Mostra messaggi</button> --}}
+                <div>
+                    {{-- Qua sotto va fatto foreach --}}
+                    @if (count($messages) > 0)
+                        <ul class="list-group list-group-flush">
+                            @foreach ($messages as $message)
+                                <li class="list-group-item">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <h5><strong>Messaggio di {{ $message->surname }} {{ $message->name }}:</strong></h5>
+                                            <span><i>Scritto il: {{ $message->created_at->format('d M Y') }}</i></span>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <span>{{ $message->message }}</span>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <span><i>Puoi rispondergli scrivendo a: {{ $message->email }}</i></span>
+                                        </div>
+                                    </div>
+                                </li>
+                            @endforeach
                         </ul>
-                    </div>
+                    @else
+                        <h2 class="text-center">Non hai nessun messaggio</h2>
+                    @endif
                 </div>
-
-                {{-- {{dd($messages)}} --}}
-
-                {{-- @foreach ($messages as $singleMessage)
-                    <ul>
-                        <li>
-
-                            {{$singleMessage->surname}} {{$singleMessage->name}} ti domanda: {{ $singleMessage->message}},
-                            puoi risponderli scivendo a: {{$singleMessage->email}}
-                        </li>
-                    </ul>
-                @endforeach --}}
-
-                @if (count($messages) > 0)
-                    @foreach ($messages as $singleMessage)
-                        <ul>
-                            <li>
-
-                                {{ $singleMessage->surname }} {{ $singleMessage->name }} ti domanda:
-                                {{ $singleMessage->message }},
-                                puoi risponderli scivendo a: {{ $singleMessage->email }}
-                            </li>
-                        </ul>
-                    @endforeach
-                @else
-                    <h2 class="text-center">Non hai nessun messaggio</h2>
-                @endif
-
             </div>
         </div>
+
+
+
     </div>
 @endsection
