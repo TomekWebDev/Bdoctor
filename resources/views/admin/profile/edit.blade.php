@@ -18,8 +18,7 @@
                         </button>
                         <ul class="dropdown-menu">
                             <li>
-                                <a class="dropdown-item" href="{{ route('admin.profile.show', $profile_to_edit->id) }}">Il
-                                    mio Profilo</a>
+                                <a class="dropdown-item" href="{{ route('admin.index', $profile_to_edit->id) }}">Dashboard</a>
                             </li>
                             <li>
                                 <a class="dropdown-item"
