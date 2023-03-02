@@ -112,7 +112,7 @@
                             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start overflow-auto" style="height: 200px">
                                 @foreach ($specs as $spec)
                                     <li class="@error('specs') is-invalid @enderror">
-                                        <input class="form-check-input ml-1" type="checkbox" value="{{ $spec->id }}" id="{{ $spec->name }}" {{ $profile_to_edit->specs->contains($spec) ? 'checked' : '' }}>
+                                        <input class="form-check-input ml-1" type="checkbox" name="specs[]" value="{{ $spec->id }}" id="{{ $spec->name }}" {{ $profile_to_edit->specs->contains($spec) ? 'checked' : '' }}>
                                         <label class="dropdown-item form-check-label" for="{{ $spec->name }}">{{ $spec->name }}</label>
                                     </li>
                                  @endforeach
