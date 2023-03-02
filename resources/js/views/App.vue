@@ -1,10 +1,8 @@
 <template>
   <div class="w-100">
-
-    <HeaderComp/>
+    <HeaderComp />
 
     <router-view> </router-view>
-    
   </div>
 </template>
 

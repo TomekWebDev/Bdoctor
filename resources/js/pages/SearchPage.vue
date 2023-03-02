@@ -1,240 +1,244 @@
 <template>
-    <div class="container">
-        <!-- navbar advanced search -->
-        <nav class="navbar col-lg-12">
-            <div class="">
-                <div class="w-100 text-center my-3">
-                    <h2>Ricerca Avanzata</h2>
-                </div>
-                <div class="" id="navbarNav2">
-                    <div class="container">
-                        <div class="row w-100">
-                            <select required v-model="selectedSpecId" name="" id="" class="form-select mb-3 col-lg-12">
-                                <option disabled selected placeholder="Seleziona una
+    <div>
+        <div class="container min-vh-100">
+            <!-- navbar advanced search -->
+            <nav class="navbar col-lg-12">
+                <div class="">
+                    <div class="w-100 text-center my-3">
+                        <h2>Ricerca Avanzata</h2>
+                    </div>
+                    <div class="" id="navbarNav2">
+                        <div class="container">
+                            <div class="row w-100">
+                                <select required v-model="selectedSpecId" name="" id=""
+                                    class="form-select mb-3 col-lg-12">
+                                    <option disabled selected placeholder="Seleziona una
                                     specializzazione">
-                                    <span class="text-danger">*</span>Seleziona una
-                                    specializzazione
-                                </option>
-                                <option v-for="spec in specs" :key="spec.id" :value="spec.id">
-                                    {{ spec.name }}
-                                </option>
-                            </select>
-                            <button
-                                v-on:click="reviewFilter = '';ratingFilter = '';currentRatingFilter = '';currentReviewFilter = '';findSpecName();searchProfilesBySpec();getSponsoredWithSpecs();"
-                                style="background-color: #076dbb" class="btn btn-primary mb-3">
-                                Nuova ricerca per specializzazione
-                            </button>
-                        </div>
-                        <div class="row w-100">
-                            <div class="col-lg-6">
-                                <label for="ratingFilterSelect">Seleziona filtro per media voti minima:</label>
-                                <select id="ratingFilterSelect" v-model="ratingFilter" class="form-select mb-3">
-                                    <option v-for="n in 5" :key="n" :value="n">{{ n }}</option>
+                                        <span class="text-danger">*</span>Seleziona una
+                                        specializzazione
+                                    </option>
+                                    <option v-for="spec in specs" :key="spec.id" :value="spec.id">
+                                        {{ spec.name }}
+                                    </option>
                                 </select>
+                                <button
+                                    v-on:click="reviewFilter = '';ratingFilter = '';currentRatingFilter = '';currentReviewFilter = '';findSpecName();searchProfilesBySpec();getSponsoredWithSpecs();"
+                                    style="background-color: #076dbb" class="btn btn-primary mb-3">
+                                    Nuova ricerca per specializzazione
+                                </button>
                             </div>
-                            <div class="col-lg-6">
-                                <label for="reviewFilterSelect">Seleziona filtro per minimo numero di
-                                    recensioni:</label>
-                                <select id="reviewFilterSelect" v-model="reviewFilter" class="form-select mb-3">
-                                    <option v-for="n in 10" :key="n" :value="n">{{ n }}</option>
-                                </select>
-                            </div>
-                            <button class="btn btn-primary col-lg-12 mb-3" type="button" v-on:click="
+                            <div class="row w-100">
+                                <div class="col-lg-6">
+                                    <label for="ratingFilterSelect">Seleziona filtro per media voti minima:</label>
+                                    <select id="ratingFilterSelect" v-model="ratingFilter" class="form-select mb-3">
+                                        <option v-for="n in 5" :key="n" :value="n">{{ n }}</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label for="reviewFilterSelect">Seleziona filtro per minimo numero di
+                                        recensioni:</label>
+                                    <select id="reviewFilterSelect" v-model="reviewFilter" class="form-select mb-3">
+                                        <option v-for="n in 10" :key="n" :value="n">{{ n }}</option>
+                                    </select>
+                                </div>
+                                <button class="btn btn-primary col-lg-12 mb-3" type="button" v-on:click="
                   searchProfilesBySpec();
                   currentRatingFilter = ratingFilter;
                   currentReviewFilter = reviewFilter;
                 " style="background-color: #076dbb">
-                                Applica filtri
-                            </button>
-                        </div>
-                        <div class="col-lg-12 d-flex justify-content-end">
-                            <div class="dropdown p-0">
-                                <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown"
-                                    aria-expanded="false" style="background-color: #076dbb">
-                                    Ordina risultati per
+                                    Applica filtri
                                 </button>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <button class="dropdown-item" v-on:click="reviewsFilterTopDown">
-                                            Recensioni dal maggiore
-                                        </button>
-                                    </li>
-                                    <div class="dropdown-divider"></div>
-                                    <li>
-                                        <button class="dropdown-item" v-on:click="reviewsFilterDownTop">
-                                            Recensioni dal minore
-                                        </button>
-                                    </li>
-                                    <div class="dropdown-divider"></div>
-                                    <li>
-                                        <button class="dropdown-item" v-on:click="ratingFilterTopDown">
-                                            Voto medio dal maggiore
-                                        </button>
-                                    </li>
-                                    <div class="dropdown-divider"></div>
-                                    <li>
-                                        <button class="dropdown-item" v-on:click="ratingFilterDownTop">
-                                            Voto medio dal minore
-                                        </button>
-                                    </li>
-                                </ul>
+                            </div>
+                            <div class="col-lg-12 d-flex justify-content-end">
+                                <div class="dropdown p-0">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button"
+                                        data-toggle="dropdown" aria-expanded="false" style="background-color: #076dbb">
+                                        Ordina risultati per
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <button class="dropdown-item" v-on:click="reviewsFilterTopDown">
+                                                Recensioni dal maggiore
+                                            </button>
+                                        </li>
+                                        <div class="dropdown-divider"></div>
+                                        <li>
+                                            <button class="dropdown-item" v-on:click="reviewsFilterDownTop">
+                                                Recensioni dal minore
+                                            </button>
+                                        </li>
+                                        <div class="dropdown-divider"></div>
+                                        <li>
+                                            <button class="dropdown-item" v-on:click="ratingFilterTopDown">
+                                                Voto medio dal maggiore
+                                            </button>
+                                        </li>
+                                        <div class="dropdown-divider"></div>
+                                        <li>
+                                            <button class="dropdown-item" v-on:click="ratingFilterDownTop">
+                                                Voto medio dal minore
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <!-- end navbar -->
+
+            <!-- resume of the search results, filters and orders -->
+            <div class="container">
+                <div v-if="selectedSpecId != undefined" class="card mt-3 p-3">
+                    <div class="row d-flex justify-content-between">
+                        <span>
+                            <strong>{{ profiles.length + sponsoredProfiles.length }}</strong>
+                            risultati trovati per
+                            <strong class="badge bg-primary m-1">{{ selectedSpecName }}</strong>
+                        </span>
+                        <span v-if="currentRatingFilter != ''">Filtro voto minimo:
+                            <strong>{{ currentRatingFilter }}</strong>
+                        </span>
+                        <span v-if="currentReviewFilter != ''">Filtro recensioni minime:
+                            <strong>{{ currentReviewFilter }}</strong>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- sponsored profiles -->
+            <div class="container">
+                <div v-for="sponsored in sponsoredProfiles" :key="sponsored.id" class="card mt-3">
+                    <div class="card-body">
+                        <div class="row d-flex align-items-center">
+                            <div class="col-lg-6 col-sm-12 d-flex align-items-center">
+                                <div v-if="!sponsored.image" class="col-5">
+                                    <img class="img-fluid rounded-circle border border-5 border-warning"
+                                        src="../../../public/img/userDoctor.jpeg" alt="" />
+                                    <div class="d-block text-warning text-center">
+                                        Sponsorizzato
+                                    </div>
+                                </div>
+                                <div v-else class="col-5">
+                                    <img style="aspect-ratio: 1/1; object-fit: cover"
+                                        class="img-fluid rounded-circle border border-5 border-warning"
+                                        :src="`storage/${sponsored.image}`" alt="" />
+                                    <div class="d-block text-warning text-center">
+                                        Sponsorizzato
+                                    </div>
+                                </div>
+                                <div>
+                                    <h4>
+                                        Dr. {{ sponsored.user.name }} {{ sponsored.user.surname }}
+                                    </h4>
+
+                                    <small v-for="spec in sponsored.specs" :key="spec.id" class="text-muted">
+                                        {{ spec.name }}
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-sm-12">
+                                <div class="my-4 text-center">
+                                    <div v-if="sponsored.ratings.length" class="col-sm-12">
+                                        Voto
+                                        <strong> {{ getVoteAverage(sponsored.ratings) }}</strong> in
+                                        base a <strong>{{ sponsored.ratings.length }}</strong> voti
+                                    </div>
+                                    <div v-else class="col-sm-12">
+                                        Questo medico non ha ancora voti
+                                    </div>
+                                    <div v-if="sponsored.reviews.length" class="col-sm-12">
+                                        <strong>{{ sponsored.reviews.length }}</strong> recensioni
+                                    </div>
+                                    <div v-else class="col-sm-12">
+                                        Questo medico non ha ancora recensioni
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <router-link class="btn btn-outline-primary w-100" :to="`/profile/${sponsored.id}`">
+                                    Vedi medico
+                                </router-link>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- end sponsored -->
+
+                <!-- If there are no sponsored AND normal profiles -->
+                <div class="card mt-3" v-if="profiles == 0 && sponsoredProfiles == 0">
+                    <div class="card-body">Non ci sono specialisti</div>
+                </div>
+
+                <!-- normal profiles -->
+
+                <div v-else v-for="profile in profiles" :key="profile.id" class="card mt-3">
+                    <div class="card-body">
+                        <div class="row d-flex align-items-center">
+                            <!-- image -->
+                            <div class="col-lg-6 col-sm-12 d-flex align-items-center">
+                                <div v-if="!profile.image" class="col-5">
+                                    <img class="img-fluid rounded-circle" src="../../../public/img/userDoctor.jpeg"
+                                        alt="" />
+                                </div>
+                                <div v-else class="col-5">
+                                    <img style="aspect-ratio: 1/1; object-fit: cover" class="img-fluid rounded-circle"
+                                        :src="`storage/${profile.image}`" alt="" />
+                                </div>
+                                <!-- name and specs -->
+                                <div>
+                                    <h4>Dr. {{ profile.user.name }} {{ profile.user.surname }}</h4>
+
+                                    <small v-for="spec in profile.specs" :key="spec.id" class="text-muted">
+                                        {{ spec.name }}
+                                    </small>
+                                </div>
+                            </div>
+                            <!-- votes review columns -->
+                            <div class="col-lg-4 col-sm-12">
+                                <div class="my-4 text-center">
+                                    <div v-if="profile.ratings.length" class="col-sm-12">
+                                        Voto
+                                        <strong> {{ getVoteAverage(profile.ratings) }}</strong> in
+                                        base a <strong>{{ profile.ratings.length }}</strong> voti
+                                    </div>
+                                    <div v-else class="col-sm-12">
+                                        Questo medico non ha ancora voti
+                                    </div>
+                                    <div v-if="profile.reviews.length" class="col-sm-12">
+                                        <strong>{{ profile.reviews.length }}</strong> recensioni
+                                    </div>
+                                    <div v-else class="col-sm-12">
+                                        Questo medico non ha ancora recensioni
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-12">
+                                <router-link class="btn btn-outline-primary w-100" :to="`/profile/${profile.id}`">
+                                    Vedi medico
+                                </router-link>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </nav>
-        <!-- end navbar -->
+            <!-- end normal profiles -->
 
-        <!-- resume of the search results, filters and orders -->
-        <div class="container">
-            <div v-if="selectedSpecId != undefined" class="card mt-3 p-3">
-                <div class="row d-flex justify-content-between">
-                    <span>
-                        <strong>{{ profiles.length + sponsoredProfiles.length }}</strong>
-                        risultati trovati per
-                        <strong class="badge bg-primary m-1">{{ selectedSpecName }}</strong>
-                    </span>
-                    <span v-if="currentRatingFilter != ''">Filtro voto minimo:
-                        <strong>{{ currentRatingFilter }}</strong>
-                    </span>
-                    <span v-if="currentReviewFilter != ''">Filtro recensioni minime:
-                        <strong>{{ currentReviewFilter }}</strong>
-                    </span>
-                </div>
-            </div>
+
         </div>
-
-        <!-- sponsored profiles -->
-        <div class="container">
-            <div v-for="sponsored in sponsoredProfiles" :key="sponsored.id" class="card mt-3">
-                <div class="card-body">
-                    <div class="row d-flex align-items-center">
-                        <div class="col-lg-6 col-sm-12 d-flex align-items-center">
-                            <div v-if="!sponsored.image" class="col-5">
-                                <img class="img-fluid rounded-circle border border-5 border-warning"
-                                    src="../../../public/img/userDoctor.jpeg" alt="" />
-                                <div class="d-block text-warning text-center">
-                                    Sponsorizzato
-                                </div>
-                            </div>
-                            <div v-else class="col-5">
-                                <img style="aspect-ratio: 1/1; object-fit: cover"
-                                    class="img-fluid rounded-circle border border-5 border-warning"
-                                    :src="`storage/${sponsored.image}`" alt="" />
-                                <div class="d-block text-warning text-center">
-                                    Sponsorizzato
-                                </div>
-                            </div>
-                            <div>
-                                <h4>
-                                    Dr. {{ sponsored.user.name }} {{ sponsored.user.surname }}
-                                </h4>
-
-                                <small v-for="spec in sponsored.specs" :key="spec.id" class="text-muted">
-                                    {{ spec.name }}
-                                </small>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-sm-12">
-                            <div class="my-4 text-center">
-                                <div v-if="sponsored.ratings.length" class="col-sm-12">
-                                    Voto
-                                    <strong> {{ getVoteAverage(sponsored.ratings) }}</strong> in
-                                    base a <strong>{{ sponsored.ratings.length }}</strong> voti
-                                </div>
-                                <div v-else class="col-sm-12">
-                                    Questo medico non ha ancora voti
-                                </div>
-                                <div v-if="sponsored.reviews.length" class="col-sm-12">
-                                    <strong>{{ sponsored.reviews.length }}</strong> recensioni
-                                </div>
-                                <div v-else class="col-sm-12">
-                                    Questo medico non ha ancora recensioni
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-2">
-                            <router-link class="btn btn-outline-primary w-100" :to="`/profile/${sponsored.id}`">
-                                Vedi medico
-                            </router-link>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- end sponsored -->
-
-            <!-- If there are no sponsored AND normal profiles -->
-            <div class="card mt-3" v-if="profiles == 0 && sponsoredProfiles == 0">
-                <div class="card-body">Non ci sono specialisti</div>
-            </div>
-
-            <!-- normal profiles -->
-
-            <div v-else v-for="profile in profiles" :key="profile.id" class="card mt-3">
-                <div class="card-body">
-                    <div class="row d-flex align-items-center">
-                        <!-- image -->
-                        <div class="col-lg-6 col-sm-12 d-flex align-items-center">
-                            <div v-if="!profile.image" class="col-5">
-                                <img class="img-fluid rounded-circle" src="../../../public/img/userDoctor.jpeg"
-                                    alt="" />
-                            </div>
-                            <div v-else class="col-5">
-                                <img style="aspect-ratio: 1/1; object-fit: cover" class="img-fluid rounded-circle"
-                                    :src="`storage/${profile.image}`" alt="" />
-                            </div>
-                            <!-- name and specs -->
-                            <div>
-                                <h4>Dr. {{ profile.user.name }} {{ profile.user.surname }}</h4>
-
-                                <small v-for="spec in profile.specs" :key="spec.id" class="text-muted">
-                                    {{ spec.name }}
-                                </small>
-                            </div>
-                        </div>
-                        <!-- votes review columns -->
-                        <div class="col-lg-4 col-sm-12">
-                            <div class="my-4 text-center">
-                                <div v-if="profile.ratings.length" class="col-sm-12">
-                                    Voto
-                                    <strong> {{ getVoteAverage(profile.ratings) }}</strong> in
-                                    base a <strong>{{ profile.ratings.length }}</strong> voti
-                                </div>
-                                <div v-else class="col-sm-12">
-                                    Questo medico non ha ancora voti
-                                </div>
-                                <div v-if="profile.reviews.length" class="col-sm-12">
-                                    <strong>{{ profile.reviews.length }}</strong> recensioni
-                                </div>
-                                <div v-else class="col-sm-12">
-                                    Questo medico non ha ancora recensioni
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-md-12">
-                            <router-link class="btn btn-outline-primary w-100" :to="`/profile/${profile.id}`">
-                                Vedi medico
-                            </router-link>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- end normal profiles -->
-
-        <Footercomp />
+        <FooterComp class="footer-component" />
     </div>
 </template>
 
 <script>
-import Footercomp from "../components/Footercomp.vue";
+    import FooterComp from "../components/FooterComp.vue";
 
     export default {
         name: "SearchPage",
         components: {
-            Footercomp,
+            FooterComp,
         },
         data() {
             return {
@@ -419,4 +423,5 @@ import Footercomp from "../components/Footercomp.vue";
     };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+</style>

@@ -1,5 +1,5 @@
 <template>
-    <div class="container-fluid">
+    <div class="">
         <!-- background image, title and search tools container -->
         <div class="container-fluid img-background mb-4">
             <div class="container title-search-container">
@@ -96,17 +96,17 @@
             </div>
         </div>
 
-        <Footercomp />
+        <FooterComp />
     </div>
 </template>
 
 <script>
-    import Footercomp from "../components/Footercomp.vue";
+    import FooterComp from "../components/FooterComp.vue";
 
     export default {
         name: "HomePage",
         components: {
-            Footercomp,
+            FooterComp,
         },
         data() {
             return {

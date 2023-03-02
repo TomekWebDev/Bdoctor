@@ -7,22 +7,27 @@
                     <router-link class="navbar-brand" :to="{ name: 'homepage' }">
                         <h2>BoolDoctor</h2>
                     </router-link>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
+                    <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon text-white color"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav">
-                            <li class="nav-item">
+                            <li class="nav-item menu-item">
                                 <router-link class="nav-link active" aria-current="page" :to="{ name: 'homepage' }">
-                                    Home
+                                    <h5>Home</h5>
                                 </router-link>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" href="/login">Login</a>
+                            <li class="nav-item menu-item">
+                                <a class="nav-link" href="/login">
+                                    <h5>Login</h5>
+                                </a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" href="/register">Register</a>
+                            <li class="nav-item menu-item">
+                                <a class="nav-link" href="/register">
+                                    <h5>Register</h5>
+                                </a>
                             </li>
                         </ul>
                     </div>
@@ -39,4 +44,8 @@
     };
 </script>
 
-<style></style>
+<style>
+    .menu-item:hover {
+        border-bottom: 1px solid white;
+    }
+</style>
