@@ -57,9 +57,9 @@ class HomeController extends Controller
                 $expirationS = 'Il tuo profilo non è sponsorizzato';
             }
             else {
-                $expirationS = 'Il tuo profilo è sponsorizzato fino al ' . $expiration;
+                $expirationS = date('d M Y - g:i A', strtotime($expiration->last()));
             }
 
-        return view('admin.dashboard', compact('profile', 'user', 'review', 'rating', 'message','expirationS'));
+        return view('admin.dashboard', compact('profile', 'user', 'review', 'rating', 'message', 'expirationS'));
     }
 }
