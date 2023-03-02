@@ -101,6 +101,7 @@
                         </div>
                         <div class="mt-3">
                             <h5>La tua sponsorizzazione finirà: <small class="text-muted">{{ $expirationS }}</small></h5>
+
                         </div>
         
                         <div class="mt-3 p-2 ">
