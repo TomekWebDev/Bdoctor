@@ -257,8 +257,8 @@
         });
 
 
-        let xValues = ['Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre',
-            'Ottobre', 'Novembre', 'Dicembre', 'Gennaio', 'Febbraio', 'Marzo',
+        let xValues = ['Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre',
+            'Ottobre', 'Novembre', 'Dicembre',
         ];
 
         let reviewValues = [gennaioR, febbraioR, marzoR, aprileR, maggioR, giugnoR, luglioR, agostoR, settembreR, ottobreR,
