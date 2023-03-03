@@ -21,9 +21,15 @@
                                         {{ spec.name }}
                                     </option>
                                 </select>
-                                <button
-                                    v-on:click="reviewFilter = '';ratingFilter = '';currentRatingFilter = '';currentReviewFilter = '';findSpecName();searchProfilesBySpec();getSponsoredWithSpecs();"
-                                    style="background-color: #076dbb" class="btn btn-primary mb-3">
+                                <button v-on:click="
+                    reviewFilter = '';
+                    ratingFilter = '';
+                    currentRatingFilter = '';
+                    currentReviewFilter = '';
+                    findSpecName();
+                    searchProfilesBySpec();
+                    getSponsoredWithSpecs();
+                  " style="background-color: #076dbb" class="btn btn-primary mb-3">
                                     Nuova ricerca per specializzazione
                                 </button>
                             </div>
@@ -42,10 +48,10 @@
                                     </select>
                                 </div>
                                 <button class="btn btn-primary col-lg-12 mb-3" type="button" v-on:click="
-                  searchProfilesBySpec();
-                  currentRatingFilter = ratingFilter;
-                  currentReviewFilter = reviewFilter;
-                " style="background-color: #076dbb">
+                    searchProfilesBySpec();
+                    currentRatingFilter = ratingFilter;
+                    currentReviewFilter = reviewFilter;
+                  " style="background-color: #076dbb">
                                     Applica filtri
                                 </button>
                             </div>
@@ -95,7 +101,9 @@
                         <span>
                             <strong>{{ profiles.length + sponsoredProfiles.length }}</strong>
                             risultati trovati per
-                            <strong class="badge bg-primary m-1">{{ selectedSpecName }}</strong>
+                            <strong class="badge bg-primary m-1">{{
+                                selectedSpecName
+                                }}</strong>
                         </span>
                         <span v-if="currentRatingFilter != ''">Filtro voto minimo:
                             <strong>{{ currentRatingFilter }}</strong>
@@ -190,7 +198,9 @@
                                 </div>
                                 <!-- name and specs -->
                                 <div>
-                                    <h4>Dr. {{ profile.user.name }} {{ profile.user.surname }}</h4>
+                                    <h4>
+                                        Dr. {{ profile.user.name }} {{ profile.user.surname }}
+                                    </h4>
 
                                     <small v-for="spec in profile.specs" :key="spec.id" class="text-muted">
                                         {{ spec.name }}
@@ -227,7 +237,6 @@
             </div>
             <!-- end normal profiles -->
 
-
         </div>
         <FooterComp class="footer-component" />
     </div>
@@ -237,17 +246,20 @@
     import FooterComp from "../components/FooterComp.vue";
     import LoaderComp from "../components/LoaderComp.vue";
 
+
     export default {
         name: "SearchPage",
         components: {
             FooterComp,
             LoaderComp,
+
         },
         data() {
             return {
                 profiles: [],
                 sponsoredProfiles: [],
                 specs: [],
+                pagination: {},
                 isLoading: false,
                 // Step 4
                 // Associamo il dato passato nel router link a un nuovo data di vue.
@@ -307,8 +319,6 @@
                         console.log(res);
                         this.profiles = res.data;
                         params = {};
-                        // this.reviewFilter = "";
-                        // this.ratingFilter = "";
                     })
                     .catch((err) => {
                         //   console.log(err);
