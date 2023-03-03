@@ -50,6 +50,10 @@ class ReviewControllerGuest extends Controller
         $new_review = new Review();
         $new_review->fill($data);
         $new_review->save();
+
+        $send_confirmation = 'La tua recensione è stata pubblicata';
+
+        return response()->json($send_confirmation);
     }
 
     /**

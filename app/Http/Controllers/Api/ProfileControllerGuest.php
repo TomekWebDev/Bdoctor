@@ -110,6 +110,9 @@ class ProfileControllerGuest extends Controller
             $this_profile->resume = url("storage/" . $this_profile->resume);
         }
 
+        $this_profile->name = $this_profile->user->name;
+        $this_profile->surname = $this_profile->user->surname;
+
         return response()->json($this_profile);
     }
 

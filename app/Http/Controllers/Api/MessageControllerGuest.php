@@ -40,9 +40,9 @@ class MessageControllerGuest extends Controller
 
         $request->validate(
             [
-                'name' => 'required|max:100',
-                'surname' => 'required|max:100',
-                'email' => 'required|max:50',
+                // 'name' => 'required|max:100',
+                // 'surname' => 'required|max:100',
+                // 'email' => 'required|max:50',
                 'message' => 'required|max:400',
                 'profile_id' => 'required'
             ]
@@ -51,6 +51,10 @@ class MessageControllerGuest extends Controller
         $new_message = new Message();
         $new_message->fill($data);
         $new_message->save();
+
+        $send_confirmation = 'Il tuo messaggio è stato inviato';
+
+        return response()->json($send_confirmation);
     }
 
     /**

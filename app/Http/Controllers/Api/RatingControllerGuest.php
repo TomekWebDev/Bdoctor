@@ -56,6 +56,10 @@ class RatingControllerGuest extends Controller
 
         $pivot->fill($data);
         $pivot->save();
+
+        $send_confirmation = 'Hai votato con successo';
+
+        return response()->json($send_confirmation);
     }
 
     /**

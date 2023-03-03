@@ -1,6 +1,6 @@
 <template>
     <div>
-        <form v-on:submit="sendReview">
+        <form @submit.prevent="sendReview">
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label"><span class="text-danger">*</span>Nome</label>
                 <input required v-model="name" type="text" placeholder="name" class="form-control" />
@@ -10,10 +10,15 @@
                 <textarea required v-model="review" name="review" placeholder="Recensione"
                     class="form-control"></textarea>
             </div>
+            <div v-if="reviewConfirmation != ''" class="alert alert-success">
+                {{reviewConfirmation}}
+            </div>
             <div id="emailHelp" class="form-text mb-3">
                 La sua recensione verrà pubblicata.
             </div>
-            <button style="background-color: #076dbb" type="submit" class="btn btn-primary mb-3">Submit</button>
+            <button style="background-color: #076dbb" type="submit" class="btn btn-primary mb-3">
+                Submit
+            </button>
         </form>
     </div>
 </template>
@@ -31,6 +36,7 @@
                 review: "",
                 validated: false,
                 isLoading: false,
+                reviewConfirmation: '',
             };
         },
         methods: {
@@ -45,6 +51,9 @@
                     })
                     .then((res) => {
                         console.log(res.data);
+                        this.reviewConfirmation = res.data;
+                        this.name = "";
+                        this.review = "";
                     })
                     .catch((err) => {
                         console.log(err);

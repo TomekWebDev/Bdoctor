@@ -1,6 +1,6 @@
 <template>
     <div>
-        <form v-on:submit="sendMessage">
+        <form @submit.prevent="sendMessage">
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Nome</label>
                 <input v-model="name" type="text" placeholder="name" class="form-control" />
@@ -18,10 +18,15 @@
                 <textarea required v-model="message" name="message" placeholder="Messaggio"
                     class="form-control"></textarea>
             </div>
+            <div v-if="messageConfirmation != ''" class="alert alert-success">
+                {{messageConfirmation}}
+            </div>
             <div id="emailHelp" class="form-text mb-3">
                 Le informazioni saranno visibili solo dal medico.
             </div>
-            <button style="background-color: #076dbb" type="submit" class="btn btn-primary mb-3">Submit</button>
+            <button style="background-color: #076dbb" type="submit" class="btn btn-primary mb-3">
+                Submit
+            </button>
         </form>
     </div>
 </template>
@@ -41,12 +46,16 @@
                 message: "",
                 validated: false,
                 isLoading: false,
+                messageConfirmation: "",
             };
+        },
+        mounted() {
+            console.log(this.variabile);
         },
         methods: {
             sendMessage() {
                 this.isLoading = true;
-
+                console.log("Before request");
                 axios
                     .post("/api/message", {
                         name: this.name,
@@ -57,6 +66,11 @@
                     })
                     .then((res) => {
                         console.log(res.data);
+                        this.messageConfirmation = res.data;
+                        this.name = '';
+                        this.surname = '';
+                        this.email = '';
+                        this.message = '';
                     })
                     .catch((err) => {
                         console.log(err);
@@ -64,6 +78,7 @@
                     .then(() => {
                         this.isLoading = false;
                     });
+                console.log("After request");
             },
         },
     };
