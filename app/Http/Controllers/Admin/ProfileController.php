@@ -186,8 +186,10 @@ class ProfileController extends Controller
         $profiloUser = Auth::user();
         $profiloUtente->specs()->sync([]);
         $profiloUtente->ratings()->sync([]);
-        $profiloUtente->delete();
+        $profiloUtente->sponsors()->sync([]);
         $profiloUser -> delete();
+        $profiloUtente->delete();
+        
 
         return redirect()->route('guest.home');
     }
