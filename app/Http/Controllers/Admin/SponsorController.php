@@ -23,7 +23,10 @@ class SponsorController extends Controller
         $gold = Sponsor::whereId(3)->first();
         $profile = Auth::user();
 
-        return view('admin.sponsors.index', compact('bronze', 'silver', 'gold', 'profile'));
+        $test = Carbon::now();
+        $test2 = ProfileSponsor::where('profile_id', Auth::user()->id)->pluck('expiration_date')->last();
+
+        return view('admin.sponsors.index', compact('bronze', 'silver', 'gold', 'profile', 'test', 'test2'));
     }
 
     /**
@@ -55,15 +58,29 @@ class SponsorController extends Controller
     {
         $profile_id = Auth::user()->id;
 
+        $last_expiration_date = date(ProfileSponsor::where('profile_id', Auth::user()->id)->pluck('expiration_date')->last());
+
         $sponsor = Sponsor::where('price', $price)->first();
         $sponsor_id = $sponsor->id;
 
         if ($price == 2.99) {
-            $expiration_date = Carbon::now()->addDays(1);
+            if ($last_expiration_date > Carbon::now()) {
+                $expiration_date = Carbon::parse($last_expiration_date)->addDays(1);
+            } else {
+                $expiration_date = Carbon::now()->addDays(1);
+            }
         } elseif ($price == 5.99) {
-            $expiration_date = Carbon::now()->addDays(2);
+            if ($last_expiration_date > Carbon::now()) {
+                $expiration_date = Carbon::parse($last_expiration_date)->addDays(2);
+            } else {
+                $expiration_date = Carbon::now()->addDays(2);
+            }
         } else {
-            $expiration_date = Carbon::now()->addDays(3);
+            if ($last_expiration_date > Carbon::now()) {
+                $expiration_date = Carbon::parse($last_expiration_date)->addDays(3);
+            } else {
+                $expiration_date = Carbon::now()->addDays(3);
+            }
         }
         $pivot = new ProfileSponsor;
         $pivot->sponsor_id = $sponsor_id;

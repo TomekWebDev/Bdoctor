@@ -66,6 +66,8 @@
                             {{ $gold->name }} sponsor</a>
                     </div>
                 </div>
+                <div>{{ $test }}</div>
+                <div>{{ $test2 }}</div>
             </div>
         </div>
     </div>
