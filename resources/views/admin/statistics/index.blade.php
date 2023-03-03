@@ -3,9 +3,36 @@
 @section('content')
     <div class="container">
 
-        <div class="card">
-            <div class="card-body">
+        <div class="card ">
+            <div class="card-body d-flex justify-content-between">
                 <h1>Statistiche</h1>
+                <div class="dropdown mr-3 d-flex flex-row-reverse ">
+                    <button class="btn btn-secondary dropdown-toggle align-self-center" type="button" data-toggle="dropdown"
+                        aria-expanded="false" style="background-color: #076dbb">
+                        Action
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="dropdown-item" href="{{ route('admin.index', $profile->id) }}">Dashboard</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{{ route('admin.profile.edit', $profile->id) }}">Modifica
+                                Profilo</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{{ route('admin.reviews.index', $profile->id) }}">Le mie
+                                Recensioni</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{{ route('admin.sponsors.index', $profile->id) }}">Aggiungi
+                                Sponsor</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item"
+                                href="{{ route('admin.statistics.index', $profile->id) }}">Statistiche</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
 
@@ -34,7 +61,8 @@
         <div class="card mt-3">
             <div class="card-body">
                 <div class="d-flex justify-content-between">
-                    <h2 class="py-3">Rating ricevuti per mese</h2>
+
+                    <h2 class="py-3">Rating ricevuti per il mese di </h2>
                     <div class="align-self-center dropdown mr-3">
                         <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown"
                             aria-expanded="false">
@@ -229,8 +257,8 @@
         });
 
 
-        let xValues = ['Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre',
-            'Ottobre', 'Novembre', 'Dicembre',
+        let xValues = ['Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre',
+            'Ottobre', 'Novembre', 'Dicembre', 'Gennaio', 'Febbraio', 'Marzo',
         ];
 
         let reviewValues = [gennaioR, febbraioR, marzoR, aprileR, maggioR, giugnoR, luglioR, agostoR, settembreR, ottobreR,

@@ -12,13 +12,14 @@
                 <div class="d-flex justify-content-between">
                     <h1>Modifica Profilo <small class="text-muted">{{ $user->name }}</small></h1>
                     <div class="dropdown mr-3 align-self-center">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown"
-                            aria-expanded="false">
+                        <button class="btn btn-secondary dropdown-toggle" style="background-color: #076dbb" type="button"
+                            data-toggle="dropdown" aria-expanded="false">
                             Action
                         </button>
                         <ul class="dropdown-menu dropdown-menu-right dropdown-menu-lg-right">
                             <li>
-                                <a class="dropdown-item" href="{{ route('admin.index', $profile_to_edit->id) }}">Dashboard</a>
+                                <a class="dropdown-item"
+                                    href="{{ route('admin.index', $profile_to_edit->id) }}">Dashboard</a>
                             </li>
                             <li>
                                 <a class="dropdown-item"
@@ -109,13 +110,17 @@
                                 aria-expanded="false">
                                 Specializzazioni
                             </button>
-                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start overflow-auto" style="height: 200px">
+                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start overflow-auto"
+                                style="height: 200px">
                                 @foreach ($specs as $spec)
                                     <li class="@error('specs') is-invalid @enderror">
-                                        <input class="form-check-input ml-1" type="checkbox" name="specs[]" value="{{ $spec->id }}" id="{{ $spec->name }}" {{ $profile_to_edit->specs->contains($spec) ? 'checked' : '' }}>
-                                        <label class="dropdown-item form-check-label" for="{{ $spec->name }}">{{ $spec->name }}</label>
+                                        <input class="form-check-input ml-1" type="checkbox" name="specs[]"
+                                            value="{{ $spec->id }}" id="{{ $spec->name }}"
+                                            {{ $profile_to_edit->specs->contains($spec) ? 'checked' : '' }}>
+                                        <label class="dropdown-item form-check-label"
+                                            for="{{ $spec->name }}">{{ $spec->name }}</label>
                                     </li>
-                                 @endforeach
+                                @endforeach
                             </ul>
                         </div>
                         <p>
@@ -132,7 +137,8 @@
                         I campi contrassegnati con <span class="text-danger">*</span> sono obbligatori
                     </div>
 
-                    <button type="submit" class="btn btn-primary" id="buttonAbilited">Modifica</button>
+                    <button type="submit" class="btn btn-primary" id="buttonAbilited"
+                        style="background-color: #076dbb">Modifica</button>
                 </form>
             </div>
         </div>

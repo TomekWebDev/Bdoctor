@@ -3,7 +3,8 @@
 @section('content')
     <div class="container">
         <div class="dropdown mr-3 d-flex flex-row-reverse">
-            <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+            <button class="btn btn-secondary dropdown-toggle" style="background-color: #076dbb" type="button"
+                data-toggle="dropdown" aria-expanded="false">
                 Action
             </button>
             <ul class="dropdown-menu">
@@ -29,14 +30,16 @@
 
         <div class="card mt-4 text-center">
             <div class="card-body">
-                <button id="buttonReview" class="btn btn-primary mb-3 p-2" onclick="toggleReviews()">Mostra recensioni</button>
+                <button id="buttonReview" class="btn btn-primary mb-3 p-2" onclick="toggleReviews() "
+                    style="background-color: #076dbb">Mostra recensioni</button>
                 <div id="reviews" style="display: none;">
 
                     {{-- Qua sotto va fatto foreach --}}
                     @if (count($reviews) > 0)
                         <div class="list-group list-group-flush">
                             @foreach ($reviews as $rev)
-                                <div class="list-group-item d-md-flex flex-md-row justify-content-between align-items-center">
+                                <div
+                                    class="list-group-item d-md-flex flex-md-row justify-content-between align-items-center">
                                     <div class="col-md-4">
                                         <h5><strong>Recensione di {{ $rev->name }}:</strong></h5>
                                         <span><i>Scritto il: {{ $rev->created_at->format('d M Y') }}</i></span>
@@ -60,7 +63,8 @@
         {{-- VOTI --}}
         <div class="card mt-4 text-center">
             <div class="card-body">
-                <button id="buttonVote" class="btn btn-primary mb-3 p-2">Mostra voti</button>
+                <button id="buttonVote" class="btn btn-primary mb-3 p-2" style="background-color: #076dbb">Mostra
+                    voti</button>
                 <div id="ratings" class="row row-cols-2 row-cols-md-3 row-cols-lg-6 g-4 justify-content-center mt-2"
                     style="display: none;">
                     @foreach ($ratings as $rating)

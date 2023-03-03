@@ -22,45 +22,29 @@
     <div class="container">
 
 
-        <div class="card mt-3">
+        <div class="card my-3">
             <div class="card-body">
-
                 <div class="d-flex justify-content-between">
                     <h1>Benvenuto nella pagina di checkout</h1>
-                    <a href="{{ route('admin.index') }}" class="btn btn-secondary align-self-center" type="button">
+                    <a href="{{ route('admin.index') }}" class="btn btn-secondary align-self-center"
+                        style="background-color: #076dbb" type="button">
                         Dashboard
                     </a>
                 </div>
-
             </div>
         </div>
 
-        <div class="container">
-            @if (session('success'))
-                <div class="alert alert-success mt-3">
-                    {{ session('success') }}
-                    <li>redirecting to the dashboard in 5 seconds</li>
-                </div>
-                {{ header('refresh:5;url=http://127.0.0.1:8000/admin') }}
-            @elseif (session('error'))
-                <div class="alert alert-danger mt-3">
-                    {{ session('error') }}
-                </div>
-            @endif
-
-
-        </div>
-
-        <div class="w-50 mx-auto">
+        <div class="w-100 mx-auto">
             <form method="POST" id="payment-form" action="{{ route('admin.sponsors.checkout', $type->price) }}">
 
                 @csrf
-                <h1 class="text-center">Hai scelto la versione: <span>{{ $type->name }}</span></h1>
+
                 <section class="mt-6 mb-3">
-                    <label class="d-flex">
-                        <span>Prezzo:</span>
-                        <span>{{ $type->price }} € </span>
-                    </label>
+                    <div class="card p-2 text-center">
+                        <h3 class="text-center">Procedi con il pagamento della versione: <span>{{ $type->name }}</span>
+                        </h3>
+                        <span> <strong>Prezzo totale: {{ $type->price }} €</strong> </span>
+                    </div>
 
                     <div>
                         <div id="bt-dropin"></div>
@@ -69,11 +53,30 @@
 
                 <input id="nonce" name="payment_method_nonce" type="hidden" />
                 <div class="d-flex justify-content-center">
-                    <button class="btn btn-primary" type="submit"><span>Paga Ora</span></button>
+                    <button class="btn btn-primary" type="submit" style="background-color: #076dbb">
+                        <span>Paga ora</span>
+                    </button>
+
                 </div>
 
             </form>
+            <div class="container avvisi">
+                @if (session('success'))
+                    <div class="alert alert-success mt-3">
+                        <h4>{{ session('success') }}</h4>
+                        <h4>Sarai reindirizzato alla tua dashboard in <span id="timer">5</span></h4>
+                    </div>
+                    {{ header('refresh:5;url=http://127.0.0.1:8000/admin') }}
+                @elseif (session('error'))
+                    <div class="alert alert-danger mt-3">
+                        {{ session('error') }}
+                    </div>
+                @endif
+
+
+            </div>
         </div>
+
     </div>
 @endsection
 
@@ -105,11 +108,27 @@
                 });
             });
         });
+        var count = 5;
+        var timer = setInterval(function() {
+            count--;
+            document.getElementById("timer").innerHTML = count;
+            if (count == 0) {
+                clearInterval(timer);
+                // Do something after the countdown is finished
+            }
+        }, 1000);
     </script>
 @endpush
 
 {{--    script braintree --}}
 
 {{-- </body> --}}
+
+<style>
+    .avvisi {
+        width: 100%;
+        margin: auto;
+    }
+</style>
 
 </html>

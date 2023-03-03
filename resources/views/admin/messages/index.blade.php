@@ -5,7 +5,8 @@
 
     <div class="container">
         <div class="dropdown mr-3 d-flex flex-row-reverse">
-            <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"
+                style="background-color: #076dbb">
                 Action
             </button>
             <ul class="dropdown-menu">
@@ -40,7 +41,8 @@
                                 <li class="list-group-item">
                                     <div class="row">
                                         <div class="col-md-3">
-                                            <h5><strong>Messaggio di {{ $message->surname }} {{ $message->name }}:</strong></h5>
+                                            <h5><strong>Messaggio di {{ $message->surname }} {{ $message->name }}:</strong>
+                                            </h5>
                                             <span><i>Scritto il: {{ $message->created_at->format('d M Y') }}</i></span>
                                         </div>
                                         <div class="col-md-6">

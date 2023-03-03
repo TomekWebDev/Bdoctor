@@ -3,7 +3,9 @@
         <!-- background image, title and search tools container -->
         <div class="container-fluid img-background mb-4">
             <div class="container title-search-container">
-                <h1 class="text-center bg-col mb-5">Ricerca medici per specializzazione</h1>
+                <h1 class="text-center bg-col mb-5">
+                    Ricerca medici per specializzazione
+                </h1>
                 <div class="row d-flex justify-content-around">
                     <div class="col-lg-6 col-md-12 mb-md-3 mb-3">
                         <select class="form-select p-2" v-model="selectedSpecId" name="" id="">
@@ -14,12 +16,12 @@
                     </div>
                     <div class="col-lg-3 col-md-6 mb-3">
                         <router-link class="btn bg text-white w-100"
-                            :to="{name: 'search',params: { spec: selectedSpecId },}">
+                            :to="{ name: 'search', params: { spec: selectedSpecId } }">
                             Cerca
                         </router-link>
                     </div>
-                    <div class="col-lg-3 col-md-6 ">
-                        <router-link class="btn bg align-self-center text-white w-100" :to="{name: 'search',}">
+                    <div class="col-lg-3 col-md-6">
+                        <router-link class="btn bg align-self-center text-white w-100" :to="{ name: 'search' }">
                             Vai a ricerca avanzata
                         </router-link>
                     </div>
@@ -39,6 +41,7 @@
 
         <div class="container my-5">
             <h3 class="bg-col text-center">Medici in evidenza</h3>
+            <LoaderComp v-if="isLoading" />
             <div v-for="sponsored in sponsoredProfiles" :key="sponsored.id" class="card mt-5">
                 <div class="card-body">
                     <div class="row d-flex align-items-center">
@@ -102,11 +105,13 @@
 
 <script>
     import FooterComp from "../components/FooterComp.vue";
+    import LoaderComp from "../components/LoaderComp.vue";
 
     export default {
         name: "HomePage",
         components: {
             FooterComp,
+            LoaderComp,
         },
         data() {
             return {
@@ -189,7 +194,7 @@
     }
 
     .spec-search-bar {
-        background-color: rgb(7, 109, 187, .3);
+        background-color: rgb(7, 109, 187, 0.3);
         padding: 0.2rem;
     }
 

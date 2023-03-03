@@ -4,7 +4,7 @@
             <!-- navbar advanced search -->
             <nav class="navbar col-lg-12">
                 <div class="">
-                    <div class="w-100 text-center my-3">
+                    <div class="w-100 text-center my-3" style="color: #076dbb">
                         <h2>Ricerca Avanzata</h2>
                     </div>
                     <div class="" id="navbarNav2">
@@ -109,6 +109,7 @@
 
             <!-- sponsored profiles -->
             <div class="container">
+                <LoaderComp v-if="isLoading" />
                 <div v-for="sponsored in sponsoredProfiles" :key="sponsored.id" class="card mt-3">
                     <div class="card-body">
                         <div class="row d-flex align-items-center">
@@ -234,11 +235,13 @@
 
 <script>
     import FooterComp from "../components/FooterComp.vue";
+    import LoaderComp from "../components/LoaderComp.vue";
 
     export default {
         name: "SearchPage",
         components: {
             FooterComp,
+            LoaderComp,
         },
         data() {
             return {
