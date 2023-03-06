@@ -121,8 +121,11 @@
                             </a>
                         @endif
                         <div class="mt-3">
+                            <h5>Voto medio: </h5>
                             <span>
-                                Voto medio :
+                                @if($ratingavg == 0)
+                                <span>Non hai ancora nessun voto</span>
+                                @endif
                                 @for ($i = 0; $i < 5; $i++)
                                     <i class="
                                     @if ($ratingavg == 5) fa-solid
@@ -130,7 +133,7 @@
                                     @elseif (($ratingavg == 3) & ($i < 3)) fa-solid
                                     @elseif ($ratingavg & ($i < 2)) fa-solid
                                     @elseif (($ratingavg == 1) & ($i < 1)) fa-solid
-                                    @elseif (($ratingavg == 0) & ($i == 0)) fa-solid @endif
+                                    @endif
                                     fa-regular fa-star"
                                         style="color: orange"></i>
                                 @endfor
