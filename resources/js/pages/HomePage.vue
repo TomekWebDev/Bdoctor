@@ -74,9 +74,7 @@
                         <div class="col-lg-4 col-sm-12">
                             <div class="my-4 text-center">
                                 <div v-if="sponsored.ratings.length" class="col-sm-12">
-                                    Voto
-                                    <strong> {{ getVoteAverage(sponsored.ratings) }}</strong> in
-                                    base a <strong>{{ sponsored.ratings.length }}</strong> voti
+                                    <i v-for="n in 5" :key="n" :class="getVoteAverage(sponsored.ratings) < n ? 'fa-regular fa-star' : 'fa-solid fa-star'" style="color: orange;"></i> in base a <strong>{{ sponsored.ratings.length }}</strong> voti
                                 </div>
                                 <div v-else class="col-sm-12">
                                     Questo medico non ha ancora voti
