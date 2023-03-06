@@ -5,7 +5,7 @@
 
         <div class="card ">
             <div class="card-body d-flex justify-content-between">
-                <h1>Statistiche</h1>
+                <h3>Statistiche</h3>
                 <div class="dropdown mr-3 d-flex flex-row-reverse ">
                     <button class="btn btn-secondary dropdown-toggle align-self-center" type="button" data-toggle="dropdown"
                         aria-expanded="false" style="background-color: #076dbb">

@@ -11,34 +11,6 @@ use Illuminate\Support\Facades\DB;
 
 class ProfileControllerGuest extends Controller
 {
-    // /**
-    //  * Display a listing of the resource.
-    //  *
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function index()
-    // {
-    //     // Step 1
-    //     // Questa funzione di index ci serve per mandare il json delle specs
-    //     // alla homepage per averle nella select
-    //     // vai a homepage vue per step 2
-    //     $specs = Spec::all();
-
-    //     $sponsoredProfiles = Profile::with(['specs', 'user', 'ratings', 'reviews', 'sponsors'])
-    //         ->whereHas('sponsors', function ($query) {
-    //             $query->where('expiration_date', '>', now());
-    //         })
-    //         ->get();
-
-    //     $data = [
-    //         'specs' => $specs,
-    //         'sponsoredProfiles' => $sponsoredProfiles
-    //     ];
-
-
-    //     return response()->json($data);
-    // }
-
 
     /**
      * Store a newly created resource in storage.
@@ -140,7 +112,7 @@ class ProfileControllerGuest extends Controller
             ->whereHas('sponsors', function ($query) {
                 $query->where('expiration_date', '>', now());
             })
-            ->get();
+            ->inRandomOrder()->take(3)->get();
         return response()->json($sponsoredProfiles);
     }
 
