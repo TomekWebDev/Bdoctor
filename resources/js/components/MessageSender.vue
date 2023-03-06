@@ -2,16 +2,16 @@
     <div>
         <form @submit.prevent="sendMessage">
             <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Nome</label>
-                <input v-model="name" type="text" placeholder="name" class="form-control" />
+                <label for="exampleInputEmail1" class="form-label"><span class="text-danger">*</span>Nome</label>
+                <input required v-model="name" type="text" placeholder="Inserisci nome" class="form-control" />
             </div>
             <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Cognome</label>
-                <input v-model="surname" type="text" placeholder="surname" class="form-control" />
+                <label for="exampleInputEmail1" class="form-label"><span class="text-danger">*</span>Cognome</label>
+                <input required v-model="surname" type="text" placeholder="Inserisci cognome" class="form-control" />
             </div>
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label"><span class="text-danger">*</span>Email</label>
-                <input required v-model="email" type="email" placeholder="email" class="form-control" />
+                <input required v-model="email" type="email" placeholder="Inserisci email" class="form-control" />
             </div>
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label"><span class="text-danger">*</span>Messaggio</label>
@@ -25,7 +25,7 @@
                 Le informazioni saranno visibili solo dal medico.
             </div>
             <button style="background-color: #076dbb" type="submit" class="btn btn-primary mb-3">
-                Submit
+                Invia
             </button>
         </form>
     </div>
