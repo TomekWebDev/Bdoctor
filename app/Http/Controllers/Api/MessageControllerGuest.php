@@ -40,9 +40,9 @@ class MessageControllerGuest extends Controller
 
         $request->validate(
             [
-                // 'name' => 'required|max:100',
-                // 'surname' => 'required|max:100',
-                // 'email' => 'required|max:50',
+                'name' => 'required|max:100',
+                'surname' => 'required|max:100',
+                'email' => 'required|max:50',
                 'message' => 'required|max:400',
                 'profile_id' => 'required'
             ]

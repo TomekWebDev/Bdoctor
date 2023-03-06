@@ -3,7 +3,7 @@
         <form @submit.prevent="sendReview">
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label"><span class="text-danger">*</span>Nome</label>
-                <input required v-model="name" type="text" placeholder="name" class="form-control" />
+                <input required v-model="name" type="text" placeholder="nome" class="form-control" />
             </div>
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label"><span class="text-danger">*</span>Recensione</label>
@@ -17,7 +17,7 @@
                 La sua recensione verrà pubblicata.
             </div>
             <button style="background-color: #076dbb" type="submit" class="btn btn-primary mb-3">
-                Submit
+                Invia
             </button>
         </form>
     </div>
