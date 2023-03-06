@@ -2,57 +2,61 @@
 
 @section('content')
     <div class="container">
-        <div class="dropdown mr-3 d-flex flex-row-reverse">
-            <button class="btn btn-secondary dropdown-toggle" style="background-color: #076dbb" type="button"
-                data-toggle="dropdown" aria-expanded="false">
-                Action
-            </button>
-            <ul class="dropdown-menu">
-                <li>
-                    <a class="dropdown-item" href="{{ route('admin.profile.edit', $profile->id) }}">Modifica Profilo</a>
-                </li>
-                <li>
-                    <a class="dropdown-item" href="{{ route('admin.profile.show', $profile->id) }}">Il mio profilo</a>
-                </li>
-                <li>
-                    <a class="dropdown-item" href="{{ route('admin.messages.index', $profile->id) }}">I miei messaggi</a>
-                </li>
-                <li>
-                    <a class="dropdown-item" href="{{ route('admin.sponsors.index', $profile->id) }}">Aggiungi Sponsor</a>
-                </li>
-                <li>
-                    <a class="dropdown-item" href="{{ route('admin.statistics.index', $profile->id) }}">Statistiche</a>
-                </li>
-            </ul>
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+
+                    <h3>Recensioni e voti</h3>
+
+                    <div class="dropdown mr-3 d-flex flex-row-reverse">
+                        <button class="btn btn-secondary dropdown-toggle" style="background-color: #076dbb" type="button"
+                            data-toggle="dropdown" aria-expanded="false">
+                            Action
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-right dropdown-menu-lg-right">
+                            <li>
+                                <a class="dropdown-item" href="{{ route('admin.profile.edit', $profile->id) }}">Modifica Profilo</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{ route('admin.profile.show', $profile->id) }}">Il mio profilo</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{ route('admin.messages.index', $profile->id) }}">I miei messaggi</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{ route('admin.sponsors.index', $profile->id) }}">Aggiungi Sponsor</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{ route('admin.statistics.index', $profile->id) }}">Statistiche</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
+        
 
         {{-- RECENSIONI --}}
 
-        <div class="card mt-4 text-center">
-            <div class="card-body">
-                <button id="buttonReview" class="btn btn-primary mb-3 p-2" onclick="toggleReviews() "
+        <div class="card mt-4">
+            <div class="card-body text-center">
+                <button id="buttonReview" class="btn btn-primary my-2 p-2" onclick="toggleReviews() "
                     style="background-color: #076dbb">Mostra recensioni</button>
                 <div id="reviews" style="display: none;">
 
-                    {{-- Qua sotto va fatto foreach --}}
+                    <h3 class="text-left mt-3">Recensioni</h3>
+
                     @if (count($reviews) > 0)
-                        <div class="list-group list-group-flush">
-                            @foreach ($reviews as $rev)
-                                <div
-                                    class="list-group-item d-md-flex flex-md-row justify-content-between align-items-center">
-                                    <div class="col-md-4">
-                                        <h5><strong>Recensione di {{ $rev->name }}:</strong></h5>
-                                        <span><i>Scritto il: {{ $rev->created_at->format('d M Y') }}</i></span>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <span>{{ $rev->review }} </span>
-                                    </div>
-                                    {{-- <div class="col-md-3">
-                                        <span><i>Scritto il: {{ $rev->created_at->format('d M Y') }}</i></span>
-                                    </div> --}}
-                                </div>
-                            @endforeach
+                    @foreach ($reviews as $rev)
+                    <div class="card my-2">
+                        <div class="card-body text-left">
+                          <h5 class="card-title">{{ $rev->name }}</h5>
+                          <h6 class="card-subtitle mb-2 text-muted">{{ $rev->created_at->format('d M Y') }}</h6>
+                          <p class="card-text">{{ $rev->review }}</p>
                         </div>
+                      </div>
+                    @endforeach
+
                     @else
                         <h2 class="text-center">Non hai ancora nessuna recensione</h2>
                     @endif
@@ -65,17 +69,35 @@
             <div class="card-body">
                 <button id="buttonVote" class="btn btn-primary mb-3 p-2" style="background-color: #076dbb">Mostra
                     voti</button>
-                <div id="ratings" class="row row-cols-2 row-cols-md-3 row-cols-lg-6 g-4 justify-content-center mt-2"
+                <div id="ratings" class="row justify-content-center mt-2"
                     style="display: none;">
+                    <div class="col-6">
+                        <h4>Voto</h4>
+                    </div>
+                    <div class="col-6">
+                        <h4>Data</h4>
+                    </div>
                     @foreach ($ratings as $rating)
-                        <div class="col">
-                            <div class="my-element card @if ($rating->rating_id - 1 <= 1) bg-danger @elseif ($rating->rating_id - 1 >= 2 && $rating->rating_id - 1 <= 3) bg-warning @elseif ($rating->rating_id - 1 >= 4) bg-success @endif"
-                                style="aspect-ratio: 1/1;">
-                                <div class="card-body d-flex align-items-center justify-content-center">
-                                    <h5 class="text-center">{{ $rating->rating_id - 1 }}</h5>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="col-6 my-2">
+                        <span>
+                            @for ($i = 0; $i < 5; $i++)
+                                <i class="
+                                @if ($rating->rating_id - 1 == 5) fa-solid 
+                                @elseif ($rating->rating_id - 1 == 4 & $i < 4) fa-solid 
+                                @elseif ($rating->rating_id - 1 == 3 & $i < 3) fa-solid 
+                                @elseif ($rating->rating_id - 1 == 2 & $i < 2) fa-solid 
+                                @elseif ($rating->rating_id - 1 == 1 & $i < 1) fa-solid 
+                                @elseif ($rating->rating_id - 1 == 0 & $i == 0) fa-solid 
+                                @endif 
+                                fa-regular fa-star" style="color: orange"></i>
+                            @endfor
+                            {{-- <i class="fa-regular fa-star" style="color: orange"></i>
+                            <i class="fa-solid fa-star" style="color: orange"></i> --}}
+                        </span>
+                    </div>
+                    <div class="col-6 my-2">
+                        {{ date('d/m/Y ', strtotime($rating->created_at))}}
+                    </div>
                     @endforeach
                 </div>
             </div>
