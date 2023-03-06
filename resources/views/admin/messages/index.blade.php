@@ -15,7 +15,7 @@
                         aria-expanded="false" style="background-color: #076dbb">
                         Action
                     </button>
-                    <ul class="dropdown-menu">
+                    <ul class="dropdown-menu dropdown-menu-right dropdown-menu-lg-right">
                         <li>
                             <a class="dropdown-item" href="{{ route('admin.index', $profile->id) }}">Dashboard</a>
                         </li>
@@ -44,30 +44,17 @@
                 <div>
                     {{-- Qua sotto va fatto foreach --}}
                     @if (count($messages) > 0)
-                        <ul class="list-group list-group-flush">
                             @foreach ($messages as $message)
-                                <li class="list-group-item">
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <h5><strong>Messaggio di {{ $message->surname }} {{ $message->name }}:</strong>
-                                            </h5>
-                                            <span><i>Scritto il: {{ $message->created_at->format('d M Y') }}</i></span>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <span>{{ $message->message }}</span>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <span>
-                                                <i>Puoi rispondergli scrivendo a:
-                                                    <a target="_blank"
-                                                        href="https://mail.google.com/mail/?view=cm&fs=1&to={{ $message->email }}">
-                                                        {{ $message->email }}
-                                                    </a>
-                                                </i>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </li>
+                            <div class="card my-3 col-lg-6 mx-lg-auto">
+                                <div class="card-body text-left">
+                                  <h5 class="card-title">{{ $message->surname }} {{ $message->name }}</h5>
+                                  <h6 class="card-subtitle mb-2 text-muted">{{ $message->email }}</h6>
+                                  <h6 class="card-subtitle mb-2 text-muted">{{ $message->created_at->format('d M Y') }}</h6>
+                                    <div class="dropdown-divider"></div>
+                                  <p class="card-text mt-1">{{ $message->message }}</p>
+                                  <a class="btn btn-success btn-sm text float-right" target="_blank" href="https://mail.google.com/mail/?view=cm&fs=1&to={{ $message->email }}">Rispondi</a>
+                                </div>
+                              </div>
                             @endforeach
                         </ul>
                     @else
