@@ -30,7 +30,7 @@
 
         {{-- MESSAGGI --}}
         <div class="card mt-4 text-center">
-            <h1 class="mt-3">I tuoi messaggi</h1>
+            <h1 class="mt-3">Messaggi ricevuti</h1>
             <div class="card-body">
                 {{-- <button id="buttonMessage" class="btn btn-primary mb-3 p-2" onclick="toggleMessages()">Mostra messaggi</button> --}}
                 <div>

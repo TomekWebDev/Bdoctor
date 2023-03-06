@@ -5,7 +5,7 @@
         <div class="card">
             <div class="card-body">
                 <div class="d-flex justify-content-between">
-                    <h3>Scegli una sponsorizzazione <small class="text-muted">{{ $profile->name }}</small></h3>
+                    <h3>Scegli una sponsorizzazione</h3>
                     <div class="dropdown mr-3 align-self-center">
                         <button class="btn btn-secondary dropdown-toggle" style="background-color: #076dbb" type="button"
                             data-toggle="dropdown" aria-expanded="false">
