@@ -14,7 +14,7 @@
                     <div class="dropdown mr-3 align-self-center">
                         <button class="btn btn-secondary dropdown-toggle" style="background-color: #076dbb" type="button"
                             data-toggle="dropdown" aria-expanded="false">
-                            Action
+                            Menu
                         </button>
                         <ul class="dropdown-menu dropdown-menu-right dropdown-menu-lg-right">
                             <li>

@@ -9,9 +9,12 @@
                     <div class="dropdown align-self-center">
                         <button class="btn btn-secondary dropdown-toggle" style="background-color: #076dbb" type="button"
                             data-toggle="dropdown" aria-expanded="false">
-                            Action
+                            Menu
                         </button>
                         <ul class="dropdown-menu dropdown-menu-right dropdown-menu-lg-right">
+                            <li>
+                                <a class="dropdown-item" href="{{ route('admin.index', $profile->id) }}">Dashboard</a>
+                            </li>
                             <li>
                                 <a class="dropdown-item" href="{{ route('admin.profile.edit', $profile->id) }}">Modifica
                                     Profilo</a>
@@ -41,7 +44,7 @@
                     <div class="card-body">
                         <h1 class="card-title" style="color: #cd7f32; ">{{ $bronze->name }}</h1>
                         <h5 class="card-text">Il tuo profilo comparirà nella Homepage del sito per 24 ore!</h5>
-                        @if (!$last_expiration_date)
+                        @if ($last_expiration_date)
                             <div class="container alert alert-success">
                                 <div class="row">
                                     <span>
@@ -61,6 +64,15 @@
                                     </span>
                                 </div>
                             </div>
+                        @else
+                            <div class="row">
+                                <span>
+                                    <small>Sponsorizza il tup profilo fino al:</small>
+                                </span>
+                                <span>
+                                    {{ $expiration_date_bronze_simulation }}
+                                </span>
+                            </div>
                         @endif
 
 
@@ -75,26 +87,36 @@
                     <div class="card-body">
                         <h1 class="card-title" style="color: #c0c0c0; ">{{ $silver->name }}</h1>
                         <h5 class="card-text">Il tuo profilo comparirà nella Homepage del sito per 48 ore!</h5>
+                        @if ($last_expiration_date)
+                            <div class="container alert alert-success">
+                                <div class="row">
+                                    <span>
+                                        <small>Hai una sponsorizzazione attiva con scadenza:</small>
+                                    </span>
 
-                        <div class="container alert alert-success">
+                                    <span>
+                                        {{ date('d M Y - g:i A', strtotime($last_expiration_date)) }}
+                                    </span>
+                                </div>
+                                <div class="row">
+                                    <span>
+                                        <small>Nuova scadenza aggiornata a seguito dell'acquisto:</small>
+                                    </span>
+                                    <span>
+                                        {{ $expiration_date_silver_simulation }}
+                                    </span>
+                                </div>
+                            </div>
+                        @else
                             <div class="row">
                                 <span>
-                                    <small>Hai una sponsorizzazione attiva con scadenza:</small>
+                                    <small>Sponsorizza il tup profilo fino al:</small>
                                 </span>
-
                                 <span>
-                                    {{ date('d M Y - g:i A', strtotime($last_expiration_date)) }}
+                                    {{ $expiration_date_bronze_simulation }}
                                 </span>
                             </div>
-                            <div class="row">
-                                <span>
-                                    <small>Nuova scadenza aggiornata a seguito dell'acquisto:</small>
-                                </span>
-                                <span>
-                                    {{ $expiration_date_silver_simulation }}
-                                </span>
-                            </div>
-                        </div>
+                        @endif
                         <a href="{{ route('admin.sponsor.pay', $silver->name, $profile->name) }}"
                             class="btn btn-primary my-2" style="background-color: #076dbb">Acquista {{ $silver->name }}
 
@@ -107,26 +129,36 @@
                     <div class="card-body">
                         <h1 class="card-title" style="color: #d4af37; ">{{ $gold->name }}</h1>
                         <h5 class="card-text">Il tuo profilo comparirà nella Homepage del sito per 72 ore!</h5>
+                        @if ($last_expiration_date)
+                            <div class="container alert alert-success">
+                                <div class="row">
+                                    <span>
+                                        <small>Hai una sponsorizzazione attiva con scadenza:</small>
+                                    </span>
 
-                        <div class="container alert alert-success">
+                                    <span>
+                                        {{ date('d M Y - g:i A', strtotime($last_expiration_date)) }}
+                                    </span>
+                                </div>
+                                <div class="row">
+                                    <span>
+                                        <small>Nuova scadenza aggiornata a seguito dell'acquisto:</small>
+                                    </span>
+                                    <span>
+                                        {{ $expiration_date_gold_simulation }}
+                                    </span>
+                                </div>
+                            </div>
+                        @else
                             <div class="row">
                                 <span>
-                                    <small>Hai una sponsorizzazione attiva con scadenza:</small>
+                                    <small>Sponsorizza il tup profilo fino al:</small>
                                 </span>
-
                                 <span>
-                                    {{ date('d M Y - g:i A', strtotime($last_expiration_date)) }}
+                                    {{ $expiration_date_bronze_simulation }}
                                 </span>
                             </div>
-                            <div class="row">
-                                <span>
-                                    <small>Nuova scadenza aggiornata a seguito dell'acquisto:</small>
-                                </span>
-                                <span>
-                                    {{ $expiration_date_gold_simulation }}
-                                </span>
-                            </div>
-                        </div>
+                        @endif
                         <a href="{{ route('admin.sponsor.pay', $gold->name, $profile->name) }}"
                             class="btn btn-primary my-2" style="background-color: #076dbb">Acquista {{ $gold->name }}
 

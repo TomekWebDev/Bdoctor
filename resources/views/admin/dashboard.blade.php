@@ -16,7 +16,7 @@
                 <div class="btn-group mr-3">
                     <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown"
                         aria-expanded="false" style="background-color: #076dbb">
-                        Action
+                        Menu
                     </button>
                     <ul class="dropdown-menu dropdown-menu-right dropdown-menu-lg-right">
                         <li>
@@ -125,14 +125,14 @@
                                 Voto medio :
                                 @for ($i = 0; $i < 5; $i++)
                                     <i class="
-                                    @if ($ratingavg == 5) fa-solid 
-                                    @elseif ($ratingavg == 4 & $i < 4) fa-solid 
-                                    @elseif ($ratingavg == 3 & $i < 3) fa-solid 
-                                    @elseif ($ratingavg & $i < 2) fa-solid 
-                                    @elseif ($ratingavg == 1 & $i < 1) fa-solid 
-                                    @elseif ($ratingavg == 0 & $i == 0) fa-solid 
-                                    @endif 
-                                    fa-regular fa-star" style="color: orange"></i>
+                                    @if ($ratingavg == 5) fa-solid
+                                    @elseif (($ratingavg == 4) & ($i < 4)) fa-solid
+                                    @elseif (($ratingavg == 3) & ($i < 3)) fa-solid
+                                    @elseif ($ratingavg & ($i < 2)) fa-solid
+                                    @elseif (($ratingavg == 1) & ($i < 1)) fa-solid
+                                    @elseif (($ratingavg == 0) & ($i == 0)) fa-solid @endif
+                                    fa-regular fa-star"
+                                        style="color: orange"></i>
                                 @endfor
                             </span>
                         </div>

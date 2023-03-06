@@ -9,7 +9,7 @@
                 <div class="dropdown mr-3 d-flex flex-row-reverse ">
                     <button class="btn btn-secondary dropdown-toggle align-self-center" type="button" data-toggle="dropdown"
                         aria-expanded="false" style="background-color: #076dbb">
-                        Action
+                        Menu
                     </button>
                     <ul class="dropdown-menu dropdown-menu-right dropdown-menu-lg-right">
                         <li>
