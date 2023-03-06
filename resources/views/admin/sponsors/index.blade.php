@@ -45,6 +45,7 @@
                             Se hai una sponsorizzazione ancora attiva, il tempo della nuova sponsorizzazione partirà allo
                             scadere di quella attuale.
                         </small>
+                        <small>{{ $expiration_date_bronze_simulation }}</small>
                         <a href="{{ route('admin.sponsor.pay', $bronze->name, $profile->name) }}" class="btn btn-primary"
                             style="background-color: #076dbb">Buy {{ $bronze->name }} sponsor</a>
                     </div>
