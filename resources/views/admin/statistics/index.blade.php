@@ -125,7 +125,11 @@
             </div>
         </div>
 
-        {{-- {{ dd($results) }} --}}
+        <div class="mt-3">
+            <a href="{{ route('admin.index') }}">
+                Go Back
+            </a>
+        </div>
 
     </div>
 @endsection
