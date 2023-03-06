@@ -67,7 +67,7 @@
         {{-- VOTI --}}
         <div class="card mt-4 text-center">
             <div class="card-body">
-                <button id="buttonVote" class="btn btn-primary mb-3 p-2" style="background-color: #076dbb">Mostra
+                <button id="buttonVote" class="btn btn-primary my-2 p-2" style="background-color: #076dbb">Mostra
                     voti</button>
                 <div id="ratings" class="row justify-content-center mt-2"
                     style="display: none;">

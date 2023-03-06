@@ -294,8 +294,9 @@
                 scales: {
                     yAxes: [{
                         ticks: {
+                            stepSize: 1,
                             min: 0,
-                            max: 16
+                            max: Math.max(gennaio, febbraio, marzo, aprile, maggio, giugno, luglio, agosto, settembre, ottobre, novembre, gennaioR, febbraioR, marzoR, aprileR, maggioR, giugnoR, luglioR, agostoR, settembreR, ottobreR, novembreR, dicembreR) + 1,
                         }
                     }],
                 }
@@ -364,8 +365,9 @@
                 scales: {
                     yAxes: [{
                         ticks: {
+                            stepSize: 1,
                             min: 0,
-                            max: 15,
+                            max: Math.max(vote0count, vote1count, vote2count, vote3count, vote4count, vote5count),
                         },
                         scaleLabel: {
                             display: true,
