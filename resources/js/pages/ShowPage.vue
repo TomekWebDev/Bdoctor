@@ -28,7 +28,7 @@
                         <div class="col-lg-8 col-md-7 col-sm-7 align-self-center">
                             <div class="card my-3 p-3">
                                 <h3 class="my-3">
-                                    Dr. {{ profile.name }} {{ profile.surname }}
+                                     {{ profile.name }} {{ profile.surname }}
                                 </h3>
                                 <div class="mb-3">
                                     <small class="text-muted">Specialità:</small>
@@ -79,7 +79,7 @@
                             <button style="background-color: #076dbb" class="btn btn-primary w-100" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#messagesDropdown" aria-expanded="false"
                                 aria-controls="messagesDropdown">
-                                Invia un messaggio al Dr. {{ profile.surname }}
+                                Invia un messaggio a {{ profile.surname }}
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                     class="bi bi-caret-down-fill" viewBox="0 0 16 16">
                                     <path

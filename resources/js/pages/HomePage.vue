@@ -63,7 +63,7 @@
                             </div>
                             <div>
                                 <h4>
-                                    Dr. {{ sponsored.user.name }} {{ sponsored.user.surname }}
+                                    {{ sponsored.user.name }} {{ sponsored.user.surname }}
                                 </h4>
 
                                 <small v-for="spec in sponsored.specs" :key="spec.id" class="text-muted">
