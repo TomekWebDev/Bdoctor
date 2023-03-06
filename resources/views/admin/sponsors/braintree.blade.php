@@ -25,7 +25,7 @@
         <div class="card my-3">
             <div class="card-body">
                 <div class="d-flex justify-content-between">
-                    <h1>Benvenuto nella pagina di checkout</h1>
+                    <h3>Benvenuto nella pagina di checkout</h3>
                     <a href="{{ route('admin.index') }}" class="btn btn-secondary align-self-center"
                         style="background-color: #076dbb" type="button">
                         Dashboard

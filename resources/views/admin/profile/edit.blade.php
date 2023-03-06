@@ -10,7 +10,7 @@
             <div class="card-body">
 
                 <div class="d-flex justify-content-between">
-                    <h1>Modifica Profilo</h1>
+                    <h3>Modifica Profilo</h3>
                     <div class="dropdown mr-3 align-self-center">
                         <button class="btn btn-secondary dropdown-toggle" style="background-color: #076dbb" type="button"
                             data-toggle="dropdown" aria-expanded="false">
