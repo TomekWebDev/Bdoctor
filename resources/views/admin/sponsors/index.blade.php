@@ -5,13 +5,13 @@
         <div class="card">
             <div class="card-body">
                 <div class="d-flex justify-content-between">
-                    <h1>Scegli una sponsorizzazione <small class="text-muted">{{ $profile->name }}</small></h1>
+                    <h3>Scegli una sponsorizzazione <small class="text-muted">{{ $profile->name }}</small></h3>
                     <div class="dropdown mr-3 align-self-center">
                         <button class="btn btn-secondary dropdown-toggle" style="background-color: #076dbb" type="button"
                             data-toggle="dropdown" aria-expanded="false">
                             Action
                         </button>
-                        <ul class="dropdown-menu">
+                        <ul class="dropdown-menu dropdown-menu-right dropdown-menu-lg-right">
                             <li>
                                 <a class="dropdown-item" href="{{ route('admin.profile.edit', $profile->id) }}">Modifica
                                     Profilo</a>

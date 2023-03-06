@@ -11,7 +11,7 @@
                         aria-expanded="false" style="background-color: #076dbb">
                         Action
                     </button>
-                    <ul class="dropdown-menu">
+                    <ul class="dropdown-menu dropdown-menu-right dropdown-menu-lg-right">
                         <li>
                             <a class="dropdown-item" href="{{ route('admin.index', $profile->id) }}">Dashboard</a>
                         </li>
@@ -68,7 +68,7 @@
                             aria-expanded="false">
                             Month
                         </button>
-                        <ul class="dropdown-menu">
+                        <ul class="dropdown-menu dropdown-menu-right dropdown-menu-lg-right">
                             <li>
                                 <a class="dropdown-item"
                                     href="{{ route('admin.statistics.setMonth', $selectedMonth = 1) }}">Gennaio</a>
