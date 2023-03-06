@@ -109,15 +109,15 @@
                         <div class="mt-3">
                             <h5>Totale Messaggi ricevuti: <small class="text-muted">{{ $message }}</small></h5>
                         </div>
-                        @if (!$expirationS)
+                        @if ($expirationS)
                             <div class="mt-3">
                                 <h5>La tua sponsorizzazione finirà: <small class="text-muted">{{ $expirationS }}</small>
                                 </h5>
                             </div>
                         @else
-                            <a class="btn btn-outline-primary btn-sm btn-block"
+                            <a class="btn btn-primary btn-sm btn-block" style="background-color: #076dbb"
                                 href="{{ route('admin.sponsors.index', $profile->id) }}">
-                                Sponsorizza il tuo profilo
+                                Sponsorizza il tuo profilo, guadagna visibilità
                             </a>
                         @endif
                         <div class="mt-3 p-2 ">

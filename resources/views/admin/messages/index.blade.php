@@ -55,6 +55,11 @@
                                 </li>
                             @endforeach
                         </ul>
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                {{ $messages->links() }}
+                            </ul>
+                        </nav>
                     @else
                         <h2 class="text-center">Non hai nessun messaggio</h2>
                     @endif
