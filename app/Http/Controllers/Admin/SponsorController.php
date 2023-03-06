@@ -27,9 +27,9 @@ class SponsorController extends Controller
         $last_expiration_date = ProfileSponsor::where('profile_id', Auth::user()->id)->pluck('expiration_date')->last();
 
         if ($last_expiration_date > Carbon::now()) {
-            $expiration_date_bronze_simulation = Carbon::parse($last_expiration_date)->addDays(1);
-            $expiration_date_silver_simulation = Carbon::parse($last_expiration_date)->addDays(2);
-            $expiration_date_gold_simulation = Carbon::parse($last_expiration_date)->addDays(3);
+            $expiration_date_bronze_simulation = date('d M Y - g:i A', strtotime(Carbon::parse($last_expiration_date)->addDays(1)));
+            $expiration_date_silver_simulation = date('d M Y - g:i A', strtotime(Carbon::parse($last_expiration_date)->addDays(2)));
+            $expiration_date_gold_simulation = date('d M Y - g:i A', strtotime(Carbon::parse($last_expiration_date)->addDays(3)));
         } else {
             $expiration_date_bronze_simulation = Carbon::now()->addDays(1);
             $expiration_date_silver_simulation = Carbon::now()->addDays(2);
@@ -38,7 +38,7 @@ class SponsorController extends Controller
 
 
 
-        return view('admin.sponsors.index', compact('bronze', 'silver', 'gold', 'profile', 'expiration_date_bronze_simulation', 'expiration_date_silver_simulation', 'expiration_date_gold_simulation'));
+        return view('admin.sponsors.index', compact('bronze', 'silver', 'gold', 'profile', 'last_expiration_date', 'expiration_date_bronze_simulation', 'expiration_date_silver_simulation', 'expiration_date_gold_simulation'));
     }
 
     /**

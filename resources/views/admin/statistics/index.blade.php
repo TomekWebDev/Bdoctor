@@ -261,15 +261,15 @@
         });
 
 
-        let xValues = ['Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre',
-            'Ottobre', 'Novembre', 'Dicembre',
+        let xValues = ['Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre',
+            'Ottobre', 'Novembre', 'Dicembre', 'Gennaio', 'Febbraio', 'Marzo',
         ];
 
-        let reviewValues = [gennaioR, febbraioR, marzoR, aprileR, maggioR, giugnoR, luglioR, agostoR, settembreR, ottobreR,
-            novembreR, dicembreR
+        let reviewValues = [aprileR, maggioR, giugnoR, luglioR, agostoR, settembreR, ottobreR,
+            novembreR, dicembreR, gennaioR, febbraioR, marzoR,
         ];
-        let messValues = [gennaio, febbraio, marzo, aprile, maggio, giugno, luglio, agosto, settembre, ottobre, novembre,
-            dicembre
+        let messValues = [aprile, maggio, giugno, luglio, agosto, settembre, ottobre, novembre,
+            dicembre, gennaio, febbraio, marzo,
         ];
 
 
@@ -296,7 +296,10 @@
                         ticks: {
                             stepSize: 1,
                             min: 0,
-                            max: Math.max(gennaio, febbraio, marzo, aprile, maggio, giugno, luglio, agosto, settembre, ottobre, novembre, gennaioR, febbraioR, marzoR, aprileR, maggioR, giugnoR, luglioR, agostoR, settembreR, ottobreR, novembreR, dicembreR) + 1,
+                            max: Math.max(gennaio, febbraio, marzo, aprile, maggio, giugno, luglio, agosto,
+                                settembre, ottobre, novembre, gennaioR, febbraioR, marzoR, aprileR,
+                                maggioR, giugnoR, luglioR, agostoR, settembreR, ottobreR, novembreR,
+                                dicembreR) + 1,
                         }
                     }],
                 }
@@ -367,7 +370,8 @@
                         ticks: {
                             stepSize: 1,
                             min: 0,
-                            max: Math.max(vote0count, vote1count, vote2count, vote3count, vote4count, vote5count),
+                            max: Math.max(vote0count, vote1count, vote2count, vote3count, vote4count,
+                                vote5count),
                         },
                         scaleLabel: {
                             display: true,
