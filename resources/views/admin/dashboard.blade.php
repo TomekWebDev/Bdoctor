@@ -120,6 +120,22 @@
                                 Sponsorizza il tuo profilo, guadagna visibilità
                             </a>
                         @endif
+                        <div class="mt-3">
+                            <span>
+                                Voto medio :
+                                @for ($i = 0; $i < 5; $i++)
+                                    <i class="
+                                    @if ($ratingavg == 5) fa-solid 
+                                    @elseif ($ratingavg == 4 & $i < 4) fa-solid 
+                                    @elseif ($ratingavg == 3 & $i < 3) fa-solid 
+                                    @elseif ($ratingavg & $i < 2) fa-solid 
+                                    @elseif ($ratingavg == 1 & $i < 1) fa-solid 
+                                    @elseif ($ratingavg == 0 & $i == 0) fa-solid 
+                                    @endif 
+                                    fa-regular fa-star" style="color: orange"></i>
+                                @endfor
+                            </span>
+                        </div>
                         <div class="mt-3 p-2 ">
                             <a href="{{ route('admin.statistics.index', $profile->id) }}" class="btn btn-primary"
                                 style="background-color: #076dbb">Statistiche</a>
@@ -136,8 +152,6 @@
                 </div>
             </div>
         </div>
-
-
     </div>
 
     {{-- Modal Curriculum Vitae --}}

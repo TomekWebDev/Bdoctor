@@ -38,6 +38,19 @@ class HomeController extends Controller
             $rating = 'Non hai ancora ricevuto rating';
         }
 
+        
+ 
+        // $ratingavg = intval(ProfileRating::where('profile_id', Auth::user()->id)->avg('rating_id'));
+
+        $ratingavg = ProfileRating::selectRaw('AVG(rating_id - 1) as rating_avg')
+            ->where('profile_id', Auth::user()->id)
+            ->value('rating_avg');
+
+        $ratingavg = intval($ratingavg);
+
+
+       
+
         $messages = Message::where('profile_id', Auth::user()->id)->get();
         if (count($messages) > 0) {
             $message = count($messages);
@@ -59,6 +72,6 @@ class HomeController extends Controller
             $expirationS = date('d M Y - g:i A', strtotime($expiration));
         }
 
-        return view('admin.dashboard', compact('profile', 'user', 'review', 'rating', 'message', 'expiration', 'expirationS'));
+        return view('admin.dashboard', compact('profile', 'user', 'review', 'rating', 'message', 'expiration', 'expirationS', 'ratingavg'));
     }
 }
