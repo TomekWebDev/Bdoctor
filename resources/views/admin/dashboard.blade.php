@@ -7,7 +7,7 @@
         <div class="card">
             <div class="d-flex align align-items-center">
                 <div class="card-body">
-                    <h1>Dashboard <small class="text-muted">{{ $user->name }} {{ $user->surname }} </small></h1>
+                    <h1>Dashboard</h1>
                     @foreach ($profile->specs as $spec)
                         <span class="badge bg-primary p-1 m-1">{{ $spec->name }}</span>
                     @endforeach
@@ -109,10 +109,17 @@
                         <div class="mt-3">
                             <h5>Totale Messaggi ricevuti: <small class="text-muted">{{ $message }}</small></h5>
                         </div>
-                        <div class="mt-3">
-                            <h5>La tua sponsorizzazione finirà: <small class="text-muted">{{ $expirationS }}</small></h5>
-                        </div>
-
+                        @if (!$expirationS)
+                            <div class="mt-3">
+                                <h5>La tua sponsorizzazione finirà: <small class="text-muted">{{ $expirationS }}</small>
+                                </h5>
+                            </div>
+                        @else
+                            <a class="btn btn-outline-primary btn-sm btn-block"
+                                href="{{ route('admin.sponsors.index', $profile->id) }}">
+                                Sponsorizza il tuo profilo
+                            </a>
+                        @endif
                         <div class="mt-3 p-2 ">
                             <a href="{{ route('admin.statistics.index', $profile->id) }}" class="btn btn-primary"
                                 style="background-color: #076dbb">Statistiche</a>
