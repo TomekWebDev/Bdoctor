@@ -40,9 +40,7 @@
 
         <div class="card mt-4">
             <div class="card-body text-center">
-                <button id="buttonReview" class="btn btn-primary my-2 p-2" onclick="toggleReviews() "
-                    style="background-color: #076dbb">Mostra recensioni</button>
-                <div id="reviews" style="display: none;">
+                <div id="reviews">
 
                     <h3 class="text-left mt-3">Recensioni</h3>
 
@@ -57,6 +55,10 @@
                       </div>
                     @endforeach
 
+                    <div class="d-flex justify-content-center my-3">
+                        {{$reviews->links()}}
+                    </div>
+
                     @else
                         <h2 class="text-center">Non hai ancora nessuna recensione</h2>
                     @endif
@@ -67,10 +69,7 @@
         {{-- VOTI --}}
         <div class="card mt-4 text-center">
             <div class="card-body">
-                <button id="buttonVote" class="btn btn-primary my-2 p-2" style="background-color: #076dbb">Mostra
-                    voti</button>
-                <div id="ratings" class="row justify-content-center mt-2"
-                    style="display: none;">
+                <div id="ratings" class="row justify-content-center mt-2 overflow-auto">
                     <div class="col-6">
                         <h4>Voto</h4>
                     </div>
@@ -100,6 +99,7 @@
                     </div>
                     @endforeach
                 </div>
+                
             </div>
         </div>
 
