@@ -38,9 +38,7 @@
                                 </div>
                                 <div class="card mb-3 p-2">
                                     <div v-if="profile.ratings.length">
-                                        Voto
-                                        <strong> {{ getVoteAverage(profile.ratings) }}</strong> in
-                                        base a <strong>{{ profile.ratings.length }}</strong> voti
+                                        <i v-for="n in 5" :key="n" :class="getVoteAverage(profile.ratings) < n ? 'fa-regular fa-star' : 'fa-solid fa-star'" style="color: orange;"></i> in base a <strong>{{ profile.ratings.length }}</strong> voti
                                     </div>
                                     <div v-else>Questo medico non ha ancora voti</div>
                                     <div v-if="profile.reviews.length">
