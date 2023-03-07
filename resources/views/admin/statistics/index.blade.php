@@ -44,7 +44,7 @@
                     <div>
                         <div>
                             <div style="width: 10px; height: 10px;" class="bg-danger d-inline-block"></div>
-                            <span>Review</span>
+                            <span>Recensioni</span>
                         </div>
                         <div>
                             <div style="width: 10px; height: 10px;" class="bg-primary d-inline-block"></div>
@@ -62,11 +62,11 @@
             <div class="card-body">
                 <div class="d-flex justify-content-between">
 
-                    <h2 class="py-3">Rating ricevuti per il mese di </h2>
+                    <h2 class="py-3">Voti ricevuti</h2>
                     <div class="align-self-center dropdown mr-3">
                         <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown"
                             aria-expanded="false">
-                            Month
+                            Seleziona mese
                         </button>
                         <ul class="dropdown-menu dropdown-menu-right dropdown-menu-lg-right">
                             <li>
@@ -127,7 +127,7 @@
 
         <div class="mt-3">
             <a href="{{ route('admin.index') }}">
-                Go Back
+                Torna alla dashboard
             </a>
         </div>
 
