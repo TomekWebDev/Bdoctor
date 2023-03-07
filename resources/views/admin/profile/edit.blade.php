@@ -53,7 +53,7 @@
 
 
                     <div class="mb-3">
-                        <label class="form-label"><span class="text-danger">*</span> City</label>
+                        <label class="form-label"><span class="text-danger">*</span>Città</label>
                         <input required name="city" type="string"
                             class="form-control @error('city') is-invalid @enderror" value="{{ $profile_to_edit->city }}">
 
@@ -65,7 +65,7 @@
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label"><span class="text-danger">*</span> Address</label>
+                        <label class="form-label"><span class="text-danger">*</span>Indirizzo</label>
                         <input required name="address" type="string"
                             class="form-control @error('address') is-invalid @enderror"
                             value="{{ $profile_to_edit->address }}">
@@ -78,29 +78,29 @@
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Phone</label>
+                        <label class="form-label">Telefono</label>
                         <input name="phone" type="string" class="form-control" value="{{ $profile_to_edit->phone }}">
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Resume</label>
+                        <label class="form-label">Curriculum</label>
                         <input name="resume" type="file" class="form-control"
                             placeholder="{{ $profile_to_edit->resume }}">
 
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Profile image</label>
+                        <label class="form-label">Immagine del profilo</label>
                         <input name="image" type="file" class="form-control">
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Description</label>
+                        <label class="form-label">Descrizione</label>
                         <textarea name="description" class="form-control">{{ $profile_to_edit->description }}</textarea>
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Services</label>
+                        <label class="form-label">Prestazioni</label>
                         <textarea name="services" class="form-control">{{ $profile_to_edit->services }}</textarea>
                     </div>
 
